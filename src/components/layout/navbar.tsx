@@ -11,10 +11,10 @@ function MascotMark() {
   return (
     <Image
       src="/images/mascot-logo.png"
-      alt="Charles Cong"
-      width={40}
+      alt=""
+      width={20}
       height={20}
-      className="h-5 w-auto"
+      className="h-auto w-auto object-contain"
       priority
     />
   );
@@ -25,10 +25,8 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const linkClassName = (href: string) =>
-    `block rounded-full text-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
-      pathname === href
-        ? "bg-secondary/80 font-medium text-foreground"
-        : "text-muted-foreground"
+    `rounded-full text-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+      pathname === href ? "bg-secondary/80 font-medium text-foreground" : "text-muted-foreground"
     }`;
 
   return (
@@ -40,7 +38,7 @@ export function Navbar() {
         <Link
           href="/"
           aria-label="Charles Cong home"
-          className="flex h-10 w-10 items-center justify-center rounded-full"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
           onClick={() => setMenuOpen(false)}
         >
           <MascotMark />
@@ -69,7 +67,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className={`${linkClassName(item.href)} px-4 py-3`}
+                  className={`${linkClassName(item.href)} block px-4 py-3`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
@@ -82,23 +80,25 @@ export function Navbar() {
 
       <nav
         aria-label="Primary navigation"
-        className="mx-auto hidden w-[calc(100%_-_48px)] max-w-2xl grid-cols-5 items-center rounded-2xl border border-border/70 bg-surface/70 p-2 backdrop-blur-xl backdrop-saturate-150 md:grid"
+        className="mx-auto hidden w-[calc(100%_-_48px)] max-w-2xl rounded-2xl border border-border/70 bg-surface/70 p-2 backdrop-blur-xl backdrop-saturate-150 md:block"
       >
-        <Link
-          href="/"
-          aria-label="Charles Cong home"
-          className="flex h-12 items-center justify-center rounded-full"
-        >
-          <MascotMark />
-        </Link>
+        <ul className="grid min-w-0 grid-flow-col auto-cols-fr items-center">
+          <li className="h-12 min-w-0">
+            <Link
+              href="/"
+              aria-label="Charles Cong home"
+              className="flex h-12 w-full items-center justify-center rounded-full"
+            >
+              <MascotMark />
+            </Link>
+          </li>
 
-        <ul className="col-span-4 grid min-w-0 grid-cols-4 items-center">
           {navigationItems.map((item) => (
-            <li key={item.label} className="min-w-0">
+            <li key={item.label} className="h-12 min-w-0">
               <Link
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
-                className={`${linkClassName(item.href)} truncate px-1 py-3 text-center lg:px-2`}
+                className={`${linkClassName(item.href)} flex h-12 items-center justify-center truncate px-1 text-center lg:px-2`}
               >
                 {item.label}
               </Link>

@@ -5,9 +5,11 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="mx-auto max-w-[1200px] px-6 pt-16 md:px-6 md:pt-20 lg:px-8 lg:pt-24"
+      className="mx-auto max-w-[1200px] px-6 pt-8 md:px-6 md:pt-10 lg:px-8 lg:pt-12"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+      <div aria-hidden="true" className="border-t border-border" />
+
+      <p className="mt-8 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground md:mt-10 lg:mt-12">
         Skills
       </p>
       <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-[28px] lg:text-4xl">

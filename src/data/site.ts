@@ -1,6 +1,6 @@
 export const siteContent = {
   name: "Charles",
-  eyebrow: "Hi! I'm",
+  eyebrow: "Hi! I’m",
   role: {
     primary: "Software Engineer",
     accent: "Engineer Who Designs",

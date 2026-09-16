@@ -85,7 +85,7 @@ export function ProjectsSection() {
             Featured Works
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-[28px] lg:text-4xl">
-            Selected Projects
+            Things I’ve Built
           </h2>
           <p className="mt-2 text-base text-muted-foreground md:text-lg">
             A collection of works that turn ideas into real, useful products.
