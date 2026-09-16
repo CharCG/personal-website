@@ -1,9 +1,117 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
+
+  --font-serif: "Times New Roman", Times, serif;
+}
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #0a0a0a;
+
+  --surface: #ffffff;
+  --muted-foreground: #6b7280;
+
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f3f4f6;
+  --border: #e5e7eb;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.page-glow {
+  background:
+    radial-gradient(circle at 50% 8%, color-mix(in srgb, var(--surface) 96%, transparent) 0, transparent 32%),
+    var(--background);
+}
+
+.hero-layout {
+  --hero-surface-top: max(56%, 416px);
+  --hero-mascot-reveal: 128px;
+}
+
+.hero-surface {
+  top: var(--hero-surface-top);
+  left: 50%;
+  width: 120vw;
+  height: calc(100% - var(--hero-surface-top) + 1px);
+  background: var(--surface);
+  border-radius: 50% 50% 0 0 / 64px 64px 0 0;
+  transform: translateX(-50%);
+}
+
+.hero-mascot {
+  top: calc(var(--hero-surface-top) - var(--hero-mascot-reveal));
+  width: 256px;
+  height: 270px;
+}
+
+@media (min-width: 768px) {
+  .hero-layout {
+    --hero-surface-top: max(62%, 584px);
+    --hero-mascot-reveal: 184px;
+  }
+
+  .hero-surface {
+    border-radius: 50% 50% 0 0 / 128px 128px 0 0;
+  }
+
+  .hero-mascot {
+    width: 344px;
+    height: 360px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-layout {
+    --hero-surface-top: max(60%, 584px);
+    --hero-mascot-reveal: 200px;
+  }
+
+  .hero-mascot {
+    width: 400px;
+    height: 424px;
+  }
 }
