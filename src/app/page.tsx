@@ -6,12 +6,14 @@ import { Navbar } from "@/components/layout/navbar";
 
 export default function Home() {
   return (
-    <main className="page-glow min-h-screen">
+    <div className="page-glow flex min-h-screen flex-col">
       <Navbar />
-      <Hero />
-      <ProjectsSection />
-      <SkillsSection />
+      <main className="flex-1">
+        <Hero />
+        <ProjectsSection />
+        <SkillsSection />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }

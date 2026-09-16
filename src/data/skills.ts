@@ -21,9 +21,4 @@ export const skills: Skill[] = [
   { name: "Python", icon: "python" },
   { name: "Java", icon: "java" },
   { name: "PHP", icon: "php" },
-  { name: "Git", icon: "git" },
-  { name: "GitHub", icon: "github" },
-  { name: "Visual Studio Code", icon: "vscode" },
-  { name: "Postman", icon: "postman" },
-  { name: "Figma", icon: "figma" },
 ];

@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
-import { FaArrowRight, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 import {
   homeRecentProjects,
   homePassionProjects,
   type Project,
 } from "@/data/projects";
+import { ProjectCard, ProjectDetailLink } from "@/components/projects/project-card";
 
 function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   return (
@@ -22,57 +22,23 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   );
 }
 
-function ProjectTitle({ project }: { project: Project }) {
-  return (
-    <div className="flex items-start justify-between gap-4">
-      <div className="min-w-0">
-        <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
-        <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
-          {project.role}
-        </p>
-      </div>
-      <Link
-        href={project.href}
-        aria-label={`View ${project.title}`}
-        className="shrink-0 rounded-md p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-      >
-        <FaArrowUpRightFromSquare aria-hidden="true" />
-      </Link>
-    </div>
-  );
-}
-
-function SelectedProjectCard({ project }: { project: Project }) {
-  const image = project.images[0];
-  if (!image) return null;
-
-  return (
-    <article className="grid overflow-hidden rounded-2xl border border-border bg-surface p-4 md:grid-cols-[44%_1fr] md:gap-6">
-      <div className="relative aspect-[3/2] overflow-hidden rounded-xl bg-secondary md:aspect-auto md:min-h-44">
-        <Image
-          src={image}
-          alt={`${project.title} product preview`}
-          fill
-          sizes="(max-width: 767px) calc(100vw - 80px), 280px"
-          className="object-cover"
-        />
-      </div>
-      <div className="flex min-w-0 flex-col pt-6 md:py-2">
-        <ProjectTitle project={project} />
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-          {project.description}
-        </p>
-        <TechnologyList technologies={project.technologies} />
-      </div>
-    </article>
-  );
-}
-
 function PassionProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex min-h-48 flex-col rounded-2xl border border-border bg-surface p-6">
-      <ProjectTitle project={project} />
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
+          <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
+            {project.role}
+          </p>
+        </div>
+        <ProjectDetailLink project={project} />
+      </div>
+      {project.description && (
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
+      )}
       <TechnologyList technologies={project.technologies} />
     </article>
   );
@@ -110,11 +76,11 @@ export function ProjectsSection() {
           Recent Projects
         </h3>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-          A few highlighted works that showcase my experience in building products.
+          A few highlighted works that showcase my experience in building useful and delightful products.
         </p>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {homeRecentProjects.map((project) => (
-            <SelectedProjectCard key={project.title} project={project} />
+            <ProjectCard key={project.slug} project={project} headingLevel="h4" />
           ))}
         </div>
       </div>
@@ -128,7 +94,7 @@ export function ProjectsSection() {
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {homePassionProjects.map((project) => (
-            <PassionProjectCard key={project.title} project={project} />
+            <PassionProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </div>

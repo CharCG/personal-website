@@ -35,9 +35,12 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+
   const linkClassName = (href: string) =>
     `rounded-full text-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
-      pathname === href ? "bg-secondary/80 font-medium text-foreground" : "text-muted-foreground"
+      isActive(href) ? "bg-secondary/80 font-medium text-foreground" : "text-muted-foreground"
     }`;
 
   return (
@@ -79,7 +82,7 @@ export function Navbar() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    aria-current={pathname === item.href ? "page" : undefined}
+                    aria-current={isActive(item.href) ? "page" : undefined}
                     className={`${linkClassName(item.href)} block px-4 py-3`}
                     onClick={() => setMenuOpen(false)}
                   >
@@ -110,7 +113,7 @@ export function Navbar() {
               <li key={item.label} className="h-12 min-w-0">
                 <Link
                   href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={isActive(item.href) ? "page" : undefined}
                   className={`${linkClassName(item.href)} flex h-12 items-center justify-center truncate px-1 text-center lg:px-2`}
                 >
                   {item.label}

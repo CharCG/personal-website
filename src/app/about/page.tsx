@@ -15,10 +15,11 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
 
-      <section className="mx-auto w-full min-w-0 max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
+      <main className="flex-1">
+        <section className="mx-auto w-full min-w-0 max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
         <div className="grid gap-8 border-b border-border pb-16 md:pb-20 lg:grid-cols-2 lg:gap-16 lg:pb-24">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
@@ -56,9 +57,10 @@ export default function About() {
           <SpotifyCard />
           <GitHubContributionsCard />
         </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </main>
+    </div>
   );
 }
