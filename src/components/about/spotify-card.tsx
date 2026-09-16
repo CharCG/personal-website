@@ -70,9 +70,13 @@ export function SpotifyCard() {
           </Link>
         ) : (
           <div className="flex min-h-24 items-center gap-4 rounded-2xl bg-secondary p-4">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-surface">
-              <FaSpotify className="text-2xl" aria-hidden="true" />
-            </span>
+            <Image
+              src="/images/mascot-confused.png"
+              alt=""
+              width={64}
+              height={64}
+              className="h-16 w-16 shrink-0 object-contain"
+            />
             <p className="text-sm leading-relaxed text-muted-foreground">
               Nothing playing right now.
             </p>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import {
-  homeSelectedProjects,
+  homeRecentProjects,
   homePassionProjects,
   type Project,
 } from "@/data/projects";
@@ -93,7 +93,7 @@ export function ProjectsSection() {
             Things I’ve Built
           </h2>
           <p className="mt-2 text-base text-muted-foreground md:text-lg">
-            A collection of works that turn ideas into real, useful products.
+            A collection of works that turn ideas into real and useful products.
           </p>
         </div>
         <Link
@@ -110,11 +110,10 @@ export function ProjectsSection() {
           Recent Projects
         </h3>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-          A few highlighted works that showcase my experience in building useful and delightful
-          products.
+          A few highlighted works that showcase my experience in building products.
         </p>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {homeSelectedProjects.map((project) => (
+          {homeRecentProjects.map((project) => (
             <SelectedProjectCard key={project.title} project={project} />
           ))}
         </div>
@@ -125,7 +124,7 @@ export function ProjectsSection() {
           Passion Projects
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
-          Small ideas, big learning. A collection of side projects I build for fun.
+          A collection of side projects I build for fun.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {homePassionProjects.map((project) => (

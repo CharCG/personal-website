@@ -16,7 +16,7 @@ export function SkillsSection() {
         Tools I Work With
       </h2>
       <p className="mt-2 text-base text-muted-foreground md:text-lg">
-        Technologies, tools, and platforms I use to build and ship products.
+        Technologies, tools, and platforms I use to build products.
       </p>
 
       <ul className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-3 md:grid-cols-4 md:p-6 lg:grid-cols-6">

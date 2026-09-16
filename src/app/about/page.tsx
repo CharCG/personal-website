@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { FaFileArrowDown } from "react-icons/fa6";
 import { GitHubContributionsCard } from "@/components/about/github-contributions-card";
 import { SpotifyCard } from "@/components/about/spotify-card";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { SocialLinks } from "@/components/shared/social-links";
 import { aboutContent } from "@/data/about";
 
 export const metadata: Metadata = {
@@ -30,6 +33,22 @@ export default function About() {
             {aboutContent.description.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+
+            <div className="flex flex-col items-start gap-6 pt-4 sm:flex-row sm:items-center">
+              <Link
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-14 w-full items-center justify-center gap-4 rounded-2xl bg-primary px-6 text-base font-medium text-primary-foreground sm:w-auto"
+              >
+                <FaFileArrowDown aria-hidden="true" />
+                Get Resume
+              </Link>
+              <SocialLinks
+                className="flex gap-4"
+                linkClassName="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-xl text-foreground transition-opacity hover:opacity-70"
+              />
+            </div>
           </div>
         </div>
 

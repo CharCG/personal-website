@@ -7,7 +7,7 @@ export type Project = {
   technologies: string[];
   href: string;
   sourceCodeHref: string | null;
-  demoHref: string | null;
+  livePreviewHref: string | null;
   category: ProjectCategory;
   images: string[];
   showOnHome: boolean;
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     technologies: ["Flutter", "NestJS", "PostgreSQL", "Midtrans"],
     href: "#",
     sourceCodeHref: null,
-    demoHref: null,
+    livePreviewHref: null,
     category: "selected",
     images: ["/images/projects/haphap.png"],
     showOnHome: true,
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     technologies: ["Figma", "React", "Tailwind CSS", "Express.js", "PostgreSQL"],
     href: "#",
     sourceCodeHref: null,
-    demoHref: null,
+    livePreviewHref: null,
     category: "selected",
     images: ["/images/projects/katasaka.png"],
     showOnHome: true,
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     href: "#",
     sourceCodeHref: null,
-    demoHref: null,
+    livePreviewHref: null,
     category: "passion",
     images: ["/images/projects/klean.png"],
     showOnHome: true,
@@ -57,7 +57,7 @@ export const projects: Project[] = [
   //   technologies: ["React", "Tailwind CSS", "Express.js", "Flask", "EfficientNet-B0"],
   //   href: "#",
   //   sourceCodeHref: null,
-  //   demoHref: null,
+  //   livePreviewHref: null,
   //   category: "passion",
   //   images: ["/images/projects/bersihin.png"],
   //   showOnHome: true,
@@ -69,14 +69,14 @@ export const projects: Project[] = [
   //   technologies: ["Figma"],
   //   href: "#",
   //   sourceCodeHref: null,
-  //   demoHref: null,
+  //   livePreviewHref: null,
   //   category: "passion",
   //   images: ["/images/projects/arunika.png"],
   //   showOnHome: true,
   // },
 ];
 
-export const homeSelectedProjects = projects.filter(
+export const homeRecentProjects = projects.filter(
   (project) => project.category === "selected" && project.showOnHome,
 );
 

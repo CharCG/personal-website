@@ -13,7 +13,6 @@ export const skills: Skill[] = [
   { name: "NestJS", icon: "nestjs" },
   { name: "Express.js", icon: "expressjs" },
   { name: "Prisma", icon: "prisma" },
-  { name: "Flask", icon: "flask" },
   { name: "Node.js", icon: "nodejs" },
   { name: "PostgreSQL", icon: "postgresql" },
   { name: "MySQL", icon: "mysql" },

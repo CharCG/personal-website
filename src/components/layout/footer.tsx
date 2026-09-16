@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
-import { navigationItems } from "@/data/navigation";
 import { siteContent } from "@/data/site";
 import { emailContact } from "@/data/socials";
 
@@ -9,7 +8,7 @@ export function Footer() {
   return (
     <footer className="mt-16 bg-primary text-primary-foreground md:mt-20 lg:mt-24">
       <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-6 md:py-12 lg:px-8">
-        <div className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:grid-cols-[1.5fr_1fr_1.5fr] lg:gap-x-16">
+        <div className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:gap-x-16">
           <div>
             <h2 className="text-xl font-semibold">{siteContent.name}</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
@@ -21,18 +20,6 @@ export function Footer() {
               linkClassName="text-2xl transition-opacity hover:opacity-70"
             />
           </div>
-
-          <nav aria-label="Footer navigation" className="hidden lg:block">
-            <ul className="space-y-2 text-sm text-primary-foreground/80">
-              {navigationItems.map((item) => (
-                <li key={item.label}>
-                  <Link className="transition-colors hover:text-primary-foreground" href={item.href}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
 
           <div className="flex w-full items-start justify-center md:justify-end">
             <Link

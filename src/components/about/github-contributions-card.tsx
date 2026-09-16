@@ -91,7 +91,7 @@ export function GitHubContributionsCard() {
         ) : (
           <div className="flex min-h-32 items-center justify-center rounded-2xl bg-secondary px-6 text-center">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Contribution data will appear here when the GitHub API token is configured.
+              GitHub activity is unavailable right now.
             </p>
           </div>
         )}
