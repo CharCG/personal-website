@@ -6,7 +6,7 @@ import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects — Charles",
-  description: "Explore the products and experiences Charles has designed and built.",
+  description: "Explore the products Charles has solved, designed, and built.",
 };
 
 export default function ProjectsPage() {
@@ -22,12 +22,11 @@ export default function ProjectsPage() {
                 Selected Works
               </p>
               <h1 className="mt-4 text-[28px] font-bold tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                All Projects
+                Projects
               </h1>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              A collection of products and experiments shaped through design, engineering, and
-              thoughtful problem-solving.
+              A collection of products shaped through critical problem solving, thoughtful design, and careful engineering.
             </p>
           </div>
 

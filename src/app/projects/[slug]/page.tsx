@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { ProjectGallery } from "@/components/projects/project-gallery";
 import { getProjectBySlug, projects } from "@/data/projects";
 
 type ProjectDetailPageProps = {
@@ -102,27 +103,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <div className="mt-12 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <section aria-label={`${project.title} previews`}>
               {project.images.length > 0 ? (
-                <div className={`grid min-w-0 gap-4 ${project.images.length > 1 ? "md:grid-cols-2" : ""}`}>
-                  {project.images.map((image, index) => (
-                    <div
-                      key={`${image}-${index}`}
-                      className="relative aspect-[3/2] min-w-0 overflow-hidden rounded-2xl border border-border bg-surface"
-                    >
-                      <Image
-                        src={image}
-                        alt={`${project.title} project preview ${index + 1}`}
-                        fill
-                        sizes={
-                          project.images.length > 1
-                            ? "(max-width: 767px) calc(100vw - 48px), (max-width: 1199px) 50vw, 400px"
-                            : "(max-width: 1199px) calc(100vw - 48px), 800px"
-                        }
-                        className="object-cover"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
+                <ProjectGallery projectTitle={project.title} images={project.images} />
               ) : (
                 <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
                   <Image

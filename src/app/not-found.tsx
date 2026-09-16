@@ -30,7 +30,7 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="mt-4 max-w-sm text-base leading-relaxed text-muted-foreground">
-          This page doesn&apos;t exist or may have been moved. Let&apos;s get you back on track.
+          This page doesn’t exist or may have been moved. Let’s get you back on track.
         </p>
 
         <Link

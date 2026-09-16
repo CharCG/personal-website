@@ -10,7 +10,7 @@ import { aboutContent } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About — Charles",
-  description: "Learn more about Charles, his work, and what he is currently building and enjoying.",
+  description: "Learn more about Charles.",
 };
 
 export default function About() {
@@ -26,7 +26,15 @@ export default function About() {
               About me
             </p>
             <h1 className="mt-4 max-w-xl text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-              {aboutContent.quote}
+              {aboutContent.quote.map((segment, index) =>
+                segment.emphasis ? (
+                  <em key={index} className="font-serif font-normal italic">
+                    {segment.text}
+                  </em>
+                ) : (
+                  <span key={index}>{segment.text}</span>
+                ),
+              )}
             </h1>
           </div>
 

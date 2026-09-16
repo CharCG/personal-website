@@ -28,7 +28,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "selected",
-    images: [],
+    images: ["/images/projects/haphap/haphap-1.png"],
     showOnHome: true,
   },
   {
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "selected",
-    images: [],
+    images: ["/images/projects/katasaka/katasaka-1.png"],
     showOnHome: true,
   },
   {
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: [],
+    images: ["/images/projects/klean/klean-1.png"],
     showOnHome: true,
   },
   {
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: [],
+    images: ["/images/projects/bersih-in/bersih-in-1.png"],
     showOnHome: true,
   },
   {
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: [],
+    images: ["/images/projects/karyaloka/karyaloka-1.png"],
     showOnHome: true,
   },
   {
@@ -98,8 +98,8 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: [],
-    showOnHome: true,
+    images: ["/images/projects/arunika/arunika-1.png"],
+    showOnHome: false,
   },
   {
     slug: "jomoro-koffee",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
     livePreviewHref: null,
     category: "passion",
     images: [],
-    showOnHome: true,
+    showOnHome: false,
   },
   {
     slug: "genshin-import",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     livePreviewHref: null,
     category: "passion",
     images: [],
-    showOnHome: true,
+    showOnHome: false,
   }
 ];
 
