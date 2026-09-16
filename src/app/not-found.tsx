@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
-// import { Navbar } from "@/components/layout/navbar";
 
 export const metadata: Metadata = {
   title: "Page Not Found — Charles Cong",
@@ -13,8 +12,6 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="page-glow flex min-h-screen flex-col overflow-x-clip">
-      {/* <Navbar /> */}
-
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center md:py-32">
         <div className="relative h-32 w-32 md:h-40 md:w-40">
           <Image

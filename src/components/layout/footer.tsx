@@ -1,14 +1,8 @@
 import Link from "next/link";
-import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
+import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
+import { SocialLinks } from "@/components/shared/social-links";
 import { navigationItems } from "@/data/navigation";
 import { siteContent } from "@/data/site";
-import { socialLinks, type SocialIcon } from "@/data/socials";
-
-const socialIcons: Record<SocialIcon, typeof FaLinkedin> = {
-  linkedin: FaLinkedin,
-  github: FaGithub,
-  email: FaEnvelope,
-};
 
 export function Footer() {
   return (
@@ -21,23 +15,10 @@ export function Footer() {
               {siteContent.role.primary} <span aria-hidden="true">—</span>{" "}
               <em className="font-serif italic">{siteContent.role.accent}</em>
             </p>
-            <div className="mt-4 flex gap-6">
-              {socialLinks.map((social) => {
-                const Icon = socialIcons[social.icon];
-                return (
-                  <Link
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="text-2xl transition-opacity hover:opacity-70"
-                  >
-                    <Icon aria-hidden="true" />
-                  </Link>
-                );
-              })}
-            </div>
+            <SocialLinks
+              className="mt-4 flex gap-6"
+              linkClassName="text-2xl transition-opacity hover:opacity-70"
+            />
           </div>
 
           <nav aria-label="Footer navigation" className="hidden md:block">

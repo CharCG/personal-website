@@ -82,10 +82,10 @@ export function ProjectsSection() {
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-            Projects
+            Featured Works
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-[28px] lg:text-4xl">
-            Projects
+            Selected Projects
           </h2>
           <p className="mt-2 text-base text-muted-foreground md:text-lg">
             A collection of works that turn ideas into real, useful products.
@@ -102,7 +102,7 @@ export function ProjectsSection() {
 
       <div className="mt-12">
         <h3 className="text-xl font-bold tracking-[-0.03em] md:text-2xl lg:text-[28px]">
-          Selected Projects
+          Recent Projects
         </h3>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
           A few highlighted works that showcase my experience in building useful and delightful
