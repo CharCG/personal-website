@@ -6,6 +6,15 @@ export type SocialLink = {
   icon: SocialIcon;
 };
 
+export const githubProfile = {
+  username: "charcg",
+  href: "https://github.com/charcg",
+} as const;
+
+export const emailContact = {
+  href: "mailto:charlescongg@gmail.com",
+} as const;
+
 export const socialLinks: SocialLink[] = [
   {
     label: "LinkedIn",
@@ -14,12 +23,12 @@ export const socialLinks: SocialLink[] = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/charcg",
+    href: githubProfile.href,
     icon: "github",
   },
   {
     label: "Email",
-    href: "mailto:charlescongg@gmail.com",
+    href: emailContact.href,
     icon: "email",
   },
 ];

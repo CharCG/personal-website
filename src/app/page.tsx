@@ -6,7 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 
 export default function Home() {
   return (
-    <main className="page-glow min-h-screen overflow-x-clip">
+    <main className="page-glow min-h-screen">
       <Navbar />
       <Hero />
       <ProjectsSection />

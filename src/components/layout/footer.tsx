@@ -3,12 +3,13 @@ import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
 import { navigationItems } from "@/data/navigation";
 import { siteContent } from "@/data/site";
+import { emailContact } from "@/data/socials";
 
 export function Footer() {
   return (
     <footer className="mt-16 bg-primary text-primary-foreground md:mt-20 lg:mt-24">
-      <div className="mx-auto flex min-h-56 max-w-[1200px] flex-col px-6 pb-6 pt-12 md:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-[1.5fr_1fr_1.5fr] md:gap-x-16">
+      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-6 md:py-12 lg:px-8">
+        <div className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:grid-cols-[1.5fr_1fr_1.5fr] lg:gap-x-16">
           <div>
             <h2 className="text-xl font-semibold">{siteContent.name}</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
@@ -16,12 +17,12 @@ export function Footer() {
               <em className="font-serif italic">{siteContent.role.accent}</em>
             </p>
             <SocialLinks
-              className="mt-4 flex gap-6"
+              className="mt-4 flex justify-center gap-6 md:justify-start"
               linkClassName="text-2xl transition-opacity hover:opacity-70"
             />
           </div>
 
-          <nav aria-label="Footer navigation" className="hidden md:block">
+          <nav aria-label="Footer navigation" className="hidden lg:block">
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               {navigationItems.map((item) => (
                 <li key={item.label}>
@@ -33,21 +34,23 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="flex items-start md:justify-end">
+          <div className="flex w-full items-start justify-center md:justify-end">
             <Link
-              href={siteContent.contact.href}
-              className="inline-flex h-14 items-center gap-4 rounded-2xl bg-surface px-6 text-base font-medium text-foreground"
+              href={emailContact.href}
+              className="inline-flex h-14 items-center justify-center gap-4 rounded-2xl bg-surface px-6 text-base font-medium text-foreground"
             >
               <FaEnvelope aria-hidden="true" />
-              {siteContent.contact.label}
+              Let’s Connect
               <FaArrowRight aria-hidden="true" />
             </Link>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 text-xs text-primary-foreground/60 md:flex-row md:items-center md:justify-between">
-          <p>{siteContent.copyright}</p>
-          <p>{siteContent.intro}</p>
+        <div className="mt-10 flex flex-col items-center gap-2 text-center text-xs text-primary-foreground/60 md:flex-row md:justify-between md:text-left">
+          <p>
+            © {new Date().getFullYear()} {siteContent.name}. All rights reserved.
+          </p>
+          <p>A curious mind. A kinder internet.</p>
         </div>
       </div>
     </footer>

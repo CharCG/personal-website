@@ -25,7 +25,12 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
 function ProjectTitle({ project }: { project: Project }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
+      <div className="min-w-0">
+        <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
+        <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
+          {project.role}
+        </p>
+      </div>
       <Link
         href={project.href}
         aria-label={`View ${project.title}`}
@@ -54,7 +59,7 @@ function SelectedProjectCard({ project }: { project: Project }) {
       </div>
       <div className="flex min-w-0 flex-col pt-6 md:py-2">
         <ProjectTitle project={project} />
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>
         <TechnologyList technologies={project.technologies} />
@@ -67,7 +72,7 @@ function PassionProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex min-h-48 flex-col rounded-2xl border border-border bg-surface p-6">
       <ProjectTitle project={project} />
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
       <TechnologyList technologies={project.technologies} />
     </article>
   );
