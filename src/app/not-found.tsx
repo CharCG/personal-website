@@ -15,7 +15,7 @@ export default function NotFound() {
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center md:py-32">
         <div className="relative h-32 w-32 md:h-40 md:w-40">
           <Image
-            src="/images/mascot-confused.png"
+            src="/images/mascot-confused-rays.png"
             alt=""
             fill
             className="object-contain"
@@ -30,7 +30,7 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="mt-4 max-w-sm text-base leading-relaxed text-muted-foreground">
-          This page doesn&apos;t exist or may have been moved. Let&apos;s get you back on track.
+          This page doesn’t exist or may have been moved. Let’s get you back on track.
         </p>
 
         <Link

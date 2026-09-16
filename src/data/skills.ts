@@ -13,7 +13,6 @@ export const skills: Skill[] = [
   { name: "NestJS", icon: "nestjs" },
   { name: "Express.js", icon: "expressjs" },
   { name: "Prisma", icon: "prisma" },
-  { name: "Flask", icon: "flask" },
   { name: "Node.js", icon: "nodejs" },
   { name: "PostgreSQL", icon: "postgresql" },
   { name: "MySQL", icon: "mysql" },
@@ -22,9 +21,4 @@ export const skills: Skill[] = [
   { name: "Python", icon: "python" },
   { name: "Java", icon: "java" },
   { name: "PHP", icon: "php" },
-  { name: "Git", icon: "git" },
-  { name: "GitHub", icon: "github" },
-  { name: "Visual Studio Code", icon: "vscode" },
-  { name: "Postman", icon: "postman" },
-  { name: "Figma", icon: "figma" },
 ];

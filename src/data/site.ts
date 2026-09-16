@@ -6,6 +6,6 @@ export const siteContent = {
   name: "Charles",
   role: {
     primary: "Software Engineer",
-    accent: "Engineer Who Designs",
+    accent: "An Engineer Who Designs",
   },
 } as const;
