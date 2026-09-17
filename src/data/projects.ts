@@ -1,4 +1,4 @@
-export type ProjectCategory = "selected" | "passion";
+export type ProjectCategory = "recent" | "passion";
 export type ProjectStatus = "Completed" | "In Progress" | "Archived";
 
 export type Project = {
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     technologies: ["Flutter", "NestJS", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
     livePreviewHref: null,
-    category: "selected",
+    category: "recent",
     images: ["/images/projects/haphap/haphap-1.png"],
     showOnHome: true,
   },
@@ -41,8 +41,8 @@ export const projects: Project[] = [
     technologies: ["Figma"],
     sourceCodeHref: null,
     livePreviewHref: null,
-    category: "selected",
-    images: ["/images/projects/katasaka/katasaka-1.png"],
+    category: "recent",
+    images: [],
     showOnHome: true,
   },
   {
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: ["/images/projects/klean/klean-1.png"],
+    images: [],
     showOnHome: true,
   },
   {
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: ["/images/projects/bersih-in/bersih-in-1.png"],
+    images: [],
     showOnHome: true,
   },
   {
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: ["/images/projects/karyaloka/karyaloka-1.png"],
+    images: [],
     showOnHome: true,
   },
   {
@@ -98,7 +98,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     livePreviewHref: null,
     category: "passion",
-    images: ["/images/projects/arunika/arunika-1.png"],
+    images: [],
     showOnHome: false,
   },
   {
@@ -132,7 +132,7 @@ export const projects: Project[] = [
 ];
 
 export const homeRecentProjects = projects.filter(
-  (project) => project.category === "selected" && project.showOnHome,
+  (project) => project.category === "recent" && project.showOnHome,
 );
 
 export const homePassionProjects = projects.filter(

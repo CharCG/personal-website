@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { siteContent } from "@/data/site";
 
 const inter = Inter({
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

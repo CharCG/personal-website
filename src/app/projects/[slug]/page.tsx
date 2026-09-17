@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { Reveal } from "@/components/motion/reveal";
 import { ProjectGallery } from "@/components/projects/project-gallery";
 import { getProjectBySlug, projects } from "@/data/projects";
 
@@ -47,15 +48,21 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
       <main className="flex-1">
         <article className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-          >
-            <FaArrowLeft aria-hidden="true" />
-            Back to Projects
-          </Link>
+          <Reveal>
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+            >
+              <FaArrowLeft
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-x-1"
+              />
+              Back to Projects
+            </Link>
+          </Reveal>
 
-          <header className="mt-8 grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
+          <Reveal className="mt-8">
+            <header className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
             <div className="max-w-3xl">
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                 {project.role}
@@ -98,27 +105,30 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 )}
               </div>
             )}
-          </header>
+            </header>
+          </Reveal>
 
           <div className="mt-12 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <section aria-label={`${project.title} previews`}>
-              {project.images.length > 0 ? (
-                <ProjectGallery projectTitle={project.title} images={project.images} />
-              ) : (
-                <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
-                  <Image
-                    src="/images/mascot-confused.png"
-                    alt=""
-                    width={128}
-                    height={128}
-                    className="h-32 w-32 object-contain"
-                  />
-                  <p className="text-sm font-medium text-muted-foreground">
-                    Preview Unavailable
-                  </p>
-                </div>
-              )}
-            </section>
+            <Reveal>
+              <section aria-label={`${project.title} previews`}>
+                {project.images.length > 0 ? (
+                  <ProjectGallery projectTitle={project.title} images={project.images} />
+                ) : (
+                  <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
+                    <Image
+                      src="/images/mascot/fallbacks/confused.png"
+                      alt=""
+                      width={128}
+                      height={128}
+                      className="h-32 w-32 object-contain"
+                    />
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Preview Unavailable
+                    </p>
+                  </div>
+                )}
+              </section>
+            </Reveal>
 
             <aside className="h-fit rounded-2xl border border-border bg-surface p-6 lg:sticky lg:top-32">
               <h2 className="text-lg font-semibold">Overview</h2>
