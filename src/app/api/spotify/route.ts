@@ -60,14 +60,7 @@ export async function GET() {
       },
     );
 
-    if (playbackResponse.status === 204) {
-      return NextResponse.json<SpotifyNowPlaying>({
-        isPlaying: false,
-        track: null,
-      });
-    }
-
-    if (!playbackResponse.ok) {
+    if (playbackResponse.status === 204 || !playbackResponse.ok) {
       return NextResponse.json(unavailable);
     }
 
@@ -75,10 +68,7 @@ export async function GET() {
     const item = playback.item;
 
     if (!item?.name || !item.external_urls?.spotify) {
-      return NextResponse.json<SpotifyNowPlaying>({
-        isPlaying: false,
-        track: null,
-      });
+      return NextResponse.json(unavailable);
     }
 
     return NextResponse.json<SpotifyNowPlaying>({

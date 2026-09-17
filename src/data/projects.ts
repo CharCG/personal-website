@@ -10,7 +10,7 @@ export type Project = {
   description: string;
   technologies: string[];
   sourceCodeHref: string | null;
-  livePreviewHref: string | null;
+  demoHref: string | null;
   category: ProjectCategory;
   images: `/${string}`[];
   showOnHome: boolean;
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     description: "A surplus food marketplace app that connects local merchants with customers to rescue unsold meals at discounted prices.",
     technologies: ["Flutter", "NestJS", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "recent",
     images: ["/images/projects/haphap/haphap-1.png"],
     showOnHome: true,
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     description: "An AI-powered storytelling app that brings Indonesian folk tales to life through interactive digital experiences.",
     technologies: ["Figma"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "recent",
     images: [],
     showOnHome: true,
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description: "A laundry marketplace that connects customers with trusted local merchants through seamless pickup and delivery.",
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: true,
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     description: "An AI-powered platform that classifies waste images to help users sort and dispose of waste correctly.",
     technologies: ["React", "Tailwind CSS", "Express.js", "Flask"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: true,
@@ -79,10 +79,10 @@ export const projects: Project[] = [
     role: "Full-Stack Developer",
     year: 2026,
     status: "Completed",
-    description: "A freelance marketplace connecting clients and freelancers through a swipe-based matching experience.",
+    description: "A freelance marketplace that connects clients and freelancers through a swipe-based matching experience.",
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: true,
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     description: "A learning management system that unifies academic tools, resources, and campus services into one platform.",
     technologies: ["Figma"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: false,
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     description: "",
     technologies: ["NestJS", "Prisma", "MySQL"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: false,
@@ -124,7 +124,7 @@ export const projects: Project[] = [
     description: "",
     technologies: ["Flutter", "Express.js", "MySQL"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: false,

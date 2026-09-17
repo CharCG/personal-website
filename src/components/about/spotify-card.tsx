@@ -86,6 +86,7 @@ export function SpotifyCard() {
           </div>
         )}
       </div>
+
     </article>
   );
 }

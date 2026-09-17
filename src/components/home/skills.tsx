@@ -27,7 +27,7 @@ export function SkillsSection() {
           {skills.map((skill) => (
             <li
               key={skill.name}
-              className="flex min-w-0 items-center justify-center gap-3 rounded-full bg-secondary px-3 py-3 text-sm"
+              className="flex min-w-0 items-center justify-start gap-3 rounded-full bg-secondary px-3 py-3 text-sm"
             >
               <StackIcon name={skill.icon} className="h-5 w-5 shrink-0" />
               <span className="truncate">{skill.name}</span>

@@ -68,7 +68,7 @@ export function Navbar() {
     const currentCount = Number(sessionStorage.getItem("mascot-click-count")) || 0;
     const nextCount = currentCount + 1;
 
-    if (nextCount < 8) {
+    if (nextCount < 5) {
       sessionStorage.setItem("mascot-click-count", String(nextCount));
       return;
     }

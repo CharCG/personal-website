@@ -77,7 +77,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               )}
             </div>
 
-            {(project.sourceCodeHref || project.livePreviewHref) && (
+            {(project.sourceCodeHref || project.demoHref) && (
               <div className="flex flex-wrap gap-4 lg:self-start">
                 {project.sourceCodeHref && (
                   <Link
@@ -91,15 +91,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <FaArrowUpRightFromSquare aria-hidden="true" />
                   </Link>
                 )}
-                {project.livePreviewHref && (
+                {project.demoHref && (
                   <Link
-                    href={project.livePreviewHref}
+                    href={project.demoHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-14 items-center gap-3 rounded-2xl bg-primary px-6 text-sm font-medium text-primary-foreground"
                   >
                     <FaGlobe aria-hidden="true" />
-                    Live Preview
+                    Demo
                     <FaArrowUpRightFromSquare aria-hidden="true" />
                   </Link>
                 )}

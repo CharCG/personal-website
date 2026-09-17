@@ -23,9 +23,9 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   );
 }
 
-function PassionProjectCard({ project }: { project: Project }) {
+function CompactProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group flex h-full min-h-48 flex-col rounded-2xl border border-border bg-surface p-6 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
+    <article className="group relative flex h-full min-h-48 flex-col rounded-2xl border border-border bg-surface p-6 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
@@ -75,40 +75,20 @@ export function ProjectsSection() {
         </Link>
       </Reveal>
 
-      <div className="mt-12">
-        <Reveal>
-          <h3 className="text-xl font-bold tracking-[-0.03em] md:text-2xl lg:text-[28px]">
-            Recent Projects
-          </h3>
-          <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-            A few highlighted works that showcase my experience in building useful and delightful products.
-          </p>
-        </Reveal>
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {homeRecentProjects.map((project, index) => (
-            <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
-              <ProjectCard project={project} headingLevel="h4" />
-            </Reveal>
-          ))}
-        </div>
+      <div className="mt-12 grid gap-4 lg:grid-cols-2">
+        {homeRecentProjects.map((project, index) => (
+          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+            <ProjectCard project={project} headingLevel="h4" />
+          </Reveal>
+        ))}
       </div>
 
-      <div className="mt-12">
-        <Reveal>
-          <h3 className="text-xl font-bold tracking-[-0.03em] md:text-2xl lg:text-[28px]">
-            Passion Projects
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
-            A collection of side projects I build for fun.
-          </p>
-        </Reveal>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {homePassionProjects.map((project, index) => (
-            <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
-              <PassionProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
+        {homePassionProjects.map((project, index) => (
+          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+            <CompactProjectCard project={project} />
+          </Reveal>
+        ))}
       </div>
     </section>
   );
