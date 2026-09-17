@@ -42,7 +42,7 @@ export function SpotifyCard() {
             href={track.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 rounded-2xl bg-secondary p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            className="group flex items-center gap-4 rounded-2xl bg-secondary p-4 transition-colors duration-200 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
             {track.albumImage ? (
               <Image
@@ -66,12 +66,15 @@ export function SpotifyCard() {
                 {track.artists}
               </span>
             </span>
-            <FaArrowUpRightFromSquare className="shrink-0 text-sm" aria-hidden="true" />
+            <FaArrowUpRightFromSquare
+              className="shrink-0 text-sm transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
         ) : (
           <div className="flex min-h-24 items-center gap-4 rounded-2xl bg-secondary p-4">
             <Image
-              src="/images/mascot-confused.png"
+              src="/images/mascot/fallbacks/confused.png"
               alt=""
               width={64}
               height={64}
@@ -83,6 +86,7 @@ export function SpotifyCard() {
           </div>
         )}
       </div>
+
     </article>
   );
 }

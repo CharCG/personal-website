@@ -10,6 +10,7 @@ type GitHubGraphQLResponse = {
         endedAt: string;
         contributionCalendar: {
           totalContributions: number;
+          months: GitHubContributions["months"];
           weeks: GitHubContributions["weeks"];
         };
       };
@@ -21,6 +22,7 @@ const unavailable: GitHubContributions = {
   totalContributions: 0,
   startedAt: null,
   endedAt: null,
+  months: [],
   weeks: [],
 };
 
@@ -47,6 +49,12 @@ export async function GET() {
                 endedAt
                 contributionCalendar {
                   totalContributions
+                  months {
+                    firstDay
+                    name
+                    totalWeeks
+                    year
+                  }
                   weeks {
                     firstDay
                     contributionDays {
@@ -80,6 +88,7 @@ export async function GET() {
       totalContributions: collection.contributionCalendar.totalContributions,
       startedAt: collection.startedAt,
       endedAt: collection.endedAt,
+      months: collection.contributionCalendar.months,
       weeks: collection.contributionCalendar.weeks,
     });
   } catch {

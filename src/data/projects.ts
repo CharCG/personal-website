@@ -1,4 +1,4 @@
-export type ProjectCategory = "selected" | "passion";
+export type ProjectCategory = "recent" | "passion";
 export type ProjectStatus = "Completed" | "In Progress" | "Archived";
 
 export type Project = {
@@ -10,7 +10,7 @@ export type Project = {
   description: string;
   technologies: string[];
   sourceCodeHref: string | null;
-  livePreviewHref: string | null;
+  demoHref: string | null;
   category: ProjectCategory;
   images: `/${string}`[];
   showOnHome: boolean;
@@ -26,9 +26,9 @@ export const projects: Project[] = [
     description: "A surplus food marketplace app that connects local merchants with customers to rescue unsold meals at discounted prices.",
     technologies: ["Flutter", "NestJS", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
-    category: "selected",
-    images: ["/images/projects/haphap/haphap-1.png"],
+    demoHref: null,
+    category: "recent",
+    images: ["/images/projects/haphap/haphap-1.png", "/images/projects/haphap/haphap-2.png", "/images/projects/haphap/haphap-3.png"],
     showOnHome: true,
   },
   {
@@ -40,9 +40,9 @@ export const projects: Project[] = [
     description: "An AI-powered storytelling app that brings Indonesian folk tales to life through interactive digital experiences.",
     technologies: ["Figma"],
     sourceCodeHref: null,
-    livePreviewHref: null,
-    category: "selected",
-    images: ["/images/projects/katasaka/katasaka-1.png"],
+    demoHref: null,
+    category: "recent",
+    images: ["/images/projects/katasaka/katasaka-1.png", "/images/projects/katasaka/katasaka-2.png"],
     showOnHome: true,
   },
   {
@@ -54,9 +54,9 @@ export const projects: Project[] = [
     description: "A laundry marketplace that connects customers with trusted local merchants through seamless pickup and delivery.",
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
-    images: ["/images/projects/klean/klean-1.png"],
+    images: ["/images/projects/klean/klean-1.png", "/images/projects/klean/klean-2.png"],
     showOnHome: true,
   },
   {
@@ -68,9 +68,9 @@ export const projects: Project[] = [
     description: "An AI-powered platform that classifies waste images to help users sort and dispose of waste correctly.",
     technologies: ["React", "Tailwind CSS", "Express.js", "Flask"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
-    images: ["/images/projects/bersih-in/bersih-in-1.png"],
+    images: ["/images/projects/bersih-in/bersih-in.png"],
     showOnHome: true,
   },
   {
@@ -79,12 +79,12 @@ export const projects: Project[] = [
     role: "Full-Stack Developer",
     year: 2026,
     status: "Completed",
-    description: "A freelance marketplace connecting clients and freelancers through a swipe-based matching experience.",
+    description: "A freelance marketplace that connects clients and freelancers through a swipe-based matching experience.",
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
-    images: ["/images/projects/karyaloka/karyaloka-1.png"],
+    images: [],
     showOnHome: true,
   },
   {
@@ -96,9 +96,9 @@ export const projects: Project[] = [
     description: "A learning management system that unifies academic tools, resources, and campus services into one platform.",
     technologies: ["Figma"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
-    images: ["/images/projects/arunika/arunika-1.png"],
+    images: [],
     showOnHome: false,
   },
   {
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     description: "",
     technologies: ["NestJS", "Prisma", "MySQL"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: false,
@@ -124,7 +124,7 @@ export const projects: Project[] = [
     description: "",
     technologies: ["Flutter", "Express.js", "MySQL"],
     sourceCodeHref: null,
-    livePreviewHref: null,
+    demoHref: null,
     category: "passion",
     images: [],
     showOnHome: false,
@@ -132,7 +132,7 @@ export const projects: Project[] = [
 ];
 
 export const homeRecentProjects = projects.filter(
-  (project) => project.category === "selected" && project.showOnHome,
+  (project) => project.category === "recent" && project.showOnHome,
 );
 
 export const homePassionProjects = projects.filter(

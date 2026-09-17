@@ -10,13 +10,16 @@ type ProjectCardProps = {
 
 export function ProjectDetailLink({ project }: { project: Project }) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      aria-label={`View ${project.title} project details`}
-      className="shrink-0 rounded-md p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-    >
-      <FaArrowRight aria-hidden="true" />
-    </Link>
+    <>
+      <Link
+        href={`/projects/${project.slug}`}
+        aria-label={`View ${project.title} project details`}
+        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+      />
+      <span className="pointer-events-none relative z-20 shrink-0 rounded-md p-1 text-xl transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1 motion-safe:group-active:scale-95">
+        <FaArrowRight aria-hidden="true" />
+      </span>
+    </>
   );
 }
 
@@ -40,7 +43,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
   const previewImage = project.images[0];
 
   return (
-    <article className="grid min-w-0 overflow-hidden rounded-2xl border border-border bg-surface p-4 md:grid-cols-[44%_1fr] md:gap-6">
+    <article className="group relative grid h-full min-w-0 overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99] md:grid-cols-[44%_1fr] md:gap-6">
       <div className="relative flex aspect-[3/2] min-h-40 items-center justify-center overflow-hidden rounded-xl bg-secondary md:aspect-auto md:min-h-44">
         {previewImage ? (
           <Image
@@ -48,16 +51,16 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
             alt={`${project.title} product preview`}
             fill
             sizes="(max-width: 767px) calc(100vw - 80px), 280px"
-            className="object-cover"
+            className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
           />
         ) : (
           <div className="flex flex-col items-center gap-2 px-4 text-center">
             <Image
-              src="/images/mascot-confused.png"
+              src="/images/mascot/fallbacks/confused.png"
               alt=""
               width={96}
               height={96}
-              className="h-24 w-24 object-contain"
+              className="h-24 w-24 object-contain transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
             />
             <p className="text-xs font-medium text-muted-foreground">Preview Unavailable</p>
           </div>

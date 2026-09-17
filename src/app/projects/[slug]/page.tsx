@@ -4,12 +4,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   FaArrowLeft,
+  FaArrowRight,
   FaArrowUpRightFromSquare,
   FaCode,
   FaGlobe,
 } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { Reveal } from "@/components/motion/reveal";
 import { ProjectGallery } from "@/components/projects/project-gallery";
 import { getProjectBySlug, projects } from "@/data/projects";
 
@@ -41,21 +43,31 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
   if (!project) notFound();
 
+  const projectIndex = projects.indexOf(project);
+  const previousProject = projects[projectIndex - 1] ?? null;
+  const nextProject = projects[projectIndex + 1] ?? null;
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
 
       <main className="flex-1">
         <article className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-          >
-            <FaArrowLeft aria-hidden="true" />
-            Back to Projects
-          </Link>
+          <Reveal>
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+            >
+              <FaArrowLeft
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-x-1"
+              />
+              Back to Projects
+            </Link>
+          </Reveal>
 
-          <header className="mt-8 grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
+          <Reveal className="mt-8">
+            <header className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
             <div className="max-w-3xl">
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                 {project.role}
@@ -70,7 +82,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               )}
             </div>
 
-            {(project.sourceCodeHref || project.livePreviewHref) && (
+            {(project.sourceCodeHref || project.demoHref) && (
               <div className="flex flex-wrap gap-4 lg:self-start">
                 {project.sourceCodeHref && (
                   <Link
@@ -84,41 +96,44 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <FaArrowUpRightFromSquare aria-hidden="true" />
                   </Link>
                 )}
-                {project.livePreviewHref && (
+                {project.demoHref && (
                   <Link
-                    href={project.livePreviewHref}
+                    href={project.demoHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-14 items-center gap-3 rounded-2xl bg-primary px-6 text-sm font-medium text-primary-foreground"
                   >
                     <FaGlobe aria-hidden="true" />
-                    Live Preview
+                    Demo
                     <FaArrowUpRightFromSquare aria-hidden="true" />
                   </Link>
                 )}
               </div>
             )}
-          </header>
+            </header>
+          </Reveal>
 
           <div className="mt-12 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <section aria-label={`${project.title} previews`}>
-              {project.images.length > 0 ? (
-                <ProjectGallery projectTitle={project.title} images={project.images} />
-              ) : (
-                <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
-                  <Image
-                    src="/images/mascot-confused.png"
-                    alt=""
-                    width={128}
-                    height={128}
-                    className="h-32 w-32 object-contain"
-                  />
-                  <p className="text-sm font-medium text-muted-foreground">
-                    Preview Unavailable
-                  </p>
-                </div>
-              )}
-            </section>
+            <Reveal>
+              <section aria-label={`${project.title} previews`}>
+                {project.images.length > 0 ? (
+                  <ProjectGallery projectTitle={project.title} images={project.images} />
+                ) : (
+                  <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
+                    <Image
+                      src="/images/mascot/fallbacks/confused.png"
+                      alt=""
+                      width={128}
+                      height={128}
+                      className="h-32 w-32 object-contain"
+                    />
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Preview Unavailable
+                    </p>
+                  </div>
+                )}
+              </section>
+            </Reveal>
 
             <aside className="h-fit rounded-2xl border border-border bg-surface p-6 lg:sticky lg:top-32">
               <h2 className="text-lg font-semibold">Overview</h2>
@@ -148,6 +163,55 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </div>
             </aside>
           </div>
+
+          <Reveal className="mt-16 md:mt-20">
+            <nav
+              aria-label="Project navigation"
+              className="grid gap-4 border-t border-border pt-8 sm:grid-cols-2"
+            >
+              {previousProject && (
+                <Link
+                  href={`/projects/${previousProject.slug}`}
+                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                >
+                  <FaArrowLeft
+                    aria-hidden="true"
+                    className="shrink-0 text-lg transition-transform duration-200 ease-out motion-safe:group-hover:-translate-x-1"
+                  />
+                  <span className="flex min-w-0 flex-1 flex-col items-start">
+                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                      Previous Project
+                    </span>
+                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">
+                      {previousProject.title}
+                    </span>
+                  </span>
+                </Link>
+              )}
+
+              {nextProject && (
+                <Link
+                  href={`/projects/${nextProject.slug}`}
+                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                    previousProject ? "" : "sm:col-start-2"
+                  }`}
+                >
+                  <span className="flex min-w-0 flex-1 flex-col items-end">
+                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                      Next Project
+                    </span>
+                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">
+                      {nextProject.title}
+                    </span>
+                  </span>
+                  <FaArrowRight
+                    aria-hidden="true"
+                    className="shrink-0 text-lg transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
+                  />
+                </Link>
+              )}
+            </nav>
+          </Reveal>
         </article>
       </main>
 

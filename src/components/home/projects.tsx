@@ -6,6 +6,7 @@ import {
   type Project,
 } from "@/data/projects";
 import { ProjectCard, ProjectDetailLink } from "@/components/projects/project-card";
+import { Reveal } from "@/components/motion/reveal";
 
 function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   return (
@@ -22,9 +23,9 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   );
 }
 
-function PassionProjectCard({ project }: { project: Project }) {
+function CompactProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex min-h-48 flex-col rounded-2xl border border-border bg-surface p-6">
+    <article className="group relative flex h-full min-h-48 flex-col rounded-2xl border border-border bg-surface p-6 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h4 className="text-lg font-semibold leading-tight md:text-xl">{project.title}</h4>
@@ -50,7 +51,7 @@ export function ProjectsSection() {
       id="projects"
       className="mx-auto max-w-[1200px] px-6 pt-16 md:px-6 md:pt-20 lg:px-8 lg:pt-24"
     >
-      <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+      <Reveal className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
             Featured Works
@@ -64,39 +65,30 @@ export function ProjectsSection() {
         </div>
         <Link
           href="/projects"
-          className="inline-flex h-14 items-center gap-4 whitespace-nowrap rounded-2xl border border-border bg-surface px-6 text-sm font-medium"
+          className="group inline-flex h-14 items-center gap-4 whitespace-nowrap rounded-2xl border border-border bg-surface px-6 text-sm font-medium transition-colors duration-200 hover:border-foreground/20"
         >
           View All Projects
-          <FaArrowRight aria-hidden="true" />
+          <FaArrowRight
+            aria-hidden="true"
+            className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
+          />
         </Link>
+      </Reveal>
+
+      <div className="mt-12 grid gap-4 lg:grid-cols-2">
+        {homeRecentProjects.map((project, index) => (
+          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+            <ProjectCard project={project} headingLevel="h4" />
+          </Reveal>
+        ))}
       </div>
 
-      <div className="mt-12">
-        <h3 className="text-xl font-bold tracking-[-0.03em] md:text-2xl lg:text-[28px]">
-          Recent Projects
-        </h3>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-          A few highlighted works that showcase my experience in building useful and delightful products.
-        </p>
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {homeRecentProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} headingLevel="h4" />
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-12">
-        <h3 className="text-xl font-bold tracking-[-0.03em] md:text-2xl lg:text-[28px]">
-          Passion Projects
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
-          A collection of side projects I build for fun.
-        </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {homePassionProjects.map((project) => (
-            <PassionProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
+        {homePassionProjects.map((project, index) => (
+          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+            <CompactProjectCard project={project} />
+          </Reveal>
+        ))}
       </div>
     </section>
   );

@@ -59,11 +59,14 @@ export function GitHubContributionsCard() {
           href={githubProfile.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
         >
           <FaGithub aria-hidden="true" />
           View Profile
-          <FaArrowUpRightFromSquare className="text-xs" aria-hidden="true" />
+          <FaArrowUpRightFromSquare
+            className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
         </Link>
       </div>
 
@@ -74,19 +77,33 @@ export function GitHubContributionsCard() {
         tabIndex={hasCalendar ? 0 : undefined}
       >
         {hasCalendar ? (
-          <div className="flex w-max gap-1">
-            {contributions?.weeks.map((week) => (
-              <div key={week.firstDay} className="grid gap-1">
-                {week.contributionDays.map((day) => (
-                  <span
-                    key={day.date}
-                    title={`${day.contributionCount} contributions on ${day.date}`}
-                    aria-label={`${day.contributionCount} contributions on ${day.date}`}
-                    className={`h-3 w-3 rounded-sm ${levelClassNames[day.contributionLevel]}`}
-                  />
-                ))}
-              </div>
-            ))}
+          <div className="w-max">
+            <div className="mb-2 flex gap-1" aria-label="Contribution calendar months">
+              {contributions?.months.map((month) => (
+                <span
+                  key={`${month.firstDay}-${month.year}`}
+                  title={`${month.name} ${month.year}`}
+                  className="shrink-0 whitespace-nowrap text-xs text-muted-foreground"
+                  style={{ width: `${month.totalWeeks * 16 - 4}px` }}
+                >
+                  {month.name.slice(0, 3)}
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-1">
+              {contributions?.weeks.map((week) => (
+                <div key={week.firstDay} className="grid gap-1">
+                  {week.contributionDays.map((day) => (
+                    <span
+                      key={day.date}
+                      title={`${day.contributionCount} contributions on ${day.date}`}
+                      aria-label={`${day.contributionCount} contributions on ${day.date}`}
+                      className={`h-3 w-3 rounded-sm ${levelClassNames[day.contributionLevel]}`}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <div className="flex min-h-32 items-center justify-center rounded-2xl bg-secondary px-6 text-center">

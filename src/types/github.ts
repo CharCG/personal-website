@@ -16,9 +16,17 @@ export type ContributionWeek = {
   contributionDays: ContributionDay[];
 };
 
+export type ContributionMonth = {
+  firstDay: string;
+  name: string;
+  totalWeeks: number;
+  year: number;
+};
+
 export type GitHubContributions = {
   totalContributions: number;
   startedAt: string | null;
   endedAt: string | null;
+  months: ContributionMonth[];
   weeks: ContributionWeek[];
 };

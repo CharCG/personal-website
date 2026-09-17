@@ -5,24 +5,43 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
+import { m } from "motion/react";
 import { navigationItems } from "@/data/navigation";
 
-function MascotMark() {
+function MascotMark({ celebrating }: { celebrating: boolean }) {
   return (
-    <Image
-      src="/images/mascot-logo.png"
-      alt=""
-      width={20}
-      height={20}
-      className="h-auto w-auto object-contain"
-      priority
-    />
+    <span className={`navbar-mascot-mark ${celebrating ? "navbar-mascot-celebrating" : ""}`}>
+      <Image
+        src="/images/mascot/fallbacks/logo.png"
+        alt=""
+        width={20}
+        height={20}
+        className="h-auto w-auto object-contain"
+        priority
+      />
+    </span>
   );
 }
 
 export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [easterEggVisible, setEasterEggVisible] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("mascot-easter-egg-pending") !== "true") return;
+
+    sessionStorage.removeItem("mascot-easter-egg-pending");
+    const timeout = window.setTimeout(() => setEasterEggVisible(true), 0);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!easterEggVisible) return;
+
+    const timeout = window.setTimeout(() => setEasterEggVisible(false), 3200);
+    return () => window.clearTimeout(timeout);
+  }, [easterEggVisible]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -39,9 +58,29 @@ export function Navbar() {
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
   const linkClassName = (href: string) =>
-    `rounded-full text-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
-      isActive(href) ? "bg-secondary/80 font-medium text-foreground" : "text-muted-foreground"
+    `relative rounded-full text-sm transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+      isActive(href) ? "font-medium text-foreground" : "text-muted-foreground"
     }`;
+
+  const handleMascotClick = () => {
+    setMenuOpen(false);
+
+    const currentCount = Number(sessionStorage.getItem("mascot-click-count")) || 0;
+    const nextCount = currentCount + 1;
+
+    if (nextCount < 5) {
+      sessionStorage.setItem("mascot-click-count", String(nextCount));
+      return;
+    }
+
+    sessionStorage.removeItem("mascot-click-count");
+
+    if (pathname === "/") {
+      setEasterEggVisible(true);
+    } else {
+      sessionStorage.setItem("mascot-easter-egg-pending", "true");
+    }
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-6 pt-4 lg:pt-8">
@@ -53,10 +92,18 @@ export function Navbar() {
           <Link
             href="/"
             aria-label="Charles Cong home"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-            onClick={() => setMenuOpen(false)}
+            className="navbar-mascot-link relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+            onClick={handleMascotClick}
           >
-            <MascotMark />
+            <MascotMark celebrating={easterEggVisible} />
+            {easterEggVisible && (
+              <span
+                role="status"
+                className="navbar-mascot-message pointer-events-none absolute left-0 top-full mt-4 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 text-xs font-medium text-foreground"
+              >
+                You found me!
+              </span>
+            )}
           </Link>
           <button
             type="button"
@@ -86,7 +133,14 @@ export function Navbar() {
                     className={`${linkClassName(item.href)} block px-4 py-3`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {item.label}
+                    {isActive(item.href) && (
+                      <m.span
+                        layoutId="mobile-navigation-active"
+                        className="absolute inset-0 rounded-full bg-secondary/80"
+                        transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
                   </Link>
                 </li>
               ))}
@@ -103,9 +157,18 @@ export function Navbar() {
               <Link
                 href="/"
                 aria-label="Charles Cong home"
-                className="flex h-12 w-full items-center justify-center rounded-full"
+                className="navbar-mascot-link relative flex h-12 w-full items-center justify-center rounded-full"
+                onClick={handleMascotClick}
               >
-                <MascotMark />
+                <MascotMark celebrating={easterEggVisible} />
+                {easterEggVisible && (
+                  <span
+                    role="status"
+                    className="navbar-mascot-message pointer-events-none absolute left-1/2 top-full mt-4 -translate-x-1/2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 text-xs font-medium text-foreground"
+                  >
+                    You found me!
+                  </span>
+                )}
               </Link>
             </li>
 
@@ -116,7 +179,14 @@ export function Navbar() {
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={`${linkClassName(item.href)} flex h-12 items-center justify-center truncate px-1 text-center lg:px-2`}
                 >
-                  {item.label}
+                  {isActive(item.href) && (
+                    <m.span
+                      layoutId="desktop-navigation-active"
+                      className="absolute inset-0 rounded-full bg-secondary/80"
+                      transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    />
+                  )}
+                  <span className="relative z-10 truncate">{item.label}</span>
                 </Link>
               </li>
             ))}

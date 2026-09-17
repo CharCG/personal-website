@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/projects/project-card";
 import { projects } from "@/data/projects";
 
@@ -16,7 +17,7 @@ export default function ProjectsPage() {
 
       <main className="flex-1">
         <section className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
-          <div className="grid gap-6 md:grid-cols-2 md:items-end md:gap-16">
+          <Reveal className="grid gap-6 md:grid-cols-2 md:items-end md:gap-16">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                 Selected Works
@@ -28,11 +29,13 @@ export default function ProjectsPage() {
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               A collection of products shaped through critical problem solving, thoughtful design, and careful engineering.
             </p>
-          </div>
+          </Reveal>
 
           <div className="mt-12 grid gap-4 lg:grid-cols-2">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+            {projects.map((project, index) => (
+              <Reveal key={project.slug} className="h-full" delay={(index % 4) * 0.06}>
+                <ProjectCard project={project} />
+              </Reveal>
             ))}
           </div>
         </section>
