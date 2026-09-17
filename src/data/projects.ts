@@ -28,7 +28,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     demoHref: null,
     category: "recent",
-    images: ["/images/projects/haphap/haphap-1.png"],
+    images: ["/images/projects/haphap/haphap-1.png", "/images/projects/haphap/haphap-2.png", "/images/projects/haphap/haphap-3.png"],
     showOnHome: true,
   },
   {
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     demoHref: null,
     category: "recent",
-    images: [],
+    images: ["/images/projects/katasaka/katasaka-1.png", "/images/projects/katasaka/katasaka-2.png"],
     showOnHome: true,
   },
   {
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     demoHref: null,
     category: "passion",
-    images: [],
+    images: ["/images/projects/klean/klean-1.png", "/images/projects/klean/klean-2.png"],
     showOnHome: true,
   },
   {
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     sourceCodeHref: null,
     demoHref: null,
     category: "passion",
-    images: [],
+    images: ["/images/projects/bersih-in/bersih-in.png"],
     showOnHome: true,
   },
   {
