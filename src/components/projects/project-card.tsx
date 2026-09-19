@@ -43,14 +43,14 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
   const previewImage = project.images[0];
 
   return (
-    <article className="group relative grid h-full min-w-0 overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99] md:grid-cols-[44%_1fr] md:gap-6">
-      <div className="relative flex aspect-[3/2] min-h-40 items-center justify-center overflow-hidden rounded-xl bg-secondary md:aspect-auto md:min-h-44">
+    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
+      <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-secondary">
         {previewImage ? (
           <Image
             src={previewImage}
             alt={`${project.title} product preview`}
             fill
-            sizes="(max-width: 767px) calc(100vw - 80px), 280px"
+            sizes="(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"
             className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
           />
         ) : (
@@ -67,7 +67,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
         )}
       </div>
 
-      <div className="flex min-w-0 flex-col pt-6 md:py-2">
+      <div className="flex min-w-0 flex-1 flex-col pt-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <Heading className="text-lg font-semibold leading-tight md:text-xl">

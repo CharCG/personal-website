@@ -1,18 +1,12 @@
-import Link from "next/link";
-import {
-  FaArrowRight,
-  FaFileArrowDown,
-} from "react-icons/fa6";
+import { FaArrowRight, FaFile } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
 import { InteractiveMascot } from "@/components/mascot/interactive-mascot";
+import { ButtonLink } from "@/components/ui/button-link";
 import { siteContent } from "@/data/site";
 
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="hero-layout relative h-svh min-h-[720px] overflow-hidden md:min-h-[800px]"
-    >
+    <section id="home" className="hero-layout relative h-svh min-h-[720px] overflow-hidden md:min-h-[800px]">
       <div className="relative z-10 mx-auto px-6 pt-32 text-center md:pt-40 lg:pt-48">
         <p className="hero-enter hero-enter-eyebrow text-xs font-semibold uppercase tracking-[0.5em] text-muted-foreground">
           Hi! I’m
@@ -38,28 +32,17 @@ export function Hero() {
 
       <div className="hero-surface absolute z-20">
         <div className="hero-enter hero-enter-actions relative z-10 mx-auto flex w-screen max-w-2xl flex-col items-stretch gap-4 px-6 pt-12 md:flex-row md:justify-center md:gap-6 md:pt-16">
-          <Link
-            href="/resume.pdf"
-            target="_blank"
-            className="group inline-flex h-16 items-center justify-center gap-4 rounded-2xl bg-primary px-8 text-base font-medium text-primary-foreground transition-opacity duration-200 hover:opacity-85"
-          >
-            <FaFileArrowDown aria-hidden="true" />
+          <ButtonLink href="/resume.pdf" target="_blank" rel="noopener noreferrer" size="lg">
+            <FaFile aria-hidden="true" />
             Get Resume
-            <FaArrowRight
-              aria-hidden="true"
-              className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
-            />
-          </Link>
-          <Link
-            href="/about"
-            className="group inline-flex h-16 items-center justify-center gap-4 rounded-2xl border border-border bg-surface px-8 text-base font-medium transition-colors duration-200 hover:border-foreground/20"
-          >
+          </ButtonLink>
+          <ButtonLink href="/about" variant="secondary" size="lg">
             More About Me
             <FaArrowRight
               aria-hidden="true"
               className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
             />
-          </Link>
+          </ButtonLink>
         </div>
 
         <SocialLinks

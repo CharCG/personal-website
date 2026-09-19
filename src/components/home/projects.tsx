@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 import {
   homeRecentProjects,
@@ -7,6 +6,7 @@ import {
 } from "@/data/projects";
 import { ProjectCard, ProjectDetailLink } from "@/components/projects/project-card";
 import { Reveal } from "@/components/motion/reveal";
+import { ButtonLink } from "@/components/ui/button-link";
 
 function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   return (
@@ -63,16 +63,18 @@ export function ProjectsSection() {
             A collection of works that turn ideas into real and useful products.
           </p>
         </div>
-        <Link
+        <ButtonLink
           href="/projects"
-          className="group inline-flex h-14 items-center gap-4 whitespace-nowrap rounded-2xl border border-border bg-surface px-6 text-sm font-medium transition-colors duration-200 hover:border-foreground/20"
+          variant="primary"
+          size="sm"
+          className="whitespace-nowrap"
         >
           View All Projects
           <FaArrowRight
             aria-hidden="true"
             className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
           />
-        </Link>
+        </ButtonLink>
       </Reveal>
 
       <div className="mt-12 grid gap-4 lg:grid-cols-2">

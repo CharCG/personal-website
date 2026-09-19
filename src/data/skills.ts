@@ -19,6 +19,9 @@ export const skills: Skill[] = [
   { name: "TypeScript", icon: "typescript" },
   { name: "JavaScript", icon: "js" },
   { name: "Python", icon: "python" },
+  { name: "Kotlin", icon: "kotlin" },
   { name: "Java", icon: "java" },
   { name: "PHP", icon: "php" },
+  { name: "Git", icon: "git" },
+  { name: "Figma", icon: "figma" },
 ];

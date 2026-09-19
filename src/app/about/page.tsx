@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { FaFileArrowDown } from "react-icons/fa6";
+import { FaFile } from "react-icons/fa6";
 import { GitHubContributionsCard } from "@/components/about/github-contributions-card";
 import { SpotifyCard } from "@/components/about/spotify-card";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/shared/social-links";
+import { ButtonLink } from "@/components/ui/button-link";
 import { aboutContent } from "@/data/about";
 
 export const metadata: Metadata = {
@@ -23,9 +23,7 @@ export default function About() {
         <section className="mx-auto w-full min-w-0 max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
           <div className="grid gap-8 border-b border-border pb-16 md:pb-20 lg:grid-cols-2 lg:gap-16 lg:pb-24">
             <Reveal>
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                About me
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
                 {aboutContent.quote.map((segment, index) =>
                   segment.emphasis ? (
@@ -46,15 +44,10 @@ export default function About() {
                 ))}
 
                 <div className="flex flex-col items-start gap-6 pt-4 sm:flex-row sm:items-center">
-                  <Link
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-14 w-full items-center justify-center gap-4 rounded-2xl bg-primary px-6 text-base font-medium text-primary-foreground transition-opacity duration-200 hover:opacity-85 sm:w-auto"
-                  >
-                    <FaFileArrowDown aria-hidden="true" />
+                  <ButtonLink href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                    <FaFile aria-hidden="true" />
                     Get Resume
-                  </Link>
+                  </ButtonLink>
                   <SocialLinks
                     className="flex gap-4"
                     linkClassName="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-xl text-foreground transition-opacity duration-200 hover:opacity-70"

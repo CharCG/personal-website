@@ -2,17 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaArrowUpRightFromSquare,
-  FaCode,
-  FaGlobe,
-} from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight, FaArrowUpRightFromSquare, FaCode, FaGlobe } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectGallery } from "@/components/projects/project-gallery";
+import { ButtonLink } from "@/components/ui/button-link";
 import { getProjectBySlug, projects } from "@/data/projects";
 
 type ProjectDetailPageProps = {
@@ -33,7 +28,7 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
 
   return {
     title: `${project.title} — Charles`,
-    description: project.description || `View details about the ${project.title} project.`,
+    description: project.description || `View the details about the ${project.title} project.`,
   };
 }
 
@@ -46,6 +41,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const projectIndex = projects.indexOf(project);
   const previousProject = projects[projectIndex - 1] ?? null;
   const nextProject = projects[projectIndex + 1] ?? null;
+  const hasAbout = project.about.trim().length > 0;
+  const keyFeatures = project.keyFeatures.filter((feature) => feature.trim().length > 0);
+  const hasProjectContent = hasAbout || keyFeatures.length > 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -68,48 +66,48 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
           <Reveal className="mt-8">
             <header className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
-            <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                {project.role}
-              </p>
-              <h1 className="mt-4 text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                {project.title}
-              </h1>
-              {project.description && (
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-                  {project.description}
-                </p>
-              )}
-            </div>
-
-            {(project.sourceCodeHref || project.demoHref) && (
-              <div className="flex flex-wrap gap-4 lg:self-start">
-                {project.sourceCodeHref && (
-                  <Link
-                    href={project.sourceCodeHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-14 items-center gap-3 rounded-2xl border border-border bg-surface px-6 text-sm font-medium"
-                  >
-                    <FaCode aria-hidden="true" />
-                    Source Code
-                    <FaArrowUpRightFromSquare aria-hidden="true" />
-                  </Link>
-                )}
-                {project.demoHref && (
-                  <Link
-                    href={project.demoHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-14 items-center gap-3 rounded-2xl bg-primary px-6 text-sm font-medium text-primary-foreground"
-                  >
-                    <FaGlobe aria-hidden="true" />
-                    Demo
-                    <FaArrowUpRightFromSquare aria-hidden="true" />
-                  </Link>
+              <div className="max-w-3xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">{project.role}</p>
+                <h1 className="mt-4 text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
+                  {project.title}
+                </h1>
+                {project.description && (
+                  <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {project.description}
+                  </p>
                 )}
               </div>
-            )}
+
+              {(project.repositoryHref || project.demoHref) && (
+                <div className="flex flex-wrap gap-4 lg:self-start">
+                  {project.repositoryHref && (
+                    <ButtonLink
+                      href={project.repositoryHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="secondary"
+                      size="sm"
+                    >
+                      <FaCode aria-hidden="true" />
+                      Repository
+                      <FaArrowUpRightFromSquare
+                        aria-hidden="true"
+                        className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                      />
+                    </ButtonLink>
+                  )}
+                  {project.demoHref && (
+                    <ButtonLink href={project.demoHref} target="_blank" rel="noopener noreferrer" size="sm">
+                      <FaGlobe aria-hidden="true" />
+                      Demo
+                      <FaArrowUpRightFromSquare
+                        aria-hidden="true"
+                        className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                      />
+                    </ButtonLink>
+                  )}
+                </div>
+              )}
             </header>
           </Reveal>
 
@@ -127,20 +125,22 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                       height={128}
                       className="h-32 w-32 object-contain"
                     />
-                    <p className="text-sm font-medium text-muted-foreground">
-                      Preview Unavailable
-                    </p>
+                    <p className="text-sm font-medium text-muted-foreground">Preview Unavailable</p>
                   </div>
                 )}
               </section>
             </Reveal>
 
-            <aside className="h-fit rounded-2xl border border-border bg-surface p-6 lg:sticky lg:top-32">
+            <aside className="h-fit rounded-2xl border border-border bg-surface p-6">
               <h2 className="text-lg font-semibold">Overview</h2>
               <dl className="mt-6 space-y-4">
                 <div className="flex items-center justify-between gap-4">
-                  <dt className="text-sm text-muted-foreground">Year</dt>
-                  <dd className="text-sm font-medium">{project.year}</dd>
+                  <dt className="text-sm text-muted-foreground">Type</dt>
+                  <dd className="text-right text-sm font-medium">{project.type}</dd>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <dt className="text-sm text-muted-foreground">Timeline</dt>
+                  <dd className="text-right text-sm font-medium">{project.timeline}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-sm text-muted-foreground">Status</dt>
@@ -152,10 +152,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 <h2 className="text-lg font-semibold">Technology Stack</h2>
                 <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
                   {project.technologies.map((technology) => (
-                    <li
-                      key={technology}
-                      className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground"
-                    >
+                    <li key={technology} className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground">
                       {technology}
                     </li>
                   ))}
@@ -164,11 +161,46 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </aside>
           </div>
 
+          {hasProjectContent && (
+            <Reveal className="mt-12">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+                <div>
+                  {hasAbout && (
+                    <section aria-labelledby="about-project">
+                      <h2 id="about-project" className="text-2xl font-semibold tracking-[-0.03em]">
+                        About
+                      </h2>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                        {project.about}
+                      </p>
+                    </section>
+                  )}
+
+                  {keyFeatures.length > 0 && (
+                    <section className={hasAbout ? "mt-8" : ""} aria-labelledby="key-features">
+                      <h2 id="key-features" className="text-2xl font-semibold tracking-[-0.03em]">
+                        Key Features
+                      </h2>
+                      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+                        {keyFeatures.map((feature) => (
+                          <li
+                            key={feature}
+                            className="flex items-start gap-4 rounded-xl bg-secondary p-4 text-base leading-relaxed"
+                          >
+                            <span aria-hidden="true" className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          )}
+
           <Reveal className="mt-16 md:mt-20">
-            <nav
-              aria-label="Project navigation"
-              className="grid gap-4 border-t border-border pt-8 sm:grid-cols-2"
-            >
+            <nav aria-label="Project navigation" className="grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
               {previousProject && (
                 <Link
                   href={`/projects/${previousProject.slug}`}
@@ -182,9 +214,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
                       Previous Project
                     </span>
-                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">
-                      {previousProject.title}
-                    </span>
+                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">{previousProject.title}</span>
                   </span>
                 </Link>
               )}
@@ -200,9 +230,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
                       Next Project
                     </span>
-                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">
-                      {nextProject.title}
-                    </span>
+                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">{nextProject.title}</span>
                   </span>
                   <FaArrowRight
                     aria-hidden="true"
