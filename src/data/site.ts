@@ -4,8 +4,7 @@ export const siteContent = {
     description: "A personal website for Charles.",
   },
   name: "Charles",
-  role: {
-    primary: "Software Engineer",
-    accent: "An Engineer Who Designs",
-  },
+  role: "Software Engineer",
+  tagline: "An Engineer Who Designs",
+  description: "I build scalable, maintainable, and reliable full-stack mobile and web applications.",
 } as const;

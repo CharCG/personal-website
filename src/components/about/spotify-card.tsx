@@ -23,7 +23,7 @@ export function SpotifyCard() {
   const track = nowPlaying?.track;
 
   return (
-    <article className="flex min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
+    <article className="flex h-full min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">

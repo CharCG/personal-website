@@ -13,8 +13,8 @@ export function Footer() {
           <div>
             <h2 className="text-xl font-semibold">{siteContent.name}</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
-              {siteContent.role.primary} <span aria-hidden="true">—</span>{" "}
-              <em className="font-serif italic">{siteContent.role.accent}</em>
+              {siteContent.role} <span aria-hidden="true">—</span>{" "}
+              <em className="font-serif italic">{siteContent.tagline}</em>
             </p>
             <SocialLinks
               className="mt-4 flex justify-center gap-6 md:justify-start"

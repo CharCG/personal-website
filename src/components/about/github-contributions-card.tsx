@@ -40,7 +40,7 @@ export function GitHubContributionsCard() {
       : null;
 
   return (
-    <article className="min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
+    <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
       <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">

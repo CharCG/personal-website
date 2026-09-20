@@ -8,7 +8,7 @@ type ProjectCardProps = {
   headingLevel?: "h2" | "h4";
 };
 
-export function ProjectDetailLink({ project }: { project: Project }) {
+function ProjectDetailLink({ project }: { project: Project }) {
   return (
     <>
       <Link
@@ -38,7 +38,10 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   );
 }
 
-export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  headingLevel = "h2",
+}: ProjectCardProps) {
   const Heading = headingLevel;
   const previewImage = project.images[0];
 

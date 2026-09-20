@@ -9,7 +9,6 @@ export const skills: Skill[] = [
   { name: "Flutter", icon: "flutter" },
   { name: "React", icon: "react" },
   { name: "Tailwind CSS", icon: "tailwindcss" },
-  { name: "Laravel", icon: "laravel" },
   { name: "NestJS", icon: "nestjs" },
   { name: "Express.js", icon: "expressjs" },
   { name: "Prisma", icon: "prisma" },
@@ -21,7 +20,5 @@ export const skills: Skill[] = [
   { name: "Python", icon: "python" },
   { name: "Kotlin", icon: "kotlin" },
   { name: "Java", icon: "java" },
-  { name: "PHP", icon: "php" },
   { name: "Git", icon: "git" },
-  { name: "Figma", icon: "figma" },
 ];

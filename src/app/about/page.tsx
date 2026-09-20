@@ -58,10 +58,10 @@ export default function About() {
           </div>
 
           <div className="grid min-w-0 gap-4 pt-16 md:pt-20 lg:grid-cols-2 lg:pt-24">
-            <Reveal className="min-w-0" delay={0.06}>
+            <Reveal className="h-full min-w-0" delay={0.06}>
               <SpotifyCard />
             </Reveal>
-            <Reveal className="min-w-0" delay={0.12}>
+            <Reveal className="h-full min-w-0" delay={0.12}>
               <GitHubContributionsCard />
             </Reveal>
           </div>

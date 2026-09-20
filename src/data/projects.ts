@@ -1,4 +1,3 @@
-export type ProjectCategory = "recent" | "passion";
 export type ProjectStatus = "Completed" | "In Progress" | "Archived";
 
 export type Project = {
@@ -14,7 +13,6 @@ export type Project = {
   technologies: string[];
   repositoryHref: string | null;
   demoHref: string | null;
-  category: ProjectCategory;
   images: `/${string}`[];
   showOnHome: boolean;
 };
@@ -31,16 +29,20 @@ export const projects: Project[] = [
       "A surplus food marketplace app that connects local merchants with customers to rescue unsold meals at discounted prices.",
     about:
       "Why should perfectly good food end up in the trash when there are people willing to enjoy it? Behind every unsold meal is a story of ingredients, time, and effort that deserve better than being discarded. Meanwhile, local merchants were losing potential revenue while consumers continued searching for affordable meal options. HapHap was created to bridge this gap by helping surplus food find a second chance instead of going to waste.",
-    keyFeatures: ["A", "B", "C"],
+    keyFeatures: [
+      "Merchant Registration Application",
+      "Menu & Surplus Management",
+      "Ordering & Digital Payment",
+      "QR Code Pickup",
+      "Order Tracking & History",
+      "Ratings & Reviews",
+      "Savings & Food Rescue Tracking",
+      "Automatic Listing Expiration",
+    ],
     technologies: ["Flutter", "NestJS", "PostgreSQL", "Midtrans"],
     repositoryHref: "https://github.com/charcg/haphap",
     demoHref: "https://s.id/HapHap",
-    category: "recent",
-    images: [
-      "/images/projects/haphap/haphap-1.png",
-      "/images/projects/haphap/haphap-2.png",
-      "/images/projects/haphap/haphap-3.png",
-    ],
+    images: ["/images/projects/haphap/haphap-1.png", "/images/projects/haphap/haphap-2.png"],
     showOnHome: true,
   },
   {
@@ -58,7 +60,6 @@ export const projects: Project[] = [
     technologies: ["Figma"],
     repositoryHref: "https://github.com/MikeKomari/Garuda_Hacks_JayaManggala",
     demoHref: null,
-    category: "recent",
     images: ["/images/projects/katasaka/katasaka-1.png", "/images/projects/katasaka/katasaka-2.png"],
     showOnHome: true,
   },
@@ -77,12 +78,7 @@ export const projects: Project[] = [
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     repositoryHref: "https://github.com/charcg/klean",
     demoHref: "https://klean-fe.vercel.app",
-    category: "passion",
-    images: [
-      "/images/projects/klean/klean-1.png",
-      "/images/projects/klean/klean-2.png",
-      "/images/projects/klean/klean-3.png",
-    ],
+    images: ["/images/projects/klean/klean-1.png", "/images/projects/klean/klean-2.png"],
     showOnHome: true,
   },
   {
@@ -100,7 +96,6 @@ export const projects: Project[] = [
     technologies: ["React", "Tailwind CSS", "Express.js", "Flask"],
     repositoryHref: null,
     demoHref: null,
-    category: "passion",
     images: ["/images/projects/bersih-in/bersih-in-1.png"],
     showOnHome: true,
   },
@@ -118,26 +113,25 @@ export const projects: Project[] = [
     technologies: ["React", "Tailwind CSS", "Express.js", "PostgreSQL", "Midtrans"],
     repositoryHref: null,
     demoHref: null,
-    category: "passion",
-    images: ["/images/projects/karyaloka/karyaloka-1.png"],
+    images: ["/images/projects/karyaloka/karyaloka-1.png", "/images/projects/karyaloka/karyaloka-2.png"],
     showOnHome: true,
   },
   {
     slug: "arunika",
     title: "Arunika",
-    role: "Full-Stack Developer",
+    role: "UI/UX Designer",
     timeline: "2026",
     status: "Completed",
     type: "Mobile App",
     description:
       "A learning management system that unifies academic tools, resources, and campus services into one platform.",
-    about: "",
+    about:
+      "Students often rely on multiple platforms to manage different aspects of campus life. This fragmented experience can make it difficult to stay organized and connected. Arunika was created as a Smart Campus Experience platform that unifies essential academic and campus services into a single application.",
     keyFeatures: [],
     technologies: ["Figma"],
     repositoryHref: null,
     demoHref: null,
-    category: "passion",
-    images: ["/images/projects/arunika/arunika-1.png"],
+    images: ["/images/projects/arunika/arunika-1.png", "/images/projects/arunika/arunika-2.png"],
     showOnHome: false,
   },
   {
@@ -153,7 +147,6 @@ export const projects: Project[] = [
     technologies: ["NestJS", "Prisma", "MySQL"],
     repositoryHref: null,
     demoHref: null,
-    category: "passion",
     images: [],
     showOnHome: false,
   },
@@ -170,15 +163,12 @@ export const projects: Project[] = [
     technologies: ["Flutter", "Express.js", "MySQL"],
     repositoryHref: null,
     demoHref: null,
-    category: "passion",
     images: [],
     showOnHome: false,
   },
 ];
 
-export const homeRecentProjects = projects.filter((project) => project.category === "recent" && project.showOnHome);
-
-export const homePassionProjects = projects.filter((project) => project.category === "passion" && project.showOnHome);
+export const homeProjects = projects.filter((project) => project.showOnHome);
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);

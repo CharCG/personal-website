@@ -14,7 +14,7 @@ export function InteractiveMascot({
   priority = false,
   sizes = "256px",
 }: InteractiveMascotProps) {
-  const mascotRef = useRef<HTMLDivElement>(null);
+  const mascotRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const mascot = mascotRef.current;
@@ -22,6 +22,7 @@ export function InteractiveMascot({
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const eyeGraphics = mascot.querySelectorAll<HTMLElement>(".interactive-mascot-eye-graphic");
+    const patLayer = mascot.querySelector<HTMLElement>(".interactive-mascot-pat");
     let animationFrame = 0;
     let previousFrameTime = 0;
     let nextBlinkTimer = 0;
@@ -30,6 +31,7 @@ export function InteractiveMascot({
     let lastActivityTime = performance.now();
     let isSleeping = false;
     let blinkAnimations: Animation[] = [];
+    let patAnimation: Animation | null = null;
     const idleDelay = 10_000;
 
     const motion = {
@@ -196,6 +198,23 @@ export function InteractiveMascot({
       if (!event.relatedTarget) resetMascot();
     };
 
+    const handlePat = () => {
+      recordActivity();
+      if (!patLayer || reducedMotion.matches) return;
+
+      blink();
+      patAnimation?.cancel();
+      patAnimation = patLayer.animate(
+        [
+          { transform: "translateY(0) scale(1)" },
+          { transform: "translateY(5px) scaleX(1.025) scaleY(0.95)", offset: 0.32 },
+          { transform: "translateY(-2px) scaleX(0.99) scaleY(1.015)", offset: 0.7 },
+          { transform: "translateY(0) scale(1)" },
+        ],
+        { duration: 420, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+      );
+    };
+
     const blink = () => {
       blinkAnimations = Array.from(eyeGraphics, (eye) =>
         eye.animate(
@@ -317,10 +336,12 @@ export function InteractiveMascot({
     window.addEventListener("scroll", recordActivity, { passive: true });
     window.addEventListener("pointerout", handlePointerOut, { passive: true });
     window.addEventListener("blur", resetMascot);
+    mascot.addEventListener("click", handlePat);
     reducedMotion.addEventListener("change", handleMotionPreference);
 
     return () => {
       cancelAnimationFrame(animationFrame);
+      patAnimation?.cancel();
       stopBlinking();
       window.clearTimeout(idleTimer);
       window.removeEventListener("pointermove", followPointer);
@@ -329,39 +350,49 @@ export function InteractiveMascot({
       window.removeEventListener("scroll", recordActivity);
       window.removeEventListener("pointerout", handlePointerOut);
       window.removeEventListener("blur", resetMascot);
+      mascot.removeEventListener("click", handlePat);
       reducedMotion.removeEventListener("change", handleMotionPreference);
     };
   }, []);
 
   return (
-    <div
+    <button
+      type="button"
       ref={mascotRef}
-      className={`interactive-mascot relative ${className}`}
-      aria-hidden="true"
+      className={`interactive-mascot relative cursor-pointer touch-manipulation appearance-none border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${className}`}
+      aria-label="Pat the mascot"
     >
-      <span className="interactive-mascot-breath">
-        <span className="interactive-mascot-character">
-          <Image
-            src="/images/mascot/parts/body.svg"
-            alt=""
-            fill
-            priority={priority}
-            sizes={sizes}
-          />
+      <span className="interactive-mascot-sleep-indicator" aria-hidden="true">
+        <span>Z</span>
+        <span>z</span>
+        <span>z</span>
+      </span>
 
-          <span className="interactive-mascot-eye interactive-mascot-eye-left">
-            <span className="interactive-mascot-eye-graphic">
-              <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" />
+      <span className="interactive-mascot-pat">
+        <span className="interactive-mascot-breath">
+          <span className="interactive-mascot-character">
+            <Image
+              src="/images/mascot/parts/body.svg"
+              alt=""
+              fill
+              priority={priority}
+              sizes={sizes}
+            />
+
+            <span className="interactive-mascot-eye interactive-mascot-eye-left">
+              <span className="interactive-mascot-eye-graphic">
+                <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" />
+              </span>
             </span>
-          </span>
 
-          <span className="interactive-mascot-eye interactive-mascot-eye-right">
-            <span className="interactive-mascot-eye-graphic">
-              <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" />
+            <span className="interactive-mascot-eye interactive-mascot-eye-right">
+              <span className="interactive-mascot-eye-graphic">
+                <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" />
+              </span>
             </span>
           </span>
         </span>
       </span>
-    </div>
+    </button>
   );
 }
