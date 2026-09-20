@@ -64,29 +64,80 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
 
   return (
     <>
-      <div className={`grid min-w-0 gap-4 ${images.length > 1 ? "md:grid-cols-2" : ""}`}>
-        {images.map((image, index) => (
+      <div className="min-w-0 rounded-2xl border border-border bg-secondary p-4 md:p-6">
+        <div className="relative aspect-video min-w-0 overflow-hidden rounded-xl bg-surface">
+          <AnimatePresence initial={false} mode="wait">
+            {selectedImage && (
+              <m.div
+                key={`${selectedImage}-${selectedIndex}`}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 0.99 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.99 }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Image
+                  src={selectedImage}
+                  alt={`${projectTitle} project preview ${selectedIndex + 1}`}
+                  fill
+                  sizes="(max-width: 1023px) calc(100vw - 80px), 760px"
+                  className="object-contain"
+                  priority={selectedIndex === 0}
+                />
+              </m.div>
+            )}
+          </AnimatePresence>
+
           <button
-            key={`${image}-${index}`}
             type="button"
-            onClick={() => openImage(index)}
-            aria-label={`Open ${projectTitle} project preview ${index + 1}`}
-            className="group relative aspect-[3/2] min-w-0 cursor-zoom-in overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-200 hover:border-foreground/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-          >
-            <Image
-              src={image}
-              alt={`${projectTitle} project preview ${index + 1}`}
-              fill
-              sizes={
-                images.length > 1
-                  ? "(max-width: 767px) calc(100vw - 48px), (max-width: 1199px) 50vw, 400px"
-                  : "(max-width: 1199px) calc(100vw - 48px), 800px"
-              }
-              className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
-              priority={index === 0}
-            />
-          </button>
-        ))}
+            onClick={() => openImage(selectedIndex)}
+            aria-label={`Open ${projectTitle} project preview ${selectedIndex + 1}`}
+            className="absolute inset-0 z-10 cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+          />
+
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={showPreviousImage}
+                aria-label="View previous project image"
+                className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+              >
+                <FaChevronLeft aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={showNextImage}
+                aria-label="View next project image"
+                className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+              >
+                <FaChevronRight aria-hidden="true" />
+              </button>
+            </>
+          )}
+        </div>
+
+        {images.length > 1 && (
+          <div className="mt-4 flex justify-center" aria-label="Choose a project image">
+            {images.map((image, index) => (
+              <button
+                key={`${image}-${index}`}
+                type="button"
+                onClick={() => setSelectedIndex(index)}
+                aria-label={`View project image ${index + 1}`}
+                aria-current={selectedIndex === index ? "true" : undefined}
+                className="flex h-6 w-6 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+                    selectedIndex === index ? "bg-primary" : "bg-border"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <dialog
@@ -109,7 +160,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
           <AnimatePresence initial={false} mode="wait">
             {selectedImage && (
               <m.div
-                key={selectedImage}
+                key={`${selectedImage}-${selectedIndex}`}
                 className="absolute inset-0"
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}

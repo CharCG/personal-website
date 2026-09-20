@@ -27,9 +27,13 @@ export function SkillsSection() {
           {skills.map((skill) => (
             <li
               key={skill.name}
-              className="flex min-w-0 items-center justify-start gap-3 rounded-full bg-secondary px-3 py-3 text-sm"
+              className="group flex min-w-0 items-center justify-start gap-3 rounded-full bg-secondary px-3 py-3 text-sm transition-colors duration-200 ease-out hover:bg-border"
             >
-              <StackIcon name={skill.icon} className="h-5 w-5 shrink-0" />
+              <StackIcon
+                name={skill.icon}
+                variant="grayscale"
+                className="skill-icon-primary h-5 w-5 shrink-0"
+              />
               <span className="truncate">{skill.name}</span>
             </li>
           ))}

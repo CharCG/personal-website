@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Footer } from "@/components/layout/footer";
+import { ButtonLink } from "@/components/ui/button-link";
 
 export const metadata: Metadata = {
   title: "Page Not Found — Charles",
@@ -33,13 +33,13 @@ export default function NotFound() {
           This page doesn’t exist or may have been moved. Let’s get you back on track.
         </p>
 
-        <Link
+        <ButtonLink
           href="/"
-          className="mt-8 inline-flex h-14 items-center gap-3 rounded-2xl bg-primary px-8 text-base font-medium text-primary-foreground"
+          className="mt-8"
         >
           <FaArrowLeft aria-hidden="true" />
           Back to Home
-        </Link>
+        </ButtonLink>
       </div>
 
       <Footer />

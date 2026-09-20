@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
 import { Reveal } from "@/components/motion/reveal";
+import { ButtonLink } from "@/components/ui/button-link";
 import { siteContent } from "@/data/site";
 import { emailContact } from "@/data/socials";
 
@@ -13,8 +13,8 @@ export function Footer() {
           <div>
             <h2 className="text-xl font-semibold">{siteContent.name}</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
-              {siteContent.role.primary} <span aria-hidden="true">—</span>{" "}
-              <em className="font-serif italic">{siteContent.role.accent}</em>
+              {siteContent.role} <span aria-hidden="true">—</span>{" "}
+              <em className="font-serif italic">{siteContent.tagline}</em>
             </p>
             <SocialLinks
               className="mt-4 flex justify-center gap-6 md:justify-start"
@@ -23,9 +23,9 @@ export function Footer() {
           </div>
 
           <div className="flex w-full items-start justify-center md:justify-end">
-            <Link
+            <ButtonLink
               href={emailContact.href}
-              className="group inline-flex h-14 items-center justify-center gap-4 rounded-2xl bg-surface px-6 text-base font-medium text-foreground transition-opacity duration-200 hover:opacity-85"
+              variant="inverted"
             >
               <FaEnvelope aria-hidden="true" />
               Let’s Connect
@@ -33,7 +33,7 @@ export function Footer() {
                 aria-hidden="true"
                 className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
               />
-            </Link>
+            </ButtonLink>
           </div>
         </Reveal>
 
