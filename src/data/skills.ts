@@ -1,4 +1,5 @@
 import {
+  siCplusplus,
   siExpress,
   siFigma,
   siFlask,
@@ -6,16 +7,19 @@ import {
   siGit,
   siJavascript,
   siKotlin,
+  siLaravel,
   siMysql,
   siNestjs,
   siNodedotjs,
   siOpenjdk,
   siPostgresql,
+  siPostman,
   siPrisma,
   siPython,
   siReact,
   siTailwindcss,
   siTypescript,
+  siXml,
   type SimpleIcon,
 } from "simple-icons";
 
@@ -28,6 +32,7 @@ export const skills: Skill[] = [
   { name: "Flutter", icon: siFlutter },
   { name: "React", icon: siReact },
   { name: "Tailwind CSS", icon: siTailwindcss },
+  { name: "Laravel", icon: siLaravel },
   { name: "NestJS", icon: siNestjs },
   { name: "Express.js", icon: siExpress },
   { name: "Flask", icon: siFlask },
@@ -40,7 +45,10 @@ export const skills: Skill[] = [
   { name: "Python", icon: siPython },
   { name: "Kotlin", icon: siKotlin },
   { name: "Java", icon: siOpenjdk },
+  { name: "XML", icon: siXml },
+  { name: "C++", icon: siCplusplus },
   { name: "Git", icon: siGit },
+  { name: "Postman", icon: siPostman },
   { name: "Figma", icon: siFigma },
 ];
 

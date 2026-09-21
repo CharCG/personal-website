@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ButtonLink } from "../ui/button-link";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 import { githubProfile } from "@/data/socials";
 import type { ContributionLevel, GitHubContributions } from "@/types/github";
@@ -52,19 +52,14 @@ export function GitHubContributionsCard() {
               : `Recent work from @${githubProfile.username}`}
           </p>
         </div>
-        <Link
-          href={githubProfile.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium transition-colors duration-200 ease-out hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-        >
+        <ButtonLink href={githubProfile.href} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
           <FaGithub aria-hidden="true" />
           View Profile
           <FaArrowUpRightFromSquare
             className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
             aria-hidden="true"
           />
-        </Link>
+        </ButtonLink>
       </div>
 
       <div

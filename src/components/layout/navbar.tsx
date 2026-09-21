@@ -106,7 +106,7 @@ export function Navbar() {
                   }}
                 >
                   <FaMagnifyingGlass aria-hidden="true" />
-                  Search pages, projects, and socials
+                  Search pages, projects, and socials...
                 </button>
               </li>
               {navigationItems.map((item) => (
@@ -173,7 +173,6 @@ export function Navbar() {
                 className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full px-2 text-sm text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 onClick={() => setCommandOpen(true)}
               >
-                <FaMagnifyingGlass aria-hidden="true" className="shrink-0" />
                 <span className="truncate">Search</span>
                 <kbd className="hidden text-xs xl:inline">⌘K</kbd>
               </button>
