@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaBars, FaXmark } from "react-icons/fa6";
+import { FaBars, FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
 import { m } from "motion/react";
+import { CommandMenu } from "@/components/layout/command-menu";
 import { navigationItems } from "@/data/navigation";
 
 function MascotMark({ celebrating }: { celebrating: boolean }) {
@@ -26,7 +27,20 @@ function MascotMark({ celebrating }: { celebrating: boolean }) {
 export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [commandOpen, setCommandOpen] = useState(false);
   const [easterEggVisible, setEasterEggVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleCommandMenu = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() !== "k" || (!event.metaKey && !event.ctrlKey)) return;
+
+      event.preventDefault();
+      setCommandOpen((current) => !current);
+    };
+
+    document.addEventListener("keydown", toggleCommandMenu);
+    return () => document.removeEventListener("keydown", toggleCommandMenu);
+  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem("mascot-easter-egg-pending") !== "true") return;
@@ -125,6 +139,19 @@ export function Navbar() {
             className="absolute inset-x-0 top-16 z-50 rounded-2xl border border-border bg-surface p-2 lg:hidden"
           >
             <ul className="space-y-1">
+              <li>
+                <button
+                  type="button"
+                  className="flex w-full cursor-pointer items-center gap-3 rounded-full px-4 py-3 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setCommandOpen(true);
+                  }}
+                >
+                  <FaMagnifyingGlass aria-hidden="true" />
+                  Search pages, projects, and socials
+                </button>
+              </li>
               {navigationItems.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -190,9 +217,24 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
+
+            <li className="h-12 min-w-0">
+              <button
+                type="button"
+                aria-label="Search pages, projects, and socials. Command or Control K"
+                className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full px-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                onClick={() => setCommandOpen(true)}
+              >
+                <FaMagnifyingGlass aria-hidden="true" className="shrink-0" />
+                <span className="truncate">Search</span>
+                <kbd className="hidden text-xs xl:inline">⌘K</kbd>
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
+
+      <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />
     </header>
   );
 }
