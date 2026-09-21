@@ -1,5 +1,6 @@
 import { FaArrowRight } from "react-icons/fa6";
 import { homeProjects } from "@/data/projects";
+import { motionStagger } from "@/components/motion/config";
 import { ProjectCard } from "@/components/projects/project-card";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -26,7 +27,7 @@ export function ProjectsSection() {
 
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
         {homeProjects.slice(0, 2).map((project, index) => (
-          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+          <Reveal key={project.slug} className="h-full" delay={index * motionStagger}>
             <ProjectCard project={project} headingLevel="h4" />
           </Reveal>
         ))}
@@ -34,7 +35,7 @@ export function ProjectsSection() {
 
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         {homeProjects.slice(2, 5).map((project, index) => (
-          <Reveal key={project.slug} className="h-full" delay={index * 0.06}>
+          <Reveal key={project.slug} className="h-full" delay={index * motionStagger}>
             <ProjectCard project={project} headingLevel="h4" />
           </Reveal>
         ))}

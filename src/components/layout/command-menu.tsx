@@ -14,10 +14,10 @@ type CommandMenuProps = {
 };
 
 const commandItemClassName =
-  "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-3 text-sm text-foreground outline-none data-[selected=true]:bg-secondary data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50";
+  "flex min-h-12 cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm text-foreground outline-none transition-colors duration-200 ease-out data-[selected=true]:bg-secondary data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50";
 
 const commandGroupClassName =
-  "py-2 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.3em] [&_[cmdk-group-heading]]:text-muted-foreground";
+  "py-2 [&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.3em] [&_[cmdk-group-heading]]:text-muted-foreground";
 
 export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
   const router = useRouter();
@@ -50,9 +50,9 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
       label="Search pages, projects, and socials"
       loop
       overlayClassName="command-menu-overlay fixed inset-0 z-[60] bg-foreground/30"
-      contentClassName="command-menu-content fixed inset-x-6 top-24 z-[70] mx-auto max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface md:top-32"
+      contentClassName="command-menu-content fixed inset-x-6 top-24 z-[70] mx-auto max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface md:top-32 lg:inset-x-8"
     >
-      <div className="flex items-center gap-3 border-b border-border px-4">
+      <div className="flex items-center gap-4 border-b border-border px-4">
         <FaMagnifyingGlass aria-hidden="true" className="shrink-0 text-muted-foreground" />
         <Command.Input
           placeholder="Search pages, projects, and socials..."
@@ -69,23 +69,21 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         </Command.Empty>
 
         <Command.Group heading="Navigation" className={commandGroupClassName}>
-          {navigationItems
-            .filter((item) => item.href !== "/#")
-            .map((item) => (
-              <Command.Item
-                key={item.href}
-                value={`page:${item.label}`}
-                keywords={[item.label, item.href]}
-                onSelect={() => navigate(item.href)}
-                className={commandItemClassName}
-              >
-                <FaArrowRight aria-hidden="true" className="shrink-0 text-muted-foreground" />
-                <span className="flex-1">{item.label}</span>
-              </Command.Item>
-            ))}
+          {navigationItems.map((item) => (
+            <Command.Item
+              key={item.href}
+              value={`page:${item.label}`}
+              keywords={[item.label, item.href]}
+              onSelect={() => navigate(item.href)}
+              className={commandItemClassName}
+            >
+              <FaArrowRight aria-hidden="true" className="shrink-0 text-muted-foreground" />
+              <span className="flex-1">{item.label}</span>
+            </Command.Item>
+          ))}
         </Command.Group>
 
-        <Command.Separator className="mx-3 h-px bg-border" />
+        <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Projects" className={commandGroupClassName}>
           {projects.map((project) => (
@@ -99,13 +97,13 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
               <FaFolderOpen aria-hidden="true" className="shrink-0 text-muted-foreground" />
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-medium">{project.title}</span>
-                <span className="mt-1 block truncate text-xs text-muted-foreground">{project.role}</span>
+                <span className="mt-2 block truncate text-xs text-muted-foreground">{project.role}</span>
               </span>
             </Command.Item>
           ))}
         </Command.Group>
 
-        <Command.Separator className="mx-3 h-px bg-border" />
+        <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Socials" className={commandGroupClassName}>
           {socialLinks.map((social) => {
@@ -126,7 +124,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
           })}
         </Command.Group>
 
-        <Command.Separator className="mx-3 h-px bg-border" />
+        <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Actions" className={commandGroupClassName}>
           <Command.Item
@@ -141,7 +139,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         </Command.Group>
       </Command.List>
 
-      <div className="flex items-center justify-between border-t border-border px-4 py-3 text-xs text-muted-foreground">
+      <div className="flex items-center justify-between border-t border-border px-4 py-2 text-xs text-muted-foreground">
         <span>Navigate with ↑ ↓</span>
         <span>Select with Enter</span>
       </div>

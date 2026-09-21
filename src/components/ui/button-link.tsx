@@ -8,8 +8,8 @@ const variantClassNames = {
 } as const;
 
 const sizeClassNames = {
-  sm: "h-14 gap-3 px-6 text-sm",
-  md: "h-14 gap-4 px-6 text-base",
+  sm: "h-12 gap-2 px-4 text-sm",
+  md: "h-14 gap-2 px-6 text-base",
   lg: "h-16 gap-4 px-8 text-base",
 } as const;
 

@@ -29,7 +29,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
   const previewImage = project.images[0];
 
   return (
-    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
+    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-200 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
       <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-secondary">
         {previewImage ? (
           <Image
@@ -37,7 +37,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
             alt={`${project.title} product preview`}
             fill
             sizes="(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"
-            className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
           />
         ) : (
           <div className="flex flex-col items-center gap-2 px-4 text-center">
@@ -46,7 +46,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
               alt=""
               width={96}
               height={96}
-              className="h-24 w-24 object-contain transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
+              className="h-24 w-24 object-contain transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
             />
             <p className="text-xs font-medium text-muted-foreground">Preview Unavailable</p>
           </div>

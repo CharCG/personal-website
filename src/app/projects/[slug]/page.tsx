@@ -58,11 +58,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <Navbar />
 
       <main className="flex-1">
-        <article className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
+        <article className="mx-auto w-full max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
           <Reveal>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
             >
               <FaArrowLeft
                 aria-hidden="true"
@@ -154,6 +154,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   <dt className="text-sm text-muted-foreground">Status</dt>
                   <dd>
                     <Chip
+                      className="font-medium"
                       icon={
                         <span
                           aria-hidden="true"
@@ -215,7 +216,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               {previousProject && (
                 <Link
                   href={`/projects/${previousProject.slug}`}
-                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
                 >
                   <FaArrowLeft
                     aria-hidden="true"
@@ -233,7 +234,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               {nextProject && (
                 <Link
                   href={`/projects/${nextProject.slug}`}
-                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                     previousProject ? "" : "sm:col-start-2"
                   }`}
                 >

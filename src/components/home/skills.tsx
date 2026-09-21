@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
+import { motionStagger } from "@/components/motion/config";
 import { BrandIcon } from "@/components/shared/brand-icon";
 import { Chip } from "@/components/ui/chip";
 import { skills } from "@/data/skills";
@@ -18,8 +19,8 @@ export function SkillsSection() {
         </p>
       </Reveal>
 
-      <Reveal delay={0.06}>
-        <ul className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-3 md:grid-cols-4 md:p-6 lg:grid-cols-6">
+      <Reveal delay={motionStagger}>
+        <ul className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-3 md:grid-cols-4 md:p-6 lg:grid-cols-6">
           {skills.map((skill) => (
             <li key={skill.name} className="group min-w-0">
               <Chip

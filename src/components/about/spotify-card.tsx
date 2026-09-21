@@ -39,7 +39,7 @@ export function SpotifyCard() {
             href={track.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-2xl bg-secondary p-4 transition-colors duration-200 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            className="group flex items-center gap-4 rounded-2xl bg-secondary p-4 transition-colors duration-200 ease-out hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
             {track.albumImage ? (
               <Image
@@ -58,8 +58,8 @@ export function SpotifyCard() {
               <span className="block text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 {nowPlaying.isPlaying ? "Now playing" : "Recently paused"}
               </span>
-              <span className="mt-1 block truncate font-semibold">{track.title}</span>
-              <span className="mt-1 block truncate text-sm text-muted-foreground">{track.artists}</span>
+              <span className="mt-2 block truncate font-semibold">{track.title}</span>
+              <span className="mt-2 block truncate text-sm text-muted-foreground">{track.artists}</span>
             </span>
             <FaArrowUpRightFromSquare
               className="shrink-0 text-sm transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"

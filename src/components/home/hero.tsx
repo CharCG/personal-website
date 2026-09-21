@@ -46,14 +46,14 @@ export function Hero() {
 
         <SocialLinks
           className="hero-enter hero-enter-socials relative z-10 mt-8 flex justify-center gap-8 md:mt-10"
-          linkClassName="text-3xl transition-opacity hover:opacity-60"
+          linkClassName="text-3xl transition-opacity duration-200 ease-out hover:opacity-70"
         />
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-8 z-30 mx-auto flex max-w-[1200px] justify-center px-6 lg:px-8">
         <Link
           href="#projects"
-          className="hero-enter hero-enter-scroll pointer-events-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+          className="hero-enter hero-enter-scroll pointer-events-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
         >
           Scroll
           <FaArrowDown className="hero-scroll-icon" aria-hidden="true" />

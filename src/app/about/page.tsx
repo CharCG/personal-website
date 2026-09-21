@@ -4,6 +4,7 @@ import { GitHubContributionsCard } from "@/components/about/github-contributions
 import { SpotifyCard } from "@/components/about/spotify-card";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { motionStagger } from "@/components/motion/config";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/shared/social-links";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -20,7 +21,7 @@ export default function About() {
 
       <main className="flex-1">
         <section className="mx-auto w-full min-w-0 max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
-          <div className="grid gap-8 border-b border-border pb-16 md:pb-20 lg:grid-cols-2 lg:gap-16 lg:pb-24">
+          <div className="grid gap-8 border-b border-border pb-8 md:pb-10 lg:grid-cols-2 lg:gap-16 lg:pb-12">
             <Reveal>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
@@ -29,7 +30,7 @@ export default function About() {
               </h1>
             </Reveal>
 
-            <Reveal className="self-end" delay={0.08}>
+            <Reveal className="self-end" delay={motionStagger}>
               <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
                 <p>A Computer Science undergraduate who believes technology should solve real human problems.</p>
                 <p>
@@ -45,18 +46,18 @@ export default function About() {
                   </ButtonLink>
                   <SocialLinks
                     className="flex gap-4"
-                    linkClassName="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-xl text-foreground transition-opacity duration-200 hover:opacity-70"
+                    linkClassName="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-xl text-foreground transition-opacity duration-200 ease-out hover:opacity-70"
                   />
                 </div>
               </div>
             </Reveal>
           </div>
 
-          <div className="grid min-w-0 gap-4 pt-16 md:pt-20 lg:grid-cols-2 lg:pt-24">
-            <Reveal className="h-full min-w-0" delay={0.06}>
+          <div className="grid min-w-0 gap-4 pt-8 md:pt-10 lg:grid-cols-2 lg:pt-12">
+            <Reveal className="h-full min-w-0" delay={motionStagger}>
               <SpotifyCard />
             </Reveal>
-            <Reveal className="h-full min-w-0" delay={0.12}>
+            <Reveal className="h-full min-w-0" delay={motionStagger * 2}>
               <GitHubContributionsCard />
             </Reveal>
           </div>

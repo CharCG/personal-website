@@ -1,5 +1,6 @@
 import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
+import { motionStagger } from "@/components/motion/config";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { emailContact } from "@/data/socials";
@@ -17,7 +18,7 @@ export function Footer() {
             </p>
             <SocialLinks
               className="mt-4 flex justify-center gap-6 md:justify-start"
-              linkClassName="text-2xl transition-opacity hover:opacity-70"
+              linkClassName="text-2xl transition-opacity duration-200 ease-out hover:opacity-70"
             />
           </div>
 
@@ -35,7 +36,7 @@ export function Footer() {
 
         <Reveal
           className="mt-10 flex flex-col items-center gap-2 text-center text-xs text-primary-foreground/60 md:flex-row md:justify-between md:text-left"
-          delay={0.08}
+          delay={motionStagger}
         >
           <p>© {new Date().getFullYear()} Charles. All rights reserved.</p>
           <p>A curious mind. A kinder internet.</p>

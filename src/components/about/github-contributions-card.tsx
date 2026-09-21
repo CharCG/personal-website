@@ -56,7 +56,7 @@ export function GitHubContributionsCard() {
           href={githubProfile.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium transition-colors duration-200 ease-out hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
         >
           <FaGithub aria-hidden="true" />
           View Profile

@@ -163,7 +163,7 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
       blinkAnimations = Array.from(eyeGraphics, (eye) =>
         eye.animate(
           [{ transform: "scaleY(1)" }, { transform: "scaleY(0.08)", offset: 0.45 }, { transform: "scaleY(1)" }],
-          { duration: 180, easing: "ease-in-out" },
+          { duration: 200, easing: "ease-in-out" },
         ),
       );
     };
@@ -293,11 +293,7 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
   }, []);
 
   return (
-    <div
-      ref={mascotRef}
-      className={`interactive-mascot relative ${className}`}
-      aria-hidden="true"
-    >
+    <div ref={mascotRef} className={`interactive-mascot relative ${className}`} aria-hidden="true">
       <span className="interactive-mascot-sleep-indicator" aria-hidden="true">
         <span>Z</span>
         <span>z</span>
