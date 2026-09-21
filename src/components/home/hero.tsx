@@ -3,20 +3,19 @@ import { FaArrowDown, FaArrowRight, FaFile } from "react-icons/fa6";
 import { SocialLinks } from "@/components/shared/social-links";
 import { InteractiveMascot } from "@/components/mascot/interactive-mascot";
 import { ButtonLink } from "@/components/ui/button-link";
-import { siteContent } from "@/data/site";
 
 export function Hero() {
   return (
     <section id="home" className="hero-layout relative h-svh min-h-[720px] overflow-hidden md:min-h-[800px]">
       <div className="relative z-10 mx-auto px-6 pt-32 text-center md:pt-40 lg:pt-48">
         <p className="hero-enter hero-enter-eyebrow text-xs font-semibold uppercase tracking-[0.5em] text-muted-foreground">
-          {siteContent.role}
+          Software Engineer
         </p>
         <h1 className="hero-enter hero-enter-name mt-4 text-4xl font-bold leading-none tracking-[-0.05em] md:text-5xl lg:text-[64px]">
-          {siteContent.name}
+          Charles
         </h1>
         <p className="hero-enter hero-enter-role mt-4 text-base text-muted-foreground md:text-lg lg:text-xl">
-          {siteContent.description}
+          I build scalable, maintainable, and reliable full-stack mobile and web applications.
         </p>
       </div>
 

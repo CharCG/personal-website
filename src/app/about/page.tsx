@@ -7,7 +7,6 @@ import { Navbar } from "@/components/layout/navbar";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/shared/social-links";
 import { ButtonLink } from "@/components/ui/button-link";
-import { aboutContent } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About — Charles",
@@ -25,23 +24,19 @@ export default function About() {
             <Reveal>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                {aboutContent.quote.map((segment, index) =>
-                  segment.emphasis ? (
-                    <em key={index} className="font-serif font-normal italic">
-                      {segment.text}
-                    </em>
-                  ) : (
-                    <span key={index}>{segment.text}</span>
-                  ),
-                )}
+                I care about the space between <em className="font-serif font-normal italic">useful</em> and{" "}
+                <em className="font-serif font-normal italic">delightful</em>.
               </h1>
             </Reveal>
 
             <Reveal className="self-end" delay={0.08}>
               <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-                {aboutContent.description.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+                <p>A Computer Science undergraduate who believes technology should solve real human problems.</p>
+                <p>
+                  Passionate about building scalable, maintainable, and reliable systems with a focus on clean
+                  architecture and long-term sustainability. Motivated to bring a result-driven mindset, strong
+                  collaboration, and practical problem-solving skills to deliver high-quality solutions.
+                </p>
 
                 <div className="flex flex-col items-start gap-6 pt-4 sm:flex-row sm:items-center">
                   <ButtonLink href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
