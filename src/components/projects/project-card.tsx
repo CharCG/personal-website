@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
+import { TechnologyList } from "@/components/projects/technology-list";
 import type { Project } from "@/data/projects";
 
 type ProjectCardProps = {
@@ -20,18 +21,6 @@ function ProjectDetailLink({ project }: { project: Project }) {
         <FaArrowRight aria-hidden="true" />
       </span>
     </>
-  );
-}
-
-function TechnologyList({ technologies }: Pick<Project, "technologies">) {
-  return (
-    <ul className="mt-auto flex flex-wrap gap-2 pt-4" aria-label="Technologies used">
-      {technologies.map((technology) => (
-        <li key={technology} className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground">
-          {technology}
-        </li>
-      ))}
-    </ul>
   );
 }
 
@@ -76,7 +65,7 @@ export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) 
         {project.description && (
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
         )}
-        <TechnologyList technologies={project.technologies} />
+        <TechnologyList technologies={project.technologies} className="mt-auto pt-4" />
       </div>
     </article>
   );

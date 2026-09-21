@@ -7,14 +7,22 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectGallery } from "@/components/projects/project-gallery";
+import { TechnologyList } from "@/components/projects/technology-list";
 import { ButtonLink } from "@/components/ui/button-link";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { Chip } from "@/components/ui/chip";
+import { getProjectBySlug, projects, type ProjectStatus } from "@/data/projects";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export const dynamicParams = false;
+
+const statusIndicatorClasses: Record<ProjectStatus, string> = {
+  Completed: "bg-success",
+  "In Progress": "bg-warning",
+  Archived: "bg-info",
+};
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -144,19 +152,24 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-sm text-muted-foreground">Status</dt>
-                  <dd className="text-sm font-medium">{project.status}</dd>
+                  <dd>
+                    <Chip
+                      icon={
+                        <span
+                          aria-hidden="true"
+                          className={`h-2 w-2 shrink-0 rounded-full ${statusIndicatorClasses[project.status]}`}
+                        />
+                      }
+                    >
+                      {project.status}
+                    </Chip>
+                  </dd>
                 </div>
               </dl>
 
               <div className="mt-6 border-t border-border pt-6">
                 <h2 className="text-lg font-semibold">Technology Stack</h2>
-                <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
-                  {project.technologies.map((technology) => (
-                    <li key={technology} className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground">
-                      {technology}
-                    </li>
-                  ))}
-                </ul>
+                <TechnologyList technologies={project.technologies} className="mt-4" />
               </div>
             </aside>
           </div>
