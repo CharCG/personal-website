@@ -138,8 +138,7 @@ a {
 }
 
 .interactive-mascot-breath,
-.interactive-mascot-character,
-.interactive-mascot-pat {
+.interactive-mascot-character {
   position: absolute;
   inset: 0;
   transform-origin: center bottom;
@@ -147,38 +146,38 @@ a {
 
 .interactive-mascot-sleep-indicator {
   position: absolute;
-  top: 8%;
-  right: 4%;
+  top: 2%;
+  right: 0;
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  gap: 2px;
+  gap: 4px;
   color: var(--primary);
   font-family: "Times New Roman", Times, serif;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-style: italic;
   font-weight: 700;
   line-height: 1;
   opacity: 0;
   pointer-events: none;
-  transform: rotate(-10deg);
+  transform: rotate(-14deg);
   transition: opacity 200ms ease-out;
 }
 
 .interactive-mascot-sleep-indicator span {
-  animation: mascot-sleep-z 1800ms ease-in-out infinite;
+  animation: mascot-sleep-z 1400ms ease-in-out infinite;
   animation-play-state: paused;
   opacity: 0;
 }
 
 .interactive-mascot-sleep-indicator span:nth-child(2) {
-  font-size: 0.8em;
-  animation-delay: 300ms;
+  font-size: 0.82em;
+  animation-delay: 220ms;
 }
 
 .interactive-mascot-sleep-indicator span:nth-child(3) {
-  font-size: 0.65em;
-  animation-delay: 600ms;
+  font-size: 0.68em;
+  animation-delay: 440ms;
 }
 
 .interactive-mascot[data-sleeping="true"] .interactive-mascot-sleep-indicator {
@@ -194,8 +193,7 @@ a {
 }
 
 .interactive-mascot-character {
-  transform: translate3d(var(--mascot-body-x), var(--mascot-body-y), 0)
-    rotate(var(--mascot-body-rotation));
+  transform: translate3d(var(--mascot-body-x), var(--mascot-body-y), 0) rotate(var(--mascot-body-rotation));
   will-change: transform;
 }
 
@@ -257,20 +255,19 @@ a {
 }
 
 @keyframes mascot-sleep-z {
-  0%,
-  20% {
+  0% {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translate3d(0, 8px, 0) rotate(-4deg) scale(0.75);
   }
 
-  45%,
-  75% {
+  22%,
+  68% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translate3d(8px, -20px, 0) rotate(6deg) scale(1.15);
   }
 }
 
@@ -301,10 +298,7 @@ a {
   stop-color: var(--primary) !important;
 }
 
-.skill-icon-primary
-  svg
-  path[fill]:not([fill="#000"]):not([fill="#fff"]):not([fill^="url("])
-  ~ path[fill="#000"] {
+.skill-icon-primary svg path[fill]:not([fill="#000"]):not([fill="#fff"]):not([fill^="url("]) ~ path[fill="#000"] {
   fill: var(--primary-foreground) !important;
 }
 
@@ -431,5 +425,4 @@ a {
   .project-lightbox::backdrop {
     animation: none;
   }
-
 }

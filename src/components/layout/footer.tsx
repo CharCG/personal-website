@@ -22,10 +22,7 @@ export function Footer() {
           </div>
 
           <div className="flex w-full items-start justify-center md:justify-end">
-            <ButtonLink
-              href={emailContact.href}
-              variant="inverted"
-            >
+            <ButtonLink href={emailContact.href} variant="inverted">
               <FaEnvelope aria-hidden="true" />
               Let’s Connect
               <FaArrowRight
@@ -40,9 +37,7 @@ export function Footer() {
           className="mt-10 flex flex-col items-center gap-2 text-center text-xs text-primary-foreground/60 md:flex-row md:justify-between md:text-left"
           delay={0.08}
         >
-          <p>
-            © {new Date().getFullYear()} Charles. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} Charles. All rights reserved.</p>
           <p>A curious mind. A kinder internet.</p>
         </Reveal>
       </div>

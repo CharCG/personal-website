@@ -170,9 +170,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                       <h2 id="about-project" className="text-2xl font-semibold tracking-[-0.03em]">
                         About
                       </h2>
-                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                        {project.about}
-                      </p>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.about}</p>
                     </section>
                   )}
 

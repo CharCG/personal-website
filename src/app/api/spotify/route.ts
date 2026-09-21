@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import axios from "axios";
 import type { SpotifyNowPlaying } from "@/types/spotify";
 
 type SpotifyTokenResponse = {
@@ -30,41 +31,35 @@ export async function GET() {
   }
 
   try {
-    const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
+    const tokenResponse = await axios.post<SpotifyTokenResponse>(
+      "https://accounts.spotify.com/api/token",
+      new URLSearchParams({
         grant_type: "refresh_token",
         refresh_token: refreshToken,
       }),
-      cache: "no-store",
-    });
+      {
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
 
-    if (!tokenResponse.ok) {
-      return NextResponse.json(unavailable);
-    }
-
-    const tokenData = (await tokenResponse.json()) as SpotifyTokenResponse;
+    const tokenData = tokenResponse.data;
     if (!tokenData.access_token) {
       return NextResponse.json(unavailable);
     }
 
-    const playbackResponse = await fetch(
+    const playbackResponse = await axios.get<SpotifyPlaybackResponse>(
       "https://api.spotify.com/v1/me/player/currently-playing",
-      {
-        headers: { Authorization: `Bearer ${tokenData.access_token}` },
-        cache: "no-store",
-      },
+      { headers: { Authorization: `Bearer ${tokenData.access_token}` } },
     );
 
-    if (playbackResponse.status === 204 || !playbackResponse.ok) {
+    if (playbackResponse.status === 204) {
       return NextResponse.json(unavailable);
     }
 
-    const playback = (await playbackResponse.json()) as SpotifyPlaybackResponse;
+    const playback = playbackResponse.data;
     const item = playback.item;
 
     if (!item?.name || !item.external_urls?.spotify) {
@@ -75,7 +70,11 @@ export async function GET() {
       isPlaying: Boolean(playback.is_playing),
       track: {
         title: item.name,
-        artists: item.artists?.map((artist) => artist.name).filter(Boolean).join(", ") || "Spotify",
+        artists:
+          item.artists
+            ?.map((artist) => artist.name)
+            .filter(Boolean)
+            .join(", ") || "Spotify",
         albumImage: item.album?.images?.[0]?.url ?? null,
         href: item.external_urls.spotify,
       },

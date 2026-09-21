@@ -2,12 +2,9 @@ import type { ComponentProps } from "react";
 import Link from "next/link";
 
 const variantClassNames = {
-  primary:
-    "bg-primary text-primary-foreground hover:opacity-85",
-  secondary:
-    "border border-border bg-surface text-foreground hover:border-foreground/20",
-  inverted:
-    "bg-surface text-foreground hover:opacity-85",
+  primary: "bg-primary text-primary-foreground hover:opacity-85",
+  secondary: "border border-border bg-surface text-foreground hover:border-foreground/20",
+  inverted: "bg-surface text-foreground hover:opacity-85",
 } as const;
 
 const sizeClassNames = {
@@ -22,12 +19,7 @@ type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
   className?: string;
 };
 
-export function ButtonLink({
-  variant = "primary",
-  size = "md",
-  className,
-  ...props
-}: ButtonLinkProps) {
+export function ButtonLink({ variant = "primary", size = "md", className, ...props }: ButtonLinkProps) {
   return (
     <Link
       className={[

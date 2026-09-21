@@ -9,12 +9,8 @@ type InteractiveMascotProps = {
   sizes?: string;
 };
 
-export function InteractiveMascot({
-  className = "",
-  priority = false,
-  sizes = "256px",
-}: InteractiveMascotProps) {
-  const mascotRef = useRef<HTMLButtonElement>(null);
+export function InteractiveMascot({ className = "", priority = false, sizes = "256px" }: InteractiveMascotProps) {
+  const mascotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mascot = mascotRef.current;
@@ -22,7 +18,6 @@ export function InteractiveMascot({
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const eyeGraphics = mascot.querySelectorAll<HTMLElement>(".interactive-mascot-eye-graphic");
-    const patLayer = mascot.querySelector<HTMLElement>(".interactive-mascot-pat");
     let animationFrame = 0;
     let previousFrameTime = 0;
     let nextBlinkTimer = 0;
@@ -31,7 +26,6 @@ export function InteractiveMascot({
     let lastActivityTime = performance.now();
     let isSleeping = false;
     let blinkAnimations: Animation[] = [];
-    let patAnimation: Animation | null = null;
     const idleDelay = 10_000;
 
     const motion = {
@@ -57,10 +51,7 @@ export function InteractiveMascot({
       mascot.style.setProperty("--mascot-eye-y", `${motion.eyeY.toFixed(2)}px`);
       mascot.style.setProperty("--mascot-body-x", `${motion.bodyX.toFixed(2)}px`);
       mascot.style.setProperty("--mascot-body-y", `${motion.bodyY.toFixed(2)}px`);
-      mascot.style.setProperty(
-        "--mascot-body-rotation",
-        `${motion.bodyRotation.toFixed(2)}deg`,
-      );
+      mascot.style.setProperty("--mascot-body-rotation", `${motion.bodyRotation.toFixed(2)}deg`);
     };
 
     const stepSpring = (
@@ -93,43 +84,13 @@ export function InteractiveMascot({
       Math.abs(motion.bodyRotationVelocity) < 0.02;
 
     const animateMotion = (time: number) => {
-      const deltaTime = previousFrameTime
-        ? Math.min((time - previousFrameTime) / 1000, 0.032)
-        : 1 / 60;
+      const deltaTime = previousFrameTime ? Math.min((time - previousFrameTime) / 1000, 0.032) : 1 / 60;
       previousFrameTime = time;
 
-      const eyeX = stepSpring(
-        motion.eyeX,
-        motion.eyeVelocityX,
-        motion.targetEyeX,
-        130,
-        16,
-        deltaTime,
-      );
-      const eyeY = stepSpring(
-        motion.eyeY,
-        motion.eyeVelocityY,
-        motion.targetEyeY,
-        130,
-        16,
-        deltaTime,
-      );
-      const bodyX = stepSpring(
-        motion.bodyX,
-        motion.bodyVelocityX,
-        motion.targetBodyX,
-        72,
-        13,
-        deltaTime,
-      );
-      const bodyY = stepSpring(
-        motion.bodyY,
-        motion.bodyVelocityY,
-        motion.targetBodyY,
-        72,
-        13,
-        deltaTime,
-      );
+      const eyeX = stepSpring(motion.eyeX, motion.eyeVelocityX, motion.targetEyeX, 130, 16, deltaTime);
+      const eyeY = stepSpring(motion.eyeY, motion.eyeVelocityY, motion.targetEyeY, 130, 16, deltaTime);
+      const bodyX = stepSpring(motion.bodyX, motion.bodyVelocityX, motion.targetBodyX, 72, 13, deltaTime);
+      const bodyY = stepSpring(motion.bodyY, motion.bodyVelocityY, motion.targetBodyY, 72, 13, deltaTime);
       const bodyRotation = stepSpring(
         motion.bodyRotation,
         motion.bodyRotationVelocity,
@@ -198,31 +159,10 @@ export function InteractiveMascot({
       if (!event.relatedTarget) resetMascot();
     };
 
-    const handlePat = () => {
-      recordActivity();
-      if (!patLayer || reducedMotion.matches) return;
-
-      blink();
-      patAnimation?.cancel();
-      patAnimation = patLayer.animate(
-        [
-          { transform: "translateY(0) scale(1)" },
-          { transform: "translateY(5px) scaleX(1.025) scaleY(0.95)", offset: 0.32 },
-          { transform: "translateY(-2px) scaleX(0.99) scaleY(1.015)", offset: 0.7 },
-          { transform: "translateY(0) scale(1)" },
-        ],
-        { duration: 420, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
-      );
-    };
-
     const blink = () => {
       blinkAnimations = Array.from(eyeGraphics, (eye) =>
         eye.animate(
-          [
-            { transform: "scaleY(1)" },
-            { transform: "scaleY(0.08)", offset: 0.45 },
-            { transform: "scaleY(1)" },
-          ],
+          [{ transform: "scaleY(1)" }, { transform: "scaleY(0.08)", offset: 0.45 }, { transform: "scaleY(1)" }],
           { duration: 180, easing: "ease-in-out" },
         ),
       );
@@ -336,12 +276,10 @@ export function InteractiveMascot({
     window.addEventListener("scroll", recordActivity, { passive: true });
     window.addEventListener("pointerout", handlePointerOut, { passive: true });
     window.addEventListener("blur", resetMascot);
-    mascot.addEventListener("click", handlePat);
     reducedMotion.addEventListener("change", handleMotionPreference);
 
     return () => {
       cancelAnimationFrame(animationFrame);
-      patAnimation?.cancel();
       stopBlinking();
       window.clearTimeout(idleTimer);
       window.removeEventListener("pointermove", followPointer);
@@ -350,17 +288,15 @@ export function InteractiveMascot({
       window.removeEventListener("scroll", recordActivity);
       window.removeEventListener("pointerout", handlePointerOut);
       window.removeEventListener("blur", resetMascot);
-      mascot.removeEventListener("click", handlePat);
       reducedMotion.removeEventListener("change", handleMotionPreference);
     };
   }, []);
 
   return (
-    <button
-      type="button"
+    <div
       ref={mascotRef}
-      className={`interactive-mascot relative cursor-pointer touch-manipulation appearance-none border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${className}`}
-      aria-label="Pat the mascot"
+      className={`interactive-mascot relative ${className}`}
+      aria-hidden="true"
     >
       <span className="interactive-mascot-sleep-indicator" aria-hidden="true">
         <span>Z</span>
@@ -368,31 +304,23 @@ export function InteractiveMascot({
         <span>z</span>
       </span>
 
-      <span className="interactive-mascot-pat">
-        <span className="interactive-mascot-breath">
-          <span className="interactive-mascot-character">
-            <Image
-              src="/images/mascot/parts/body.svg"
-              alt=""
-              fill
-              priority={priority}
-              sizes={sizes}
-            />
+      <span className="interactive-mascot-breath">
+        <span className="interactive-mascot-character">
+          <Image src="/images/mascot/parts/body.svg" alt="" fill priority={priority} sizes={sizes} />
 
-            <span className="interactive-mascot-eye interactive-mascot-eye-left">
-              <span className="interactive-mascot-eye-graphic">
-                <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" />
-              </span>
+          <span className="interactive-mascot-eye interactive-mascot-eye-left">
+            <span className="interactive-mascot-eye-graphic">
+              <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" />
             </span>
+          </span>
 
-            <span className="interactive-mascot-eye interactive-mascot-eye-right">
-              <span className="interactive-mascot-eye-graphic">
-                <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" />
-              </span>
+          <span className="interactive-mascot-eye interactive-mascot-eye-right">
+            <span className="interactive-mascot-eye-graphic">
+              <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" />
             </span>
           </span>
         </span>
       </span>
-    </button>
+    </div>
   );
 }

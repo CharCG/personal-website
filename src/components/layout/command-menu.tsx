@@ -2,12 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
-import {
-  FaArrowRight,
-  FaFile,
-  FaFolderOpen,
-  FaMagnifyingGlass,
-} from "react-icons/fa6";
+import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from "react-icons/fa6";
 import { socialIcons } from "@/components/shared/social-links";
 import { navigationItems } from "@/data/navigation";
 import { projects } from "@/data/projects";
@@ -54,7 +49,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
       onOpenChange={onOpenChange}
       label="Search pages, projects, and socials"
       loop
-      overlayClassName="command-menu-overlay fixed inset-0 z-[60] bg-foreground/30 backdrop-blur-sm"
+      overlayClassName="command-menu-overlay fixed inset-0 z-[60] bg-foreground/30"
       contentClassName="command-menu-content fixed inset-x-6 top-24 z-[70] mx-auto max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface md:top-32"
     >
       <div className="flex items-center gap-3 border-b border-border px-4">
@@ -104,9 +99,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
               <FaFolderOpen aria-hidden="true" className="shrink-0 text-muted-foreground" />
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-medium">{project.title}</span>
-                <span className="mt-1 block truncate text-xs text-muted-foreground">
-                  {project.role}
-                </span>
+                <span className="mt-1 block truncate text-xs text-muted-foreground">{project.role}</span>
               </span>
             </Command.Item>
           ))}

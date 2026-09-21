@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { FaArrowUpRightFromSquare, FaSpotify } from "react-icons/fa6";
 import type { SpotifyNowPlaying } from "@/types/spotify";
 
@@ -12,9 +13,9 @@ export function SpotifyCard() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("/api/spotify", { signal: controller.signal })
-      .then((response) => response.json() as Promise<SpotifyNowPlaying>)
-      .then(setNowPlaying)
+    axios
+      .get<SpotifyNowPlaying>("/api/spotify", { signal: controller.signal })
+      .then((response) => setNowPlaying(response.data))
       .catch(() => undefined);
 
     return () => controller.abort();
@@ -26,12 +27,8 @@ export function SpotifyCard() {
     <article className="flex h-full min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-            On Repeat
-          </p>
-          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">
-            Listening on Spotify
-          </h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Repeat</p>
+          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Listening on Spotify</h2>
         </div>
         <FaSpotify className="shrink-0 text-3xl" aria-hidden="true" />
       </div>
@@ -62,9 +59,7 @@ export function SpotifyCard() {
                 {nowPlaying.isPlaying ? "Now playing" : "Recently paused"}
               </span>
               <span className="mt-1 block truncate font-semibold">{track.title}</span>
-              <span className="mt-1 block truncate text-sm text-muted-foreground">
-                {track.artists}
-              </span>
+              <span className="mt-1 block truncate text-sm text-muted-foreground">{track.artists}</span>
             </span>
             <FaArrowUpRightFromSquare
               className="shrink-0 text-sm transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
@@ -80,13 +75,10 @@ export function SpotifyCard() {
               height={64}
               className="h-16 w-16 shrink-0 object-contain"
             />
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Nothing playing right now.
-            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">Nothing playing right now.</p>
           </div>
         )}
       </div>
-
     </article>
   );
 }

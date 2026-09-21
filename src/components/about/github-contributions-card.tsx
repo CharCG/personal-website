@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 import { githubProfile } from "@/data/socials";
 import type { ContributionLevel, GitHubContributions } from "@/types/github";
@@ -19,9 +20,9 @@ export function GitHubContributionsCard() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("/api/github-contributions", { signal: controller.signal })
-      .then((response) => response.json() as Promise<GitHubContributions>)
-      .then(setContributions)
+    axios
+      .get<GitHubContributions>("/api/github-contributions", { signal: controller.signal })
+      .then((response) => setContributions(response.data))
       .catch(() => undefined);
 
     return () => controller.abort();
@@ -43,12 +44,8 @@ export function GitHubContributionsCard() {
     <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
       <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-            Open Sourcing
-          </p>
-          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">
-            GitHub Contributions
-          </h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Open Sourcing</p>
+          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {hasCalendar
               ? `${contributions?.totalContributions} contributions${period ? ` · ${period}` : ""}`

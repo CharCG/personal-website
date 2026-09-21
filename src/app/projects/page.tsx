@@ -19,15 +19,12 @@ export default function ProjectsPage() {
         <section className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
           <Reveal className="grid gap-6 md:grid-cols-2 md:items-end md:gap-16">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                Projects
-              </p>
-              <h1 className="mt-4 text-[28px] font-bold tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                Selected Works
-              </h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Projects</p>
+              <h1 className="mt-4 text-[28px] font-bold tracking-[-0.04em] md:text-4xl lg:text-5xl">Selected Works</h1>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              A collection of products shaped through critical problem solving, thoughtful design, and careful engineering.
+              A collection of products shaped through critical problem solving, thoughtful design, and careful
+              engineering.
             </p>
           </Reveal>
 

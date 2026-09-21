@@ -27,10 +27,7 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   return (
     <ul className="mt-auto flex flex-wrap gap-2 pt-4" aria-label="Technologies used">
       {technologies.map((technology) => (
-        <li
-          key={technology}
-          className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground"
-        >
+        <li key={technology} className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground">
           {technology}
         </li>
       ))}
@@ -38,10 +35,7 @@ function TechnologyList({ technologies }: Pick<Project, "technologies">) {
   );
 }
 
-export function ProjectCard({
-  project,
-  headingLevel = "h2",
-}: ProjectCardProps) {
+export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) {
   const Heading = headingLevel;
   const previewImage = project.images[0];
 
@@ -73,20 +67,14 @@ export function ProjectCard({
       <div className="flex min-w-0 flex-1 flex-col pt-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <Heading className="text-lg font-semibold leading-tight md:text-xl">
-              {project.title}
-            </Heading>
-            <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
-              {project.role}
-            </p>
+            <Heading className="text-lg font-semibold leading-tight md:text-xl">{project.title}</Heading>
+            <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">{project.role}</p>
           </div>
           <ProjectDetailLink project={project} />
         </div>
 
         {project.description && (
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            {project.description}
-          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
         )}
         <TechnologyList technologies={project.technologies} />
       </div>
