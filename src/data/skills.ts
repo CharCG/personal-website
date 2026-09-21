@@ -5,6 +5,7 @@ import {
   siFlask,
   siFlutter,
   siGit,
+  siGithub,
   siJavascript,
   siKotlin,
   siLaravel,
@@ -48,6 +49,7 @@ export const skills: Skill[] = [
   { name: "XML", icon: siXml },
   { name: "C++", icon: siCplusplus },
   { name: "Git", icon: siGit },
+  { name: "GitHub", icon: siGithub },
   { name: "Postman", icon: siPostman },
   { name: "Figma", icon: siFigma },
 ];
