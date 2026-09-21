@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { ButtonLink } from "../ui/button-link";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 import { githubProfile } from "@/data/socials";
 import type { ContributionLevel, GitHubContributions } from "@/types/github";
@@ -19,9 +20,9 @@ export function GitHubContributionsCard() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("/api/github-contributions", { signal: controller.signal })
-      .then((response) => response.json() as Promise<GitHubContributions>)
-      .then(setContributions)
+    axios
+      .get<GitHubContributions>("/api/github-contributions", { signal: controller.signal })
+      .then((response) => setContributions(response.data))
       .catch(() => undefined);
 
     return () => controller.abort();
@@ -43,31 +44,22 @@ export function GitHubContributionsCard() {
     <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
       <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-            Open Sourcing
-          </p>
-          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">
-            GitHub Contributions
-          </h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Open Sourcing</p>
+          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {hasCalendar
               ? `${contributions?.totalContributions} contributions${period ? ` · ${period}` : ""}`
               : `Recent work from @${githubProfile.username}`}
           </p>
         </div>
-        <Link
-          href={githubProfile.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-secondary px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-        >
+        <ButtonLink href={githubProfile.href} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
           <FaGithub aria-hidden="true" />
           View Profile
           <FaArrowUpRightFromSquare
             className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
             aria-hidden="true"
           />
-        </Link>
+        </ButtonLink>
       </div>
 
       <div

@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { unstable_cache } from "next/cache";
+import axios from "axios";
 import { githubProfile } from "@/data/socials";
 import type { GitHubContributions } from "@/types/github";
 
@@ -26,71 +28,76 @@ const unavailable: GitHubContributions = {
   weeks: [],
 };
 
-export async function GET() {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) {
-    return NextResponse.json(unavailable);
-  }
+const getGitHubContributions = unstable_cache(
+  async (): Promise<GitHubContributions> => {
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      return unavailable;
+    }
 
-  try {
-    const response = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "User-Agent": "charles-portfolio",
-      },
-      body: JSON.stringify({
+    const response = await axios.post<GitHubGraphQLResponse>(
+      "https://api.github.com/graphql",
+      {
         query: `
-          query Contributions($login: String!) {
-            user(login: $login) {
-              contributionsCollection {
-                startedAt
-                endedAt
-                contributionCalendar {
-                  totalContributions
-                  months {
-                    firstDay
-                    name
-                    totalWeeks
-                    year
-                  }
-                  weeks {
-                    firstDay
-                    contributionDays {
-                      date
-                      contributionCount
-                      contributionLevel
+            query Contributions($login: String!) {
+              user(login: $login) {
+                contributionsCollection {
+                  startedAt
+                  endedAt
+                  contributionCalendar {
+                    totalContributions
+                    months {
+                      firstDay
+                      name
+                      totalWeeks
+                      year
+                    }
+                    weeks {
+                      firstDay
+                      contributionDays {
+                        date
+                        contributionCount
+                        contributionLevel
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        `,
+          `,
         variables: { login: githubProfile.username },
-      }),
-      next: { revalidate: 3600 },
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "User-Agent": "charles-portfolio",
+        },
+      },
+    );
 
-    if (!response.ok) {
-      return NextResponse.json(unavailable);
-    }
-
-    const result = (await response.json()) as GitHubGraphQLResponse;
+    const result = response.data;
     const collection = result.data?.user?.contributionsCollection;
 
     if (!collection) {
-      return NextResponse.json(unavailable);
+      return unavailable;
     }
 
-    return NextResponse.json<GitHubContributions>({
+    return {
       totalContributions: collection.contributionCalendar.totalContributions,
       startedAt: collection.startedAt,
       endedAt: collection.endedAt,
       months: collection.contributionCalendar.months,
       weeks: collection.contributionCalendar.weeks,
-    });
+    };
+  },
+  ["github-contributions"],
+  { revalidate: 3600 },
+);
+
+export async function GET() {
+  try {
+    return NextResponse.json(await getGitHubContributions());
   } catch {
     return NextResponse.json(unavailable);
   }

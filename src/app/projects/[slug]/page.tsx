@@ -7,14 +7,22 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectGallery } from "@/components/projects/project-gallery";
+import { TechnologyList } from "@/components/projects/technology-list";
 import { ButtonLink } from "@/components/ui/button-link";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { Chip } from "@/components/ui/chip";
+import { getProjectBySlug, projects, type ProjectStatus } from "@/data/projects";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export const dynamicParams = false;
+
+const statusIndicatorClasses: Record<ProjectStatus, string> = {
+  Completed: "bg-success",
+  "In Progress": "bg-warning",
+  Archived: "bg-info",
+};
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -50,11 +58,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <Navbar />
 
       <main className="flex-1">
-        <article className="mx-auto w-full max-w-[1200px] px-6 pb-16 pt-32 md:px-6 md:pb-20 md:pt-40 lg:px-8 lg:pb-24">
+        <article className="mx-auto w-full max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
           <Reveal>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
             >
               <FaArrowLeft
                 aria-hidden="true"
@@ -144,19 +152,25 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-sm text-muted-foreground">Status</dt>
-                  <dd className="text-sm font-medium">{project.status}</dd>
+                  <dd>
+                    <Chip
+                      className="font-medium"
+                      icon={
+                        <span
+                          aria-hidden="true"
+                          className={`h-2 w-2 shrink-0 rounded-full ${statusIndicatorClasses[project.status]}`}
+                        />
+                      }
+                    >
+                      {project.status}
+                    </Chip>
+                  </dd>
                 </div>
               </dl>
 
               <div className="mt-6 border-t border-border pt-6">
                 <h2 className="text-lg font-semibold">Technology Stack</h2>
-                <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
-                  {project.technologies.map((technology) => (
-                    <li key={technology} className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground">
-                      {technology}
-                    </li>
-                  ))}
-                </ul>
+                <TechnologyList technologies={project.technologies} className="mt-4" />
               </div>
             </aside>
           </div>
@@ -170,9 +184,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                       <h2 id="about-project" className="text-2xl font-semibold tracking-[-0.03em]">
                         About
                       </h2>
-                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                        {project.about}
-                      </p>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.about}</p>
                     </section>
                   )}
 
@@ -204,7 +216,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               {previousProject && (
                 <Link
                   href={`/projects/${previousProject.slug}`}
-                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
                 >
                   <FaArrowLeft
                     aria-hidden="true"
@@ -222,7 +234,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               {nextProject && (
                 <Link
                   href={`/projects/${nextProject.slug}`}
-                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                     previousProject ? "" : "sm:col-start-2"
                   }`}
                 >

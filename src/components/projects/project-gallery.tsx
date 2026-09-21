@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, m } from "motion/react";
 import { FaChevronLeft, FaChevronRight, FaXmark } from "react-icons/fa6";
+import { motionDuration, motionEaseOut, motionEaseOutCss } from "@/components/motion/config";
 
 type ProjectGalleryProps = {
   projectTitle: string;
@@ -29,7 +30,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
           { opacity: 0, transform: "scale(0.98)" },
           { opacity: 1, transform: "scale(1)" },
         ],
-        { duration: 200, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+        { duration: motionDuration.fast * 1000, easing: motionEaseOutCss },
       );
     }
   };
@@ -49,7 +50,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
         { opacity: 1, transform: "scale(1)" },
         { opacity: 0, transform: "scale(0.98)" },
       ],
-      { duration: 160, easing: "ease-in" },
+      { duration: motionDuration.fast * 1000, easing: motionEaseOutCss },
     );
     closeAnimationRef.current.finished.then(() => dialog.close()).catch(() => undefined);
   };
@@ -74,7 +75,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: motionDuration.fast, ease: motionEaseOut }}
               >
                 <Image
                   src={selectedImage}
@@ -101,7 +102,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 type="button"
                 onClick={showPreviousImage}
                 aria-label="View previous project image"
-                className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
               >
                 <FaChevronLeft aria-hidden="true" />
               </button>
@@ -109,7 +110,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 type="button"
                 onClick={showNextImage}
                 aria-label="View next project image"
-                className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-sm transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
               >
                 <FaChevronRight aria-hidden="true" />
               </button>
@@ -130,7 +131,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
               >
                 <span
                   aria-hidden="true"
-                  className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+                  className={`h-2 w-2 rounded-full transition-colors duration-200 ease-out ${
                     selectedIndex === index ? "bg-primary" : "bg-border"
                   }`}
                 />
@@ -165,7 +166,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: motionDuration.fast, ease: motionEaseOut }}
               >
                 <Image
                   src={selectedImage}
@@ -184,7 +185,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 type="button"
                 onClick={showPreviousImage}
                 aria-label="View previous project image"
-                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-lg transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-lg transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
               >
                 <FaChevronLeft aria-hidden="true" />
               </button>
@@ -192,7 +193,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 type="button"
                 onClick={showNextImage}
                 aria-label="View next project image"
-                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-lg transition-colors duration-200 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-lg transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
               >
                 <FaChevronRight aria-hidden="true" />
               </button>
@@ -206,7 +207,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
             type="button"
             onClick={closeImage}
             aria-label="Close image preview"
-            className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+            className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-lg transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
           >
             <FaXmark aria-hidden="true" />
           </button>

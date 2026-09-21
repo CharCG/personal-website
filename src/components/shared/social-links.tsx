@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { socialLinks, type SocialIcon } from "@/data/socials";
 
-const socialIcons: Record<SocialIcon, typeof FaLinkedin> = {
+export const socialIcons: Record<SocialIcon, typeof FaLinkedin> = {
   linkedin: FaLinkedin,
   github: FaGithub,
   email: FaEnvelope,

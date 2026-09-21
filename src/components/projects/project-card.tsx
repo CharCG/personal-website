@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
+import { TechnologyList } from "@/components/projects/technology-list";
 import type { Project } from "@/data/projects";
 
 type ProjectCardProps = {
@@ -23,30 +24,12 @@ function ProjectDetailLink({ project }: { project: Project }) {
   );
 }
 
-function TechnologyList({ technologies }: Pick<Project, "technologies">) {
-  return (
-    <ul className="mt-auto flex flex-wrap gap-2 pt-4" aria-label="Technologies used">
-      {technologies.map((technology) => (
-        <li
-          key={technology}
-          className="rounded-full bg-secondary px-4 py-2 text-xs text-foreground"
-        >
-          {technology}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-export function ProjectCard({
-  project,
-  headingLevel = "h2",
-}: ProjectCardProps) {
+export function ProjectCard({ project, headingLevel = "h2" }: ProjectCardProps) {
   const Heading = headingLevel;
   const previewImage = project.images[0];
 
   return (
-    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-300 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
+    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-200 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99]">
       <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-secondary">
         {previewImage ? (
           <Image
@@ -54,7 +37,7 @@ export function ProjectCard({
             alt={`${project.title} product preview`}
             fill
             sizes="(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"
-            className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
           />
         ) : (
           <div className="flex flex-col items-center gap-2 px-4 text-center">
@@ -63,7 +46,7 @@ export function ProjectCard({
               alt=""
               width={96}
               height={96}
-              className="h-24 w-24 object-contain transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.02]"
+              className="h-24 w-24 object-contain transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
             />
             <p className="text-xs font-medium text-muted-foreground">Preview Unavailable</p>
           </div>
@@ -73,22 +56,16 @@ export function ProjectCard({
       <div className="flex min-w-0 flex-1 flex-col pt-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <Heading className="text-lg font-semibold leading-tight md:text-xl">
-              {project.title}
-            </Heading>
-            <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
-              {project.role}
-            </p>
+            <Heading className="text-lg font-semibold leading-tight md:text-xl">{project.title}</Heading>
+            <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">{project.role}</p>
           </div>
           <ProjectDetailLink project={project} />
         </div>
 
         {project.description && (
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            {project.description}
-          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
         )}
-        <TechnologyList technologies={project.technologies} />
+        <TechnologyList technologies={project.technologies} className="mt-auto pt-4" />
       </div>
     </article>
   );
