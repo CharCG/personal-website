@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { siGithub } from "simple-icons";
-import { BrandIcon } from "@/components/shared/brand-icon";
-import { ButtonLink } from "@/components/ui/button-link";
-import { githubProfile } from "@/data/socials";
-import type { ContributionLevel, GitHubContributions } from "@/types/github";
+import type { ContributionLevel, GitHubContributions } from "@/features/about/types/github";
+import { BrandIcon } from "@/shared/components/brand-icon";
+import { ButtonLink } from "@/shared/components/ui/button-link";
+import { githubProfile } from "@/shared/data/socials";
 
 const levelClassNames: Record<ContributionLevel, string> = {
   NONE: "bg-secondary",
@@ -65,7 +65,7 @@ export function GitHubContributionsCard() {
       </div>
 
       <div
-        className="mt-8 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain pb-2"
+        className="mt-8 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain"
         role={hasCalendar ? "region" : undefined}
         aria-label={hasCalendar ? "Scrollable GitHub contribution calendar" : undefined}
         tabIndex={hasCalendar ? 0 : undefined}

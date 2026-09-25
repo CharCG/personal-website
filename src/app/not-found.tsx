@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Footer } from "@/components/layout/footer";
-import { ButtonLink } from "@/components/ui/button-link";
+import { Footer } from "@/shared/components/layout/footer";
+import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export const metadata: Metadata = {
   title: "Page Not Found — Charles",

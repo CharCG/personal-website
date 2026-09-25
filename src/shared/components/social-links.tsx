@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
-import { socialLinks, type SocialIcon as SocialIconName } from "@/data/socials";
+import { socialLinks, type SocialIcon as SocialIconName } from "@/shared/data/socials";
 
 export const socialIcons: Record<SocialIconName, ReactNode> = {
   email: <FaEnvelope aria-hidden="true" />,

@@ -1,41 +1,32 @@
 import { unstable_cache } from "next/cache";
 import { NextResponse } from "next/server";
 import axios from "axios";
-import type { MonkeytypeMetricBest, MonkeytypeSummary } from "@/types/monkeytype";
+import type { MonkeytypeSummary } from "@/features/about/types/monkeytype";
 
 type MonkeytypePersonalBest = {
+  acc?: number;
+  consistency?: number;
+  language?: string;
   wpm?: number;
 };
 
 type MonkeytypePersonalBestsResponse = {
-  data?: Record<string, MonkeytypePersonalBest | MonkeytypePersonalBest[] | null>;
+  data?: MonkeytypePersonalBest | MonkeytypePersonalBest[] | null;
+};
+
+type MonkeytypeStatsResponse = {
+  data?: {
+    completedTests?: number;
+  };
 };
 
 const unavailable: MonkeytypeSummary = {
-  timeBest: null,
-  wordBest: null,
+  personalBest: null,
+  completedTests: null,
 };
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
-}
-
-function getBestByMode(data: MonkeytypePersonalBestsResponse["data"]): MonkeytypeMetricBest | null {
-  if (!data) {
-    return null;
-  }
-
-  return Object.entries(data)
-    .flatMap(([metricValue, records]) => {
-      const metric = Number(metricValue);
-      const candidates = Array.isArray(records) ? records : records ? [records] : [];
-      return candidates.flatMap((candidate) =>
-        Number.isFinite(metric) && isFiniteNumber(candidate.wpm)
-          ? [{ metric, wpm: candidate.wpm }]
-          : [],
-      );
-    })
-    .sort((first, second) => second.wpm - first.wpm)[0] ?? null;
 }
 
 const getMonkeytypeSummary = unstable_cache(
@@ -50,26 +41,50 @@ const getMonkeytypeSummary = unstable_cache(
       Authorization: `ApeKey ${apeKey}`,
     };
 
-    const [timeBestsResult, wordBestsResult] = await Promise.allSettled([
+    const [personalBestsResult, statsResult] = await Promise.allSettled([
       axios.get<MonkeytypePersonalBestsResponse>("https://api.monkeytype.com/users/personalBests", {
         headers,
-        params: { mode: "time" },
+        params: { mode: "time", mode2: 60 },
       }),
-      axios.get<MonkeytypePersonalBestsResponse>("https://api.monkeytype.com/users/personalBests", {
-        headers,
-        params: { mode: "words" },
-      }),
+      axios.get<MonkeytypeStatsResponse>("https://api.monkeytype.com/users/stats", { headers }),
     ]);
 
-    if (timeBestsResult.status === "rejected" && wordBestsResult.status === "rejected") {
+    if (personalBestsResult.status === "rejected" && statsResult.status === "rejected") {
       throw new Error("Monkeytype API requests failed");
     }
 
+    const personalBestData =
+      personalBestsResult.status === "fulfilled" ? personalBestsResult.value.data.data : null;
+    const personalBests = Array.isArray(personalBestData)
+      ? personalBestData
+      : personalBestData
+        ? [personalBestData]
+        : [];
+    const personalBest = personalBests
+      .filter(
+        (result) =>
+          isFiniteNumber(result.wpm) &&
+          isFiniteNumber(result.acc) &&
+          isFiniteNumber(result.consistency),
+      )
+      .sort((first, second) => (second.wpm ?? 0) - (first.wpm ?? 0))[0];
+    const stats = statsResult.status === "fulfilled" ? statsResult.value.data.data : null;
+
     return {
-      timeBest:
-        timeBestsResult.status === "fulfilled" ? getBestByMode(timeBestsResult.value.data.data) : null,
-      wordBest:
-        wordBestsResult.status === "fulfilled" ? getBestByMode(wordBestsResult.value.data.data) : null,
+      personalBest:
+        personalBest &&
+        isFiniteNumber(personalBest.wpm) &&
+        isFiniteNumber(personalBest.acc) &&
+        isFiniteNumber(personalBest.consistency)
+          ? {
+              wpm: personalBest.wpm,
+              accuracy: personalBest.acc,
+              consistency: personalBest.consistency,
+              language: personalBest.language || "English",
+              duration: 60,
+            }
+          : null,
+      completedTests: isFiniteNumber(stats?.completedTests) ? stats.completedTests : null,
     };
   },
   ["monkeytype-summary"],

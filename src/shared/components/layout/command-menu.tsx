@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from "react-icons/fa6";
-import { socialIcons } from "@/components/shared/social-links";
-import { navigationItems } from "@/data/navigation";
-import { projects } from "@/data/projects";
-import { socialLinks } from "@/data/socials";
+import { projects } from "@/shared/data/projects";
+import { socialIcons } from "@/shared/components/social-links";
+import { navigationItems } from "@/shared/data/navigation";
+import { socialLinks } from "@/shared/data/socials";
 
 type CommandMenuProps = {
   open: boolean;

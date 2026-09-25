@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { MotionProvider } from "@/components/motion/motion-provider";
+import { MotionProvider } from "@/shared/motion/motion-provider";
 
 const inter = Inter({
   variable: "--font-inter",

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
-import { motionStagger } from "@/components/motion/config";
-import { Reveal } from "@/components/motion/reveal";
-import { ProjectCard } from "@/components/projects/project-card";
-import { projects } from "@/data/projects";
+import { ProjectCard } from "@/features/projects/components/project-card";
+import { projects } from "@/shared/data/projects";
+import { Footer } from "@/shared/components/layout/footer";
+import { Navbar } from "@/shared/components/layout/navbar";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
 
 export const metadata: Metadata = {
   title: "Projects — Charles",

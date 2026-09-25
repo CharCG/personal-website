@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaBars, FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
 import { m } from "motion/react";
-import { CommandMenu } from "@/components/layout/command-menu";
-import { navigationItems } from "@/data/navigation";
+import { CommandMenu } from "@/shared/components/layout/command-menu";
+import { navigationItems } from "@/shared/data/navigation";
 
 const activeIndicatorTransition = { type: "spring", stiffness: 500, damping: 40 } as const;
 

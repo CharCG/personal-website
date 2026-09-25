@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaArrowLeft, FaArrowRight, FaArrowUpRightFromSquare, FaCode, FaGlobe } from "react-icons/fa6";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
-import { Reveal } from "@/components/motion/reveal";
-import { ProjectGallery } from "@/components/projects/project-gallery";
-import { TechnologyList } from "@/components/projects/technology-list";
-import { ButtonLink } from "@/components/ui/button-link";
-import { Chip } from "@/components/ui/chip";
-import { getProjectBySlug, projects, type ProjectStatus } from "@/data/projects";
+import { ProjectGallery } from "@/features/projects/components/project-gallery";
+import { TechnologyList } from "@/features/projects/components/technology-list";
+import { getProjectBySlug, projects, type ProjectStatus } from "@/shared/data/projects";
+import { Footer } from "@/shared/components/layout/footer";
+import { Navbar } from "@/shared/components/layout/navbar";
+import { Reveal } from "@/shared/motion/reveal";
+import { ButtonLink } from "@/shared/components/ui/button-link";
+import { Chip } from "@/shared/components/ui/chip";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;

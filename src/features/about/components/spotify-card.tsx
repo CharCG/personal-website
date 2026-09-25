@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { siSpotify } from "simple-icons";
-import { BrandIcon } from "@/components/shared/brand-icon";
-import type { SpotifyNowPlaying } from "@/types/spotify";
+import type { SpotifyNowPlaying } from "@/features/about/types/spotify";
+import { BrandIcon } from "@/shared/components/brand-icon";
 
 export function SpotifyCard() {
   const [nowPlaying, setNowPlaying] = useState<SpotifyNowPlaying | null>(null);

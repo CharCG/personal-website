@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import axios from "axios";
-import { githubProfile } from "@/data/socials";
-import type { GitHubContributions } from "@/types/github";
+import type { GitHubContributions } from "@/features/about/types/github";
+import { githubProfile } from "@/shared/data/socials";
 
 type GitHubGraphQLResponse = {
   data?: {

@@ -1,9 +1,9 @@
 import { FaArrowRight } from "react-icons/fa6";
-import { homeProjects } from "@/data/projects";
-import { motionStagger } from "@/components/motion/config";
-import { ProjectCard } from "@/components/projects/project-card";
-import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
+import { ProjectCard } from "@/features/projects/components/project-card";
+import { homeProjects } from "@/shared/data/projects";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
+import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export function ProjectsSection() {
   return (

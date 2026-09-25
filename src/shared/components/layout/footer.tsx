@@ -1,9 +1,9 @@
 import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
-import { SocialLinks } from "@/components/shared/social-links";
-import { motionStagger } from "@/components/motion/config";
-import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
-import { emailContact } from "@/data/socials";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
+import { SocialLinks } from "@/shared/components/social-links";
+import { ButtonLink } from "@/shared/components/ui/button-link";
+import { emailContact } from "@/shared/data/socials";
 
 export function Footer() {
   return (

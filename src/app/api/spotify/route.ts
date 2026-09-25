@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
-import type { SpotifyNowPlaying } from "@/types/spotify";
+import type { SpotifyNowPlaying } from "@/features/about/types/spotify";
 
 type SpotifyTokenResponse = {
   access_token?: string;

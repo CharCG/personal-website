@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { FaFile } from "react-icons/fa6";
-import { GitHubContributionsCard } from "@/components/about/github-contributions-card";
-import { MonkeytypeCard } from "@/components/about/monkeytype-card";
-import { SpotifyCard } from "@/components/about/spotify-card";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
-import { motionStagger } from "@/components/motion/config";
-import { Reveal } from "@/components/motion/reveal";
-import { SocialLinks } from "@/components/shared/social-links";
-import { ButtonLink } from "@/components/ui/button-link";
+import { GitHubContributionsCard } from "@/features/about/components/github-contributions-card";
+import { MonkeytypeCard } from "@/features/about/components/monkeytype-card";
+import { SpotifyCard } from "@/features/about/components/spotify-card";
+import { Footer } from "@/shared/components/layout/footer";
+import { Navbar } from "@/shared/components/layout/navbar";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
+import { SocialLinks } from "@/shared/components/social-links";
+import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export const metadata: Metadata = {
   title: "About — Charles",

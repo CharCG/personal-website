@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FaArrowDown, FaArrowRight, FaFile } from "react-icons/fa6";
-import { SocialLinks } from "@/components/shared/social-links";
-import { InteractiveMascot } from "@/components/mascot/interactive-mascot";
-import { ButtonLink } from "@/components/ui/button-link";
+import { InteractiveMascot } from "@/shared/components/mascot/interactive-mascot";
+import { SocialLinks } from "@/shared/components/social-links";
+import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export function Hero() {
   return (

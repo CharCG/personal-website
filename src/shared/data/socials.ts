@@ -11,6 +11,10 @@ export const githubProfile = {
   href: "https://github.com/charcg",
 } as const;
 
+export const monkeytypeProfile = {
+  href: "https://monkeytype.com/profile/charlescong",
+} as const;
+
 export const emailContact = {
   href: "mailto:charlescongg@gmail.com",
 } as const;
