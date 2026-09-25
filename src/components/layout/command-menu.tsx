@@ -106,22 +106,20 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Socials" className={commandGroupClassName}>
-          {socialLinks.map((social) => {
-            const Icon = socialIcons[social.icon];
-
-            return (
-              <Command.Item
-                key={social.label}
-                value={`social:${social.label}`}
-                keywords={[social.label, social.href, "social", "contact"]}
-                onSelect={() => openSocial(social.href)}
-                className={commandItemClassName}
-              >
-                <Icon aria-hidden="true" className="shrink-0 text-muted-foreground" />
-                <span className="flex-1">{social.label}</span>
-              </Command.Item>
-            );
-          })}
+          {socialLinks.map((social) => (
+            <Command.Item
+              key={social.label}
+              value={`social:${social.label}`}
+              keywords={[social.label, social.href, "social", "contact"]}
+              onSelect={() => openSocial(social.href)}
+              className={commandItemClassName}
+            >
+              <span className="flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground">
+                {socialIcons[social.icon]}
+              </span>
+              <span className="flex-1">{social.label}</span>
+            </Command.Item>
+          ))}
         </Command.Group>
 
         <Command.Separator className="mx-4 h-px bg-border" />

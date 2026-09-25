@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FaFile } from "react-icons/fa6";
 import { GitHubContributionsCard } from "@/components/about/github-contributions-card";
+import { MonkeytypeCard } from "@/components/about/monkeytype-card";
 import { SpotifyCard } from "@/components/about/spotify-card";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
@@ -53,11 +54,14 @@ export default function About() {
             </Reveal>
           </div>
 
-          <div className="grid min-w-0 gap-4 pt-8 md:pt-10 lg:grid-cols-2 lg:pt-12">
+          <div className="grid min-w-0 gap-4 pt-8 md:grid-cols-2 md:pt-10 lg:pt-12">
             <Reveal className="h-full min-w-0" delay={motionStagger}>
               <SpotifyCard />
             </Reveal>
             <Reveal className="h-full min-w-0" delay={motionStagger * 2}>
+              <MonkeytypeCard />
+            </Reveal>
+            <Reveal className="h-full min-w-0 md:col-span-2" delay={motionStagger * 3}>
               <GitHubContributionsCard />
             </Reveal>
           </div>

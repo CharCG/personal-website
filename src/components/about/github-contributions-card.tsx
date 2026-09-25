@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ButtonLink } from "../ui/button-link";
-import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { siGithub } from "simple-icons";
+import { BrandIcon } from "@/components/shared/brand-icon";
+import { ButtonLink } from "@/components/ui/button-link";
 import { githubProfile } from "@/data/socials";
 import type { ContributionLevel, GitHubContributions } from "@/types/github";
 
@@ -53,7 +55,7 @@ export function GitHubContributionsCard() {
           </p>
         </div>
         <ButtonLink href={githubProfile.href} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
-          <FaGithub aria-hidden="true" />
+          <BrandIcon icon={siGithub} className="h-4 w-4 shrink-0" />
           View Profile
           <FaArrowUpRightFromSquare
             className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"

@@ -7,7 +7,15 @@ type BrandIconProps = {
 
 export function BrandIcon({ icon, className }: BrandIconProps) {
   return (
-    <svg aria-hidden="true" className={className} fill="currentColor" focusable="false" viewBox="0 0 24 24">
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      focusable="false"
+      height="1em"
+      viewBox="0 0 24 24"
+      width="1em"
+    >
       <path d={icon.path} />
     </svg>
   );

@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaArrowUpRightFromSquare, FaSpotify } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { siSpotify } from "simple-icons";
+import { BrandIcon } from "@/components/shared/brand-icon";
 import type { SpotifyNowPlaying } from "@/types/spotify";
 
 export function SpotifyCard() {
@@ -30,7 +32,7 @@ export function SpotifyCard() {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Repeat</p>
           <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Listening on Spotify</h2>
         </div>
-        <FaSpotify className="shrink-0 text-3xl" aria-hidden="true" />
+        <BrandIcon icon={siSpotify} className="h-8 w-8 shrink-0" />
       </div>
 
       <div className="mt-auto pt-8">
@@ -51,7 +53,7 @@ export function SpotifyCard() {
               />
             ) : (
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-surface">
-                <FaSpotify className="text-2xl" aria-hidden="true" />
+                <BrandIcon icon={siSpotify} className="h-6 w-6" />
               </span>
             )}
             <span className="min-w-0 flex-1">

@@ -46,7 +46,7 @@ export function Hero() {
 
         <SocialLinks
           className="hero-enter hero-enter-socials relative z-10 mt-8 flex justify-center gap-8 md:mt-10"
-          linkClassName="text-3xl transition-opacity duration-200 ease-out hover:opacity-70"
+          linkClassName="text-3xl text-primary transition-opacity duration-200 ease-out hover:opacity-70"
         />
       </div>
 

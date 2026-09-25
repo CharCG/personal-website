@@ -1,4 +1,3 @@
-import { FaCode } from "react-icons/fa6";
 import { BrandIcon } from "@/components/shared/brand-icon";
 import { Chip } from "@/components/ui/chip";
 import type { Project } from "@/data/projects";
