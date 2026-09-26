@@ -45,8 +45,12 @@ const getMonkeytypeSummary = unstable_cache(
       axios.get<MonkeytypePersonalBestsResponse>("https://api.monkeytype.com/users/personalBests", {
         headers,
         params: { mode: "time", mode2: 60 },
+        timeout: 10_000,
       }),
-      axios.get<MonkeytypeStatsResponse>("https://api.monkeytype.com/users/stats", { headers }),
+      axios.get<MonkeytypeStatsResponse>("https://api.monkeytype.com/users/stats", {
+        headers,
+        timeout: 10_000,
+      }),
     ]);
 
     if (personalBestsResult.status === "rejected" && statsResult.status === "rejected") {

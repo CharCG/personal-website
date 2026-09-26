@@ -38,6 +38,7 @@ export async function GET() {
         refresh_token: refreshToken,
       }),
       {
+        timeout: 10_000,
         headers: {
           Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
           "Content-Type": "application/x-www-form-urlencoded",
@@ -52,7 +53,10 @@ export async function GET() {
 
     const playbackResponse = await axios.get<SpotifyPlaybackResponse>(
       "https://api.spotify.com/v1/me/player/currently-playing",
-      { headers: { Authorization: `Bearer ${tokenData.access_token}` } },
+      {
+        timeout: 10_000,
+        headers: { Authorization: `Bearer ${tokenData.access_token}` },
+      },
     );
 
     if (playbackResponse.status === 204) {

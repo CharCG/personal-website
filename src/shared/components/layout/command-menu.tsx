@@ -115,7 +115,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
               className={commandItemClassName}
             >
               <span className="flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground">
-                {socialIcons[social.icon]}
+                {socialIcons[social.label]}
               </span>
               <span className="flex-1">{social.label}</span>
             </Command.Item>

@@ -43,8 +43,8 @@ export function StackCard() {
   const rows = [skills.slice(0, midpoint), skills.slice(midpoint)];
 
   return (
-    <article className="flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-border bg-surface py-6 md:py-8">
-      <div className="flex items-start justify-between gap-4 px-6 md:px-8">
+    <article className="flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-border bg-surface py-6">
+      <div className="flex items-start justify-between gap-4 px-6">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Learning</p>
           <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Skills & Stacks</h2>

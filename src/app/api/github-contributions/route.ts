@@ -68,6 +68,7 @@ const getGitHubContributions = unstable_cache(
         variables: { login: githubProfile.username },
       },
       {
+        timeout: 10_000,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

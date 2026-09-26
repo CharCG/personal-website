@@ -1,12 +1,11 @@
-import type { ReactNode } from "react";
 import Link from "next/link";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
-import { socialLinks, type SocialIcon as SocialIconName } from "@/shared/data/socials";
+import { socialLinks } from "@/shared/data/socials";
 
-export const socialIcons: Record<SocialIconName, ReactNode> = {
-  email: <FaEnvelope aria-hidden="true" />,
-  github: <FaGithub aria-hidden="true" />,
-  linkedin: <FaLinkedin aria-hidden="true" />,
+export const socialIcons = {
+  Email: <FaEnvelope aria-hidden="true" />,
+  GitHub: <FaGithub aria-hidden="true" />,
+  LinkedIn: <FaLinkedin aria-hidden="true" />,
 };
 
 type SocialLinksProps = {
@@ -26,7 +25,7 @@ export function SocialLinks({ className, linkClassName }: SocialLinksProps) {
           aria-label={social.label}
           className={linkClassName}
         >
-          {socialIcons[social.icon]}
+          {socialIcons[social.label]}
         </Link>
       ))}
     </div>

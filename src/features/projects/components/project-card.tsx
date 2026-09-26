@@ -6,7 +6,7 @@ import type { Project } from "@/shared/data/projects";
 
 type ProjectCardProps = {
   project: Project;
-  headingLevel?: "h2" | "h4";
+  headingLevel?: "h2" | "h3";
 };
 
 function ProjectDetailLink({ project }: { project: Project }) {

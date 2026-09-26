@@ -28,7 +28,7 @@ export function ProjectsSection() {
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
         {homeProjects.slice(0, 2).map((project, index) => (
           <Reveal key={project.slug} className="h-full" delay={index * motionStagger}>
-            <ProjectCard project={project} headingLevel="h4" />
+            <ProjectCard project={project} headingLevel="h3" />
           </Reveal>
         ))}
       </div>
@@ -36,7 +36,7 @@ export function ProjectsSection() {
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         {homeProjects.slice(2, 5).map((project, index) => (
           <Reveal key={project.slug} className="h-full" delay={index * motionStagger}>
-            <ProjectCard project={project} headingLevel="h4" />
+            <ProjectCard project={project} headingLevel="h3" />
           </Reveal>
         ))}
       </div>
