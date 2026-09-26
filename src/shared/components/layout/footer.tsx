@@ -1,13 +1,12 @@
 import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
-import { SocialLinks } from "@/components/shared/social-links";
-import { motionStagger } from "@/components/motion/config";
-import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
-import { emailContact } from "@/data/socials";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
+import { SocialLinks } from "@/shared/components/social-links";
+import { ButtonLink } from "@/shared/components/ui/button-link";
+import { emailContact } from "@/shared/data/socials";
 
 export function Footer() {
   return (
-    
     <footer className="mt-16 bg-primary text-primary-foreground md:mt-20 lg:mt-24">
       <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-6 md:py-12 lg:px-8">
         <Reveal className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:gap-x-16">

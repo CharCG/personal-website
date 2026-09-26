@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ButtonLink } from "../ui/button-link";
-import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
-import { githubProfile } from "@/data/socials";
-import type { ContributionLevel, GitHubContributions } from "@/types/github";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { siGithub } from "simple-icons";
+import type { ContributionLevel, GitHubContributions } from "@/features/about/types/github";
+import { BrandIcon } from "@/shared/components/brand-icon";
+import { ButtonLink } from "@/shared/components/ui/button-link";
+import { githubProfile } from "@/shared/data/socials";
 
 const levelClassNames: Record<ContributionLevel, string> = {
   NONE: "bg-secondary",
@@ -41,8 +43,8 @@ export function GitHubContributionsCard() {
       : null;
 
   return (
-    <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
+    <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6">
+      <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Open Sourcing</p>
           <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
@@ -53,7 +55,7 @@ export function GitHubContributionsCard() {
           </p>
         </div>
         <ButtonLink href={githubProfile.href} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
-          <FaGithub aria-hidden="true" />
+          <BrandIcon icon={siGithub} className="h-4 w-4 shrink-0" />
           View Profile
           <FaArrowUpRightFromSquare
             className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
@@ -63,7 +65,7 @@ export function GitHubContributionsCard() {
       </div>
 
       <div
-        className="mt-8 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain pb-2"
+        className="mt-6 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain"
         role={hasCalendar ? "region" : undefined}
         aria-label={hasCalendar ? "Scrollable GitHub contribution calendar" : undefined}
         tabIndex={hasCalendar ? 0 : undefined}

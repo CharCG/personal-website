@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, m } from "motion/react";
 import { FaChevronLeft, FaChevronRight, FaXmark } from "react-icons/fa6";
-import { motionDuration, motionEaseOut, motionEaseOutCss } from "@/components/motion/config";
+import { motionDuration, motionEaseOut, motionEaseOutCss } from "@/shared/motion/config";
 
 type ProjectGalleryProps = {
   projectTitle: string;

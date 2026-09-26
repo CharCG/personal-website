@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FaArrowDown, FaArrowRight, FaFile } from "react-icons/fa6";
-import { SocialLinks } from "@/components/shared/social-links";
-import { InteractiveMascot } from "@/components/mascot/interactive-mascot";
-import { ButtonLink } from "@/components/ui/button-link";
+import { InteractiveMascot } from "@/shared/components/mascot/interactive-mascot";
+import { SocialLinks } from "@/shared/components/social-links";
+import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export function Hero() {
   return (
@@ -46,7 +46,7 @@ export function Hero() {
 
         <SocialLinks
           className="hero-enter hero-enter-socials relative z-10 mt-8 flex justify-center gap-8 md:mt-10"
-          linkClassName="text-3xl transition-opacity duration-200 ease-out hover:opacity-70"
+          linkClassName="text-3xl text-primary transition-opacity duration-200 ease-out hover:opacity-70"
         />
       </div>
 

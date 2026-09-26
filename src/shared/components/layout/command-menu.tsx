@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from "react-icons/fa6";
-import { socialIcons } from "@/components/shared/social-links";
-import { navigationItems } from "@/data/navigation";
-import { projects } from "@/data/projects";
-import { socialLinks } from "@/data/socials";
+import { projects } from "@/shared/data/projects";
+import { socialIcons } from "@/shared/components/social-links";
+import { navigationItems } from "@/shared/data/navigation";
+import { socialLinks } from "@/shared/data/socials";
 
 type CommandMenuProps = {
   open: boolean;
@@ -106,22 +106,20 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Socials" className={commandGroupClassName}>
-          {socialLinks.map((social) => {
-            const Icon = socialIcons[social.icon];
-
-            return (
-              <Command.Item
-                key={social.label}
-                value={`social:${social.label}`}
-                keywords={[social.label, social.href, "social", "contact"]}
-                onSelect={() => openSocial(social.href)}
-                className={commandItemClassName}
-              >
-                <Icon aria-hidden="true" className="shrink-0 text-muted-foreground" />
-                <span className="flex-1">{social.label}</span>
-              </Command.Item>
-            );
-          })}
+          {socialLinks.map((social) => (
+            <Command.Item
+              key={social.label}
+              value={`social:${social.label}`}
+              keywords={[social.label, social.href, "social", "contact"]}
+              onSelect={() => openSocial(social.href)}
+              className={commandItemClassName}
+            >
+              <span className="flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground">
+                {socialIcons[social.label]}
+              </span>
+              <span className="flex-1">{social.label}</span>
+            </Command.Item>
+          ))}
         </Command.Group>
 
         <Command.Separator className="mx-4 h-px bg-border" />

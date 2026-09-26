@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
-import { TechnologyList } from "@/components/projects/technology-list";
-import type { Project } from "@/data/projects";
+import { TechnologyList } from "@/features/projects/components/technology-list";
+import type { Project } from "@/shared/data/projects";
 
 type ProjectCardProps = {
   project: Project;
-  headingLevel?: "h2" | "h4";
+  headingLevel?: "h2" | "h3";
 };
 
 function ProjectDetailLink({ project }: { project: Project }) {

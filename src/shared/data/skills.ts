@@ -1,5 +1,4 @@
 import {
-  siCplusplus,
   siExpress,
   siFigma,
   siFlask,
@@ -53,7 +52,6 @@ export const skills: Skill[] = [
   { name: "Kotlin", icon: siKotlin },
   { name: "Java", icon: siOpenjdk },
   { name: "XML", icon: siXml },
-  { name: "C++", icon: siCplusplus },
   { name: "Git", icon: siGit },
   { name: "GitHub", icon: siGithub },
   { name: "Postman", icon: siPostman },

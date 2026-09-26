@@ -1,8 +1,8 @@
-import { Reveal } from "@/components/motion/reveal";
-import { motionStagger } from "@/components/motion/config";
-import { BrandIcon } from "@/components/shared/brand-icon";
-import { Chip } from "@/components/ui/chip";
-import { skills } from "@/data/skills";
+import { BrandIcon } from "@/shared/components/brand-icon";
+import { motionStagger } from "@/shared/motion/config";
+import { Reveal } from "@/shared/motion/reveal";
+import { Chip } from "@/shared/components/ui/chip";
+import { skills } from "@/shared/data/skills";
 
 export function SkillsSection() {
   return (

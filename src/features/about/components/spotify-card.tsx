@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaArrowUpRightFromSquare, FaSpotify } from "react-icons/fa6";
-import type { SpotifyNowPlaying } from "@/types/spotify";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { siSpotify } from "simple-icons";
+import type { SpotifyNowPlaying } from "@/features/about/types/spotify";
+import { BrandIcon } from "@/shared/components/brand-icon";
 
 export function SpotifyCard() {
   const [nowPlaying, setNowPlaying] = useState<SpotifyNowPlaying | null>(null);
@@ -24,16 +26,16 @@ export function SpotifyCard() {
   const track = nowPlaying?.track;
 
   return (
-    <article className="flex h-full min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
+    <article className="flex h-full min-h-56 flex-col rounded-2xl border border-border bg-surface p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Repeat</p>
           <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Listening on Spotify</h2>
         </div>
-        <FaSpotify className="shrink-0 text-3xl" aria-hidden="true" />
+        <BrandIcon icon={siSpotify} className="h-8 w-8 shrink-0" />
       </div>
 
-      <div className="mt-auto pt-8">
+      <div className="mt-6">
         {track ? (
           <Link
             href={track.href}
@@ -51,7 +53,7 @@ export function SpotifyCard() {
               />
             ) : (
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-surface">
-                <FaSpotify className="text-2xl" aria-hidden="true" />
+                <BrandIcon icon={siSpotify} className="h-6 w-6" />
               </span>
             )}
             <span className="min-w-0 flex-1">

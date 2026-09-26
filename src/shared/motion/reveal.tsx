@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { m } from "motion/react";
-import { motionDuration, motionEaseOut } from "@/components/motion/config";
+import { motionDuration, motionEaseOut } from "@/shared/motion/config";
 
 type RevealProps = {
   children: ReactNode;

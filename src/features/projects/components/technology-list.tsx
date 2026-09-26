@@ -1,8 +1,7 @@
-import { FaCode } from "react-icons/fa6";
-import { BrandIcon } from "@/components/shared/brand-icon";
-import { Chip } from "@/components/ui/chip";
-import type { Project } from "@/data/projects";
-import { getSkillByName } from "@/data/skills";
+import type { Project } from "@/shared/data/projects";
+import { BrandIcon } from "@/shared/components/brand-icon";
+import { Chip } from "@/shared/components/ui/chip";
+import { getSkillByName } from "@/shared/data/skills";
 
 type TechnologyListProps = Pick<Project, "technologies"> & {
   className?: string;
