@@ -15,6 +15,25 @@ function formatLanguage(language: string) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function MonkeytypeProfileLink() {
+  return (
+    <ButtonLink
+      href={monkeytypeProfile.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      variant="primary"
+      size="sm"
+    >
+      <BrandIcon icon={siMonkeytype} className="h-4 w-4 shrink-0" />
+      View Profile
+      <FaArrowUpRightFromSquare
+        className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+        aria-hidden="true"
+      />
+    </ButtonLink>
+  );
+}
+
 export function MonkeytypeCard() {
   const [summary, setSummary] = useState<MonkeytypeSummary | null>(null);
 
@@ -32,32 +51,19 @@ export function MonkeytypeCard() {
   const personalBest = summary?.personalBest;
 
   return (
-    <article className="flex h-full min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
+    <article className="flex h-full min-h-56 flex-col rounded-2xl border border-border bg-surface p-6">
+      <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">At the Keyboard</p>
-          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Monkeytype Stats</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Typing</p>
+          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">Monkeytype Statistics</h2>
         </div>
-        <ButtonLink
-          href={monkeytypeProfile.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="primary"
-          size="sm"
-        >
-          <BrandIcon icon={siMonkeytype} className="h-4 w-4 shrink-0" />
-          View Profile
-          <FaArrowUpRightFromSquare
-            className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
-        </ButtonLink>
+        <MonkeytypeProfileLink />
       </div>
 
-      <div className="mt-auto pt-8">
+      <div className="mt-6">
         {personalBest ? (
           <div className="rounded-2xl bg-secondary p-4">
-            <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex flex-wrap items-end justify-between gap-2">
               <div className="flex items-end gap-2">
                 <span className="text-4xl font-bold tracking-[-0.04em]">{Math.round(personalBest.wpm)}</span>
                 <span className="pb-1 text-sm text-muted-foreground">WPM</span>
@@ -67,7 +73,7 @@ export function MonkeytypeCard() {
               </p>
             </div>
 
-            <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-border pt-4">
+            <dl className="mt-4 grid grid-cols-3 gap-2 border-t border-border pt-4">
               <div>
                 <dt className="text-xs text-muted-foreground">Accuracy</dt>
                 <dd className="mt-2 font-semibold">{Math.round(personalBest.accuracy)}%</dd>

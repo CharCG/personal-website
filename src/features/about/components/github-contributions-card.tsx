@@ -43,8 +43,8 @@ export function GitHubContributionsCard() {
       : null;
 
   return (
-    <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
+    <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6">
+      <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Open Sourcing</p>
           <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
@@ -65,7 +65,7 @@ export function GitHubContributionsCard() {
       </div>
 
       <div
-        className="mt-8 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain"
+        className="mt-6 w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain"
         role={hasCalendar ? "region" : undefined}
         aria-label={hasCalendar ? "Scrollable GitHub contribution calendar" : undefined}
         tabIndex={hasCalendar ? 0 : undefined}

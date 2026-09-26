@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { FaFile } from "react-icons/fa6";
 import { GitHubContributionsCard } from "@/features/about/components/github-contributions-card";
+import { GlobeCard } from "@/features/about/components/globe-card";
 import { MonkeytypeCard } from "@/features/about/components/monkeytype-card";
 import { SpotifyCard } from "@/features/about/components/spotify-card";
+import { StackCard } from "@/features/about/components/stack-card";
 import { Footer } from "@/shared/components/layout/footer";
 import { Navbar } from "@/shared/components/layout/navbar";
 import { motionStagger } from "@/shared/motion/config";
@@ -55,15 +57,23 @@ export default function About() {
           </div>
 
           <div className="grid min-w-0 gap-4 pt-8 md:grid-cols-2 md:pt-10 lg:pt-12">
-            <Reveal className="h-full min-w-0" delay={motionStagger}>
-              <SpotifyCard />
+            <Reveal className="min-w-0 self-start" delay={motionStagger}>
+              <GlobeCard />
             </Reveal>
-            <Reveal className="h-full min-w-0" delay={motionStagger * 2}>
-              <MonkeytypeCard />
-            </Reveal>
-            <Reveal className="h-full min-w-0 md:col-span-2" delay={motionStagger * 3}>
+            <Reveal className="min-w-0 self-start" delay={motionStagger * 2}>
               <GitHubContributionsCard />
             </Reveal>
+            <Reveal className="h-full min-w-0" delay={motionStagger * 3}>
+              <StackCard />
+            </Reveal>
+            <div className="grid min-w-0 gap-4">
+              <Reveal className="h-full min-w-0" delay={motionStagger * 4}>
+                <SpotifyCard />
+              </Reveal>
+              <Reveal className="h-full min-w-0" delay={motionStagger * 5}>
+                <MonkeytypeCard />
+              </Reveal>
+            </div>
           </div>
         </section>
       </main>

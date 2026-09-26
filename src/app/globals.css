@@ -315,6 +315,59 @@ a {
   }
 }
 
+.stack-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.stack-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: stack-marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.stack-marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.stack-marquee:hover .stack-marquee-track {
+  animation-play-state: paused;
+}
+
+.stack-marquee-list {
+  display: flex;
+  flex: none;
+  gap: 16px;
+  margin: 0;
+  padding: 0 16px 0 0;
+  list-style: none;
+}
+
+@keyframes stack-marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.globe-marker-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -32px);
+}
+
+@supports (position-anchor: --cobe-indonesia) {
+  .globe-marker-label {
+    position-anchor: --cobe-indonesia;
+    top: auto;
+    bottom: anchor(top);
+    left: anchor(center);
+    opacity: var(--cobe-visible-indonesia, 0);
+    transform: translate(-50%, -8px);
+  }
+}
+
 @media (min-width: 768px) {
   .hero-layout {
     --hero-surface-top: max(62%, 584px);
@@ -381,5 +434,17 @@ a {
 
   .project-lightbox::backdrop {
     animation: none;
+  }
+
+  .stack-marquee {
+    overflow-x: auto;
+  }
+
+  .stack-marquee-track {
+    animation: none;
+  }
+
+  .stack-marquee-list[aria-hidden="true"] {
+    display: none;
   }
 }

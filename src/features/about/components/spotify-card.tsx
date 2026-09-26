@@ -26,7 +26,7 @@ export function SpotifyCard() {
   const track = nowPlaying?.track;
 
   return (
-    <article className="flex h-full min-h-72 flex-col rounded-2xl border border-border bg-surface p-6 md:p-8">
+    <article className="flex h-full min-h-56 flex-col rounded-2xl border border-border bg-surface p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">On Repeat</p>
@@ -35,7 +35,7 @@ export function SpotifyCard() {
         <BrandIcon icon={siSpotify} className="h-8 w-8 shrink-0" />
       </div>
 
-      <div className="mt-auto pt-8">
+      <div className="mt-6">
         {track ? (
           <Link
             href={track.href}
