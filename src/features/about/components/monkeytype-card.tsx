@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { siMonkeytype } from "simple-icons";
 import type { MonkeytypeSummary } from "@/features/about/types/monkeytype";
 import { BrandIcon } from "@/shared/components/brand-icon";
 import { ButtonLink } from "@/shared/components/ui/button-link";
-import { monkeytypeProfile } from "@/shared/data/socials";
+import { monkeytypeContact } from "@/shared/data/contacts";
 
 function formatLanguage(language: string) {
   return language
@@ -18,7 +17,7 @@ function formatLanguage(language: string) {
 function MonkeytypeProfileLink() {
   return (
     <ButtonLink
-      href={monkeytypeProfile.href}
+      href={monkeytypeContact.link}
       target="_blank"
       rel="noopener noreferrer"
       variant="primary"
@@ -26,10 +25,6 @@ function MonkeytypeProfileLink() {
     >
       <BrandIcon icon={siMonkeytype} className="h-4 w-4 shrink-0" />
       View Profile
-      <FaArrowUpRightFromSquare
-        className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-        aria-hidden="true"
-      />
     </ButtonLink>
   );
 }

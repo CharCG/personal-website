@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FaArrowLeft, FaArrowRight, FaArrowUpRightFromSquare, FaCode, FaGlobe } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight, FaCode, FaGlobe } from "react-icons/fa6";
 import { ProjectGallery } from "@/features/projects/components/project-gallery";
 import { TechnologyList } from "@/features/projects/components/technology-list";
 import { getProjectBySlug, projects, type ProjectStatus } from "@/shared/data/projects";
@@ -86,11 +86,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 )}
               </div>
 
-              {(project.repositoryHref || project.demoHref) && (
+              {(project.repositoryLink || project.demoLink) && (
                 <div className="flex flex-wrap gap-4 lg:self-start">
-                  {project.repositoryHref && (
+                  {project.repositoryLink && (
                     <ButtonLink
-                      href={project.repositoryHref}
+                      href={project.repositoryLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="secondary"
@@ -98,20 +98,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     >
                       <FaCode aria-hidden="true" />
                       Repository
-                      <FaArrowUpRightFromSquare
-                        aria-hidden="true"
-                        className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-                      />
                     </ButtonLink>
                   )}
-                  {project.demoHref && (
-                    <ButtonLink href={project.demoHref} target="_blank" rel="noopener noreferrer" size="sm">
+                  {project.demoLink && (
+                    <ButtonLink href={project.demoLink} target="_blank" rel="noopener noreferrer" size="sm">
                       <FaGlobe aria-hidden="true" />
                       Demo
-                      <FaArrowUpRightFromSquare
-                        aria-hidden="true"
-                        className="transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-                      />
                     </ButtonLink>
                   )}
                 </div>

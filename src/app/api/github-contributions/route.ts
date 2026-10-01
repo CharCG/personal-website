@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import axios from "axios";
 import type { GitHubContributions } from "@/features/about/types/github";
-import { githubProfile } from "@/shared/data/socials";
+import { githubContact } from "@/shared/data/contacts";
 
 type GitHubGraphQLResponse = {
   data?: {
@@ -65,7 +65,7 @@ const getGitHubContributions = unstable_cache(
               }
             }
           `,
-        variables: { login: githubProfile.username },
+        variables: { login: githubContact.name },
       },
       {
         timeout: 10_000,

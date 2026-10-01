@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { siGithub } from "simple-icons";
 import type { ContributionLevel, GitHubContributions } from "@/features/about/types/github";
 import { BrandIcon } from "@/shared/components/brand-icon";
 import { ButtonLink } from "@/shared/components/ui/button-link";
-import { githubProfile } from "@/shared/data/socials";
+import { githubContact } from "@/shared/data/contacts";
 
 const levelClassNames: Record<ContributionLevel, string> = {
   NONE: "bg-secondary",
@@ -51,16 +50,12 @@ export function GitHubContributionsCard() {
           <p className="mt-2 text-sm text-muted-foreground">
             {hasCalendar
               ? `${contributions?.totalContributions} contributions${period ? ` · ${period}` : ""}`
-              : `Recent work from @${githubProfile.username}`}
+              : `Recent work from @${githubContact.name}`}
           </p>
         </div>
-        <ButtonLink href={githubProfile.href} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
+        <ButtonLink href={githubContact.link} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
           <BrandIcon icon={siGithub} className="h-4 w-4 shrink-0" />
           View Profile
-          <FaArrowUpRightFromSquare
-            className="text-xs transition-transform duration-200 ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
         </ButtonLink>
       </div>
 

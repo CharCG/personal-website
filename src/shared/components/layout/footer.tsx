@@ -1,9 +1,9 @@
-import { FaArrowRight, FaEnvelope } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 import { motionStagger } from "@/shared/motion/config";
 import { Reveal } from "@/shared/motion/reveal";
 import { SocialLinks } from "@/shared/components/social-links";
 import { ButtonLink } from "@/shared/components/ui/button-link";
-import { emailContact } from "@/shared/data/socials";
+import { emailContact } from "@/shared/data/contacts";
 
 export function Footer() {
   return (
@@ -23,8 +23,7 @@ export function Footer() {
           </div>
 
           <div className="flex w-full items-start justify-center md:justify-end">
-            <ButtonLink href={emailContact.href} variant="inverted">
-              <FaEnvelope aria-hidden="true" />
+            <ButtonLink href={emailContact.link} variant="inverted">
               Let’s Connect
               <FaArrowRight
                 aria-hidden="true"

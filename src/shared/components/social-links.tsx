@@ -1,12 +1,6 @@
 import Link from "next/link";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
-import { socialLinks } from "@/shared/data/socials";
-
-export const socialIcons = {
-  Email: <FaEnvelope aria-hidden="true" />,
-  GitHub: <FaGithub aria-hidden="true" />,
-  LinkedIn: <FaLinkedin aria-hidden="true" />,
-};
+import { BrandIcon } from "@/shared/components/brand-icon";
+import { contacts } from "@/shared/data/contacts";
 
 type SocialLinksProps = {
   className: string;
@@ -16,16 +10,16 @@ type SocialLinksProps = {
 export function SocialLinks({ className, linkClassName }: SocialLinksProps) {
   return (
     <div className={className}>
-      {socialLinks.map((social) => (
+      {contacts.map((contact) => (
         <Link
-          key={social.label}
-          href={social.href}
+          key={contact.platform}
+          href={contact.link}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={social.label}
+          aria-label={contact.platform}
           className={linkClassName}
         >
-          {socialIcons[social.label]}
+          <BrandIcon icon={contact.icon} />
         </Link>
       ))}
     </div>

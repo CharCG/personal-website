@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,21 +9,6 @@ import { CommandMenu } from "@/shared/components/layout/command-menu";
 import { navigationItems } from "@/shared/data/navigation";
 
 const activeIndicatorTransition = { type: "spring", stiffness: 500, damping: 40 } as const;
-
-function MascotMark() {
-  return (
-    <span className="navbar-mascot-mark">
-      <Image
-        src="/images/mascot/fallbacks/logo.png"
-        alt=""
-        width={20}
-        height={20}
-        className="h-auto w-auto object-contain"
-        priority
-      />
-    </span>
-  );
-}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -67,15 +51,8 @@ export function Navbar() {
       <div className="relative mx-auto w-full max-w-2xl">
         <nav
           aria-label="Primary navigation"
-          className="flex h-14 w-full items-center justify-between rounded-2xl border border-border/70 bg-surface/80 px-2 backdrop-blur-xl lg:hidden"
+          className="flex h-14 w-full items-center justify-end rounded-2xl border border-border/70 bg-surface/80 px-2 backdrop-blur-xl lg:hidden"
         >
-          <Link
-            href="/"
-            aria-label="Charles Cong home"
-            className="navbar-mascot-link relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-          >
-            <MascotMark />
-          </Link>
           <button
             type="button"
             aria-controls="mobile-navigation"
@@ -137,16 +114,6 @@ export function Navbar() {
           className="hidden w-full rounded-2xl border border-border/70 bg-surface/70 p-2 backdrop-blur-xl lg:block"
         >
           <ul className="grid min-w-0 grid-flow-col auto-cols-fr items-center">
-            <li className="h-12 min-w-0">
-              <Link
-                href="/"
-                aria-label="Charles Cong home"
-                className="navbar-mascot-link relative flex h-12 w-full items-center justify-center rounded-full"
-              >
-                <MascotMark />
-              </Link>
-            </li>
-
             {navigationItems.map((item) => (
               <li key={item.label} className="h-12 min-w-0">
                 <Link

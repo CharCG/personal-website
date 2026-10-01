@@ -1,3 +1,4 @@
+import { type IconType } from "react-icons";
 import {
   siExpress,
   siFigma,
@@ -28,7 +29,7 @@ import {
 
 export type Skill = {
   name: string;
-  icon: SimpleIcon;
+  icon: IconType | SimpleIcon;
 };
 
 export const skills: Skill[] = [

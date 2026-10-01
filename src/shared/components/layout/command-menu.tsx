@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from "react-icons/fa6";
 import { projects } from "@/shared/data/projects";
-import { socialIcons } from "@/shared/components/social-links";
+import { BrandIcon } from "@/shared/components/brand-icon";
 import { navigationItems } from "@/shared/data/navigation";
-import { socialLinks } from "@/shared/data/socials";
+import { contacts } from "@/shared/data/contacts";
 
 type CommandMenuProps = {
   open: boolean;
@@ -106,18 +106,18 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         <Command.Separator className="mx-4 h-px bg-border" />
 
         <Command.Group heading="Socials" className={commandGroupClassName}>
-          {socialLinks.map((social) => (
+          {contacts.map((contact) => (
             <Command.Item
-              key={social.label}
-              value={`social:${social.label}`}
-              keywords={[social.label, social.href, "social", "contact"]}
-              onSelect={() => openSocial(social.href)}
+              key={contact.platform}
+              value={`contact:${contact.platform}`}
+              keywords={[contact.platform, contact.name, contact.link, "social", "contact"]}
+              onSelect={() => openSocial(contact.link)}
               className={commandItemClassName}
             >
               <span className="flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground">
-                {socialIcons[social.label]}
+                <BrandIcon icon={contact.icon} />
               </span>
-              <span className="flex-1">{social.label}</span>
+              <span className="flex-1">{contact.platform}</span>
             </Command.Item>
           ))}
         </Command.Group>
