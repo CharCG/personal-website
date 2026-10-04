@@ -20,8 +20,6 @@ export type ContributionMonth = {
 
 export type GitHubContributions = {
   totalContributions: number;
-  startedAt: string | null;
-  endedAt: string | null;
   months: ContributionMonth[];
   weeks: ContributionWeek[];
 };

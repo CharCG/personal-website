@@ -10,8 +10,8 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <ProjectsSection />
         <SkillsSection />
+        <ProjectsSection />
       </main>
       <Footer />
     </div>

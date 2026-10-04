@@ -2,14 +2,12 @@ import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import axios from "axios";
 import type { GitHubContributions } from "@/features/about/types/github";
-import { githubProfile } from "@/shared/data/socials";
+import { githubContact } from "@/shared/data/contacts";
 
 type GitHubGraphQLResponse = {
   data?: {
     user?: {
       contributionsCollection: {
-        startedAt: string;
-        endedAt: string;
         contributionCalendar: {
           totalContributions: number;
           months: GitHubContributions["months"];
@@ -22,8 +20,6 @@ type GitHubGraphQLResponse = {
 
 const unavailable: GitHubContributions = {
   totalContributions: 0,
-  startedAt: null,
-  endedAt: null,
   months: [],
   weeks: [],
 };
@@ -42,8 +38,6 @@ const getGitHubContributions = unstable_cache(
             query Contributions($login: String!) {
               user(login: $login) {
                 contributionsCollection {
-                  startedAt
-                  endedAt
                   contributionCalendar {
                     totalContributions
                     months {
@@ -65,7 +59,7 @@ const getGitHubContributions = unstable_cache(
               }
             }
           `,
-        variables: { login: githubProfile.username },
+        variables: { login: githubContact.name },
       },
       {
         timeout: 10_000,
@@ -86,8 +80,6 @@ const getGitHubContributions = unstable_cache(
 
     return {
       totalContributions: collection.contributionCalendar.totalContributions,
-      startedAt: collection.startedAt,
-      endedAt: collection.endedAt,
       months: collection.contributionCalendar.months,
       weeks: collection.contributionCalendar.weeks,
     };

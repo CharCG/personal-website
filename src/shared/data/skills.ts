@@ -1,3 +1,4 @@
+import { type IconType } from "react-icons";
 import {
   siExpress,
   siFigma,
@@ -28,34 +29,79 @@ import {
 
 export type Skill = {
   name: string;
-  icon: SimpleIcon;
+  icon: IconType | SimpleIcon;
 };
 
-export const skills: Skill[] = [
+export type SkillCategory = {
+  id: "frontend" | "mobile" | "backend" | "uiux" | "other";
+  label: string;
+  description: string;
+  skills: Skill[];
+};
+
+export const frontendSkills: Skill[] = [
   { name: "Flutter", icon: siFlutter },
   { name: "React", icon: siReact },
   { name: "Tailwind CSS", icon: siTailwindcss },
   { name: "Vite", icon: siVite },
+];
+
+export const mobileSkills: Skill[] = [
+  { name: "Flutter", icon: siFlutter },
+  { name: "Kotlin", icon: siKotlin },
+  { name: "XML", icon: siXml },
+  { name: "Java", icon: siOpenjdk },
+];
+
+export const backendSkills: Skill[] = [
   { name: "Laravel", icon: siLaravel },
   { name: "NestJS", icon: siNestjs },
   { name: "Express.js", icon: siExpress },
   { name: "Flask", icon: siFlask },
   { name: "Prisma", icon: siPrisma },
-  { name: "Mongoose", icon: siMongoose },
-  { name: "Node.js", icon: siNodedotjs },
   { name: "PostgreSQL", icon: siPostgresql },
   { name: "MySQL", icon: siMysql },
-  { name: "MongoDB", icon: siMongodb },
   { name: "TypeScript", icon: siTypescript },
-  { name: "JavaScript", icon: siJavascript },
   { name: "Python", icon: siPython },
-  { name: "Kotlin", icon: siKotlin },
-  { name: "Java", icon: siOpenjdk },
-  { name: "XML", icon: siXml },
-  { name: "Git", icon: siGit },
-  { name: "GitHub", icon: siGithub },
-  { name: "Postman", icon: siPostman },
-  { name: "Figma", icon: siFigma },
+];
+
+export const uiuxSkills: Skill[] = [{ name: "Figma", icon: siFigma }];
+
+export const otherSkills: Skill[] = [{ name: "Git", icon: siGit }];
+
+export const skills: Skill[] = [...frontendSkills, ...mobileSkills, ...backendSkills, ...uiuxSkills, ...otherSkills];
+
+export const skillCategories: SkillCategory[] = [
+  {
+    id: "frontend",
+    label: "Frontend Development",
+    description: "",
+    skills: frontendSkills,
+  },
+  {
+    id: "mobile",
+    label: "Mobile Development",
+    description: "",
+    skills: mobileSkills,
+  },
+  {
+    id: "backend",
+    label: "Backend Development",
+    description: "",
+    skills: backendSkills,
+  },
+  {
+    id: "uiux",
+    label: "UI/UX Design",
+    description: "",
+    skills: uiuxSkills,
+  },
+  {
+    id: "other",
+    label: "Other",
+    description: "",
+    skills: otherSkills,
+  }
 ];
 
 export function getSkillByName(name: string) {

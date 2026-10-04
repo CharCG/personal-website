@@ -302,17 +302,17 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
 
       <span className="interactive-mascot-breath">
         <span className="interactive-mascot-character">
-          <Image src="/images/mascot/parts/body.svg" alt="" fill priority={priority} sizes={sizes} />
+          <Image src="/images/mascot/parts/body.svg" alt="" fill priority={priority} sizes={sizes} draggable={false} />
 
           <span className="interactive-mascot-eye interactive-mascot-eye-left">
             <span className="interactive-mascot-eye-graphic">
-              <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" />
+              <Image src="/images/mascot/parts/left-eye.svg" alt="" fill sizes="50px" draggable={false} />
             </span>
           </span>
 
           <span className="interactive-mascot-eye interactive-mascot-eye-right">
             <span className="interactive-mascot-eye-graphic">
-              <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" />
+              <Image src="/images/mascot/parts/right-eye.svg" alt="" fill sizes="50px" draggable={false} />
             </span>
           </span>
         </span>

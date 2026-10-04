@@ -5,6 +5,7 @@ import { Footer } from "@/shared/components/layout/footer";
 import { Navbar } from "@/shared/components/layout/navbar";
 import { motionStagger } from "@/shared/motion/config";
 import { Reveal } from "@/shared/motion/reveal";
+import { SplitText } from "@/shared/motion/split-text";
 
 export const metadata: Metadata = {
   title: "Projects — Charles",
@@ -18,23 +19,27 @@ export default function ProjectsPage() {
 
       <main className="flex-1">
         <section className="mx-auto w-full max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
-          <Reveal className="grid gap-6 md:grid-cols-2 md:items-end md:gap-16">
+          <div className="grid gap-6 md:grid-cols-2 md:items-end md:gap-16">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Projects</p>
               <h1 className="mt-4 text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                Selected Works
+                <SplitText>Selected Works</SplitText>
               </h1>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               A collection of products shaped through critical problem solving, thoughtful design, and careful
               engineering.
             </p>
-          </Reveal>
+          </div>
 
-          <div className="mt-12 grid gap-4 lg:grid-cols-2">
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
             {projects.map((project, index) => (
-              <Reveal key={project.slug} className="h-full" delay={(index % 4) * motionStagger}>
-                <ProjectCard project={project} />
+              <Reveal
+                key={project.slug}
+                className={`h-full ${index === 0 ? "lg:col-span-2" : ""}`}
+                delay={(index % 4) * motionStagger}
+              >
+                <ProjectCard project={project} variant={index === 0 ? "featured" : "default"} />
               </Reveal>
             ))}
           </div>

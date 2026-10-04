@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
+  --font-sans: var(--font-instrument-sans), Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-accent: var(--font-architects-daughter), cursive;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -17,7 +21,6 @@
   --color-warning: var(--warning);
   --color-info: var(--info);
 
-  --font-serif: "Times New Roman", Times, serif;
 }
 
 :root {
@@ -50,9 +53,16 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, sans-serif;
+  font-family: var(--font-instrument-sans), Arial, sans-serif;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-bricolage-grotesque), Arial, sans-serif;
 }
 
 * {
@@ -105,10 +115,6 @@ a {
   animation: hero-content-enter var(--motion-reveal) var(--motion-ease-out) forwards;
 }
 
-.hero-enter-name {
-  animation-delay: 80ms;
-}
-
 .hero-enter-role {
   animation-delay: 160ms;
 }
@@ -147,6 +153,12 @@ a {
   --mascot-body-x: 0px;
   --mascot-body-y: 0px;
   --mascot-body-rotation: 0deg;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.interactive-mascot img {
+  -webkit-user-drag: none;
 }
 
 .interactive-mascot-breath,
@@ -165,7 +177,6 @@ a {
   align-items: flex-end;
   gap: 4px;
   color: var(--primary);
-  font-family: "Times New Roman", Times, serif;
   font-size: 1.5rem;
   font-style: italic;
   font-weight: 700;
@@ -237,15 +248,6 @@ a {
   transform: scaleY(0.08);
 }
 
-.navbar-mascot-mark {
-  display: inline-flex;
-  transform-origin: bottom center;
-}
-
-.navbar-mascot-link:hover .navbar-mascot-mark {
-  animation: navbar-mascot-hop var(--motion-reveal) var(--motion-ease-out);
-}
-
 @keyframes mascot-breathe {
   0%,
   100% {
@@ -304,47 +306,60 @@ a {
   }
 }
 
-@keyframes navbar-mascot-hop {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-.stack-marquee {
+.skills-category-marquee {
   width: 100%;
   overflow: hidden;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-.stack-marquee-track {
+.skills-category-marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.skills-category-track {
   display: flex;
   width: max-content;
-  animation: stack-marquee-scroll 32s linear infinite;
+  animation: skills-category-scroll 24s linear infinite;
   will-change: transform;
 }
 
-.stack-marquee-track-reverse {
-  animation-direction: reverse;
-}
-
-.stack-marquee:hover .stack-marquee-track {
-  animation-play-state: paused;
-}
-
-.stack-marquee-list {
+.skills-category-list {
   display: flex;
   flex: none;
-  gap: 16px;
-  margin: 0;
-  padding: 0 16px 0 0;
-  list-style: none;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 24px;
 }
 
-@keyframes stack-marquee-scroll {
+.skills-category-list-repeat {
+  display: flex;
+}
+
+.skills-auto-rotate-progress {
+  transform-origin: left;
+  animation: skills-auto-rotate-progress linear forwards;
+}
+
+@keyframes skills-auto-rotate-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.skills-category-item {
+  flex: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+@keyframes skills-category-scroll {
   to {
     transform: translateX(-50%);
   }
@@ -382,6 +397,12 @@ a {
     width: 344px;
     height: 360px;
   }
+
+  .skills-category-list {
+    min-width: min(100vw, 1200px);
+    justify-content: space-around;
+  }
+
 }
 
 @media (min-width: 1024px) {
@@ -428,23 +449,23 @@ a {
     transition: none;
   }
 
-  .navbar-mascot-link:hover .navbar-mascot-mark {
-    animation: none;
-  }
-
   .project-lightbox::backdrop {
     animation: none;
   }
 
-  .stack-marquee {
+  .skills-category-marquee {
     overflow-x: auto;
   }
 
-  .stack-marquee-track {
+  .skills-category-track {
     animation: none;
   }
 
-  .stack-marquee-list[aria-hidden="true"] {
+  .skills-category-list-repeat {
     display: none;
+  }
+
+  .skills-auto-rotate-progress {
+    animation: none;
   }
 }

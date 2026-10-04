@@ -1,4 +1,5 @@
 export type ProjectStatus = "Completed" | "In Progress" | "Archived";
+export type ProjectType = "Web App" | "Mobile App" | "Desktop App" | "Library" | "Game" | "Other";
 
 export type Project = {
   slug: string;
@@ -6,15 +7,15 @@ export type Project = {
   role: string;
   timeline: string;
   status: ProjectStatus;
-  type: string;
+  type: ProjectType;
   description: string;
   about: string;
   keyFeatures: string[];
   technologies: string[];
-  repositoryHref: string | null;
-  demoHref: string | null;
+  repositoryLink: string | null;
+  demoLink: string | null;
   images: `/${string}`[];
-  showOnHome: boolean;
+  featured: boolean;
 };
 
 export const projects: Project[] = [
@@ -39,11 +40,11 @@ export const projects: Project[] = [
       "Savings & Food Rescue Tracking",
       "Automatic Listing Expiration",
     ],
-    technologies: ["Flutter", "NestJS", "Prisma", "PostgreSQL", "Midtrans"],
-    repositoryHref: "https://github.com/charcg/haphap",
-    demoHref: "https://s.id/HapHap",
+    technologies: ["Flutter", "NestJS", "Prisma", "PostgreSQL"],
+    repositoryLink: "https://github.com/charcg/haphap",
+    demoLink: "https://s.id/HapHap",
     images: ["/images/projects/haphap/haphap-1.png", "/images/projects/haphap/haphap-2.png"],
-    showOnHome: true,
+    featured: true,
   },
   {
     slug: "katasaka",
@@ -58,10 +59,10 @@ export const projects: Project[] = [
       "It all started with one simple question, why do so many children know global fairy tales, yet struggle to recognize the stories that shaped their own culture? Growing up, I was surrounded by Indonesian folk tales filled with wisdom, imagination, and values passed down through generations. Yet as technology became a bigger part of daily life, I noticed these stories becoming less visible. Rather than letting these stories fade over time, I saw an opportunity to bring them to life through Katasaka.",
     keyFeatures: [],
     technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Prisma", "PostgreSQL", "Figma"],
-    repositoryHref: "https://github.com/MikeKomari/Garuda_Hacks_JayaManggala",
-    demoHref: null,
+    repositoryLink: "https://github.com/MikeKomari/Garuda_Hacks_JayaManggala",
+    demoLink: null,
     images: ["/images/projects/katasaka/katasaka-1.png", "/images/projects/katasaka/katasaka-2.png"],
-    showOnHome: true,
+    featured: true,
   },
   {
     slug: "klean",
@@ -69,17 +70,17 @@ export const projects: Project[] = [
     role: "Full-Stack Developer",
     timeline: "Feb 2026 – Jul 2026",
     status: "Completed",
-    type: "Progressive Web App",
+    type: "Web App",
     description:
       "A laundry marketplace that connects customers with trusted local merchants through seamless pickup and delivery.",
     about:
       "Convenience has become an expectation in everyday services, yet laundry often remains a manual and time-consuming experience. Customers expect seamless scheduling and order tracking, while many laundry businesses still rely on fragmented workflows. Klean was created to bridge this gap by bringing customers, merchants, and delivery services into one seamless experience.",
     keyFeatures: [],
-    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Prisma", "PostgreSQL", "Midtrans"],
-    repositoryHref: "https://github.com/charcg/klean",
-    demoHref: "https://klean-fe.vercel.app",
+    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Prisma", "PostgreSQL"],
+    repositoryLink: "https://github.com/charcg/klean",
+    demoLink: "https://klean-fe.vercel.app",
     images: ["/images/projects/klean/klean-1.png", "/images/projects/klean/klean-2.png"],
-    showOnHome: true,
+    featured: true,
   },
   {
     slug: "bersih-in",
@@ -93,11 +94,11 @@ export const projects: Project[] = [
     about:
       "Waste sorting is often overlooked, yet it is important in effective waste management. Many people want to dispose of waste responsibly but lack the knowledge to identify different waste types correctly. Bersih.In was created to make waste classification more accessible through AI-powered image classification, helping users make informed disposal decisions.",
     keyFeatures: [],
-    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Mongoose", "MongoDB", "Flask"],
-    repositoryHref: "https://github.com/charcg/bersih-in",
-    demoHref: "https://bersih-in-ai.vercel.app",
+    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Flask"],
+    repositoryLink: "https://github.com/charcg/bersih-in",
+    demoLink: "https://bersih-in-ai.vercel.app",
     images: ["/images/projects/bersih-in/bersih-in-1.png"],
-    showOnHome: true,
+    featured: true,
   },
   {
     slug: "karyaloka",
@@ -105,16 +106,16 @@ export const projects: Project[] = [
     role: "Full-Stack Developer",
     timeline: "Aug 2026 – Sep 2026",
     status: "Completed",
-    type: "Progressive Web App",
+    type: "Web App",
     description:
       "A freelance marketplace that connects clients and freelancers through a swipe-based matching experience.",
     about: "",
     keyFeatures: [],
-    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Prisma", "PostgreSQL", "Midtrans"],
-    repositoryHref: "https://github.com/charcg/karyaloka",
-    demoHref: "https://karyaloka-fe.vercel.app",
+    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Prisma", "PostgreSQL"],
+    repositoryLink: "https://github.com/charcg/karyaloka",
+    demoLink: "https://karyaloka-fe.vercel.app",
     images: ["/images/projects/karyaloka/karyaloka-1.png", "/images/projects/karyaloka/karyaloka-2.png"],
-    showOnHome: true,
+    featured: true,
   },
   {
     slug: "arunika",
@@ -129,46 +130,14 @@ export const projects: Project[] = [
       "Students often rely on multiple platforms to manage different aspects of campus life. This fragmented experience can make it difficult to stay organized and connected. Arunika was created as a Smart Campus Experience platform that unifies essential academic and campus services into a single application.",
     keyFeatures: [],
     technologies: ["Figma"],
-    repositoryHref: null,
-    demoHref: null,
+    repositoryLink: null,
+    demoLink: null,
     images: ["/images/projects/arunika/arunika-1.png", "/images/projects/arunika/arunika-2.png"],
-    showOnHome: false,
-  },
-  {
-    slug: "jomoro-koffee",
-    title: "Jomoro Koffee",
-    role: "Back-End Developer",
-    timeline: "2026",
-    status: "Completed",
-    type: "API Service",
-    description: "",
-    about: "",
-    keyFeatures: [],
-    technologies: ["NestJS", "Prisma", "MySQL"],
-    repositoryHref: "https://github.com/charcg/jomoro-koffee",
-    demoHref: null,
-    images: [],
-    showOnHome: false,
-  },
-  {
-    slug: "genshin-import",
-    title: "Genshin Import",
-    role: "Full-Stack Developer",
-    timeline: "2026",
-    status: "Completed",
-    type: "Mobile App",
-    description: "",
-    about: "",
-    keyFeatures: [],
-    technologies: ["Flutter", "Express.js", "MySQL"],
-    repositoryHref: "https://github.com/luckyandreas224/genshin-import",
-    demoHref: null,
-    images: [],
-    showOnHome: false,
+    featured: false,
   },
 ];
 
-export const homeProjects = projects.filter((project) => project.showOnHome);
+export const homeProjects = projects.filter((project) => project.featured);
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
