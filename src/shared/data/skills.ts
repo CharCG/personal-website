@@ -59,10 +59,8 @@ export const backendSkills: Skill[] = [
   { name: "Express.js", icon: siExpress },
   { name: "Flask", icon: siFlask },
   { name: "Prisma", icon: siPrisma },
-  { name: "Mongoose", icon: siMongoose },
   { name: "PostgreSQL", icon: siPostgresql },
   { name: "MySQL", icon: siMysql },
-  { name: "MongoDB", icon: siMongodb },
   { name: "TypeScript", icon: siTypescript },
   { name: "Python", icon: siPython },
 ];
@@ -77,26 +75,32 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
     label: "Frontend Development",
-    description: "Building responsive web and mobile interfaces that feel clear, fast, and dependable.",
+    description: "",
     skills: frontendSkills,
   },
   {
     id: "mobile",
     label: "Mobile Development",
-    description: "Creating mobile applications that are optimized for performance and user experience.",
+    description: "",
     skills: mobileSkills,
   },
   {
     id: "backend",
     label: "Backend Development",
-    description: "Designing maintainable APIs and server-side systems that support reliable products.",
+    description: "",
     skills: backendSkills,
   },
   {
     id: "uiux",
     label: "UI/UX Design",
-    description: "Creating intuitive and visually appealing designs that enhance user experiences.",
+    description: "",
     skills: uiuxSkills,
+  },
+  {
+    id: "other",
+    label: "Other",
+    description: "",
+    skills: otherSkills,
   }
 ];
 

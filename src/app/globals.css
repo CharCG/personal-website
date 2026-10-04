@@ -115,10 +115,6 @@ a {
   animation: hero-content-enter var(--motion-reveal) var(--motion-ease-out) forwards;
 }
 
-.hero-enter-name {
-  animation-delay: 80ms;
-}
-
 .hero-enter-role {
   animation-delay: 160ms;
 }

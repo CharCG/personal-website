@@ -134,14 +134,16 @@ export function SkillsSection() {
             </div>
           </div>
 
-          <div className="relative flex min-h-64 flex-col items-center justify-center pb-16 pt-8 text-center md:pt-12">
+          <div className="mt-8 flex min-h-64 flex-col items-center justify-center rounded-2xl border border-border bg-surface p-6 text-center md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Currently viewing</p>
             <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] md:text-4xl lg:text-5xl">
               {activeCategory.label}
             </h3>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              {activeCategory.description}
-            </p>
+            {activeCategory.description && (
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                {activeCategory.description}
+              </p>
+            )}
             <ul className="mt-8 flex flex-wrap justify-center gap-6 md:gap-8" aria-label={`${activeCategory.label} technologies`}>
               {activeCategory.skills.map((skill) => (
                 <li key={skill.name} className="flex w-20 flex-col items-center gap-2 text-center">
@@ -150,7 +152,7 @@ export function SkillsSection() {
                 </li>
               ))}
             </ul>
-            <div className="absolute bottom-0 right-0 flex flex-col items-end gap-2 text-xs text-muted-foreground">
+            <div className="mt-8 flex self-end flex-col items-end gap-2 text-xs text-muted-foreground">
               <span>{prefersReducedMotion ? "Manual viewing" : isPaused ? "Paused" : "Auto-rotating"}</span>
               <span className="h-1 w-24 overflow-hidden rounded-full bg-secondary" aria-hidden="true">
                 <span

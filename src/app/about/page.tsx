@@ -10,6 +10,7 @@ import { motionStagger } from "@/shared/motion/config";
 import { Reveal } from "@/shared/motion/reveal";
 import { SocialLinks } from "@/shared/components/social-links";
 import { ButtonLink } from "@/shared/components/ui/button-link";
+import { SplitText } from "@/shared/motion/split-text";
 
 export const metadata: Metadata = {
   title: "About — Charles",
@@ -24,13 +25,15 @@ export default function About() {
       <main className="flex-1">
         <section className="mx-auto w-full min-w-0 max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
           <div className="grid gap-8 border-b border-border pb-8 md:pb-10 lg:grid-cols-2 lg:gap-16 lg:pb-12">
-            <Reveal>
+            <div>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                I care about the space between <em className="font-accent font-normal not-italic tracking-normal">useful</em>{" "}
-                and <em className="font-accent font-normal not-italic tracking-normal">delightful</em>.
+                <SplitText>
+                  I care about the space between <em className="font-accent font-normal not-italic tracking-normal">useful</em>{" "}
+                  and <em className="font-accent font-normal not-italic tracking-normal">delightful</em>.
+                </SplitText>
               </h1>
-            </Reveal>
+            </div>
 
             <Reveal className="self-end" delay={motionStagger}>
               <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -55,7 +58,7 @@ export default function About() {
             </Reveal>
           </div>
 
-          <div className="grid min-w-0 gap-4 pt-6 md:grid-cols-2 md:pt-8 lg:pt-10">
+          <div className="grid min-w-0 auto-rows-fr gap-4 pt-6 md:grid-cols-2 md:pt-8 lg:pt-10">
             <Reveal className="h-full min-w-0" delay={motionStagger}>
               <GlobeCard />
             </Reveal>

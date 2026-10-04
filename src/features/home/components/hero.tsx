@@ -3,6 +3,7 @@ import { FaArrowDown, FaArrowRight, FaFile } from "react-icons/fa6";
 import { InteractiveMascot } from "@/shared/components/mascot/interactive-mascot";
 import { SocialLinks } from "@/shared/components/social-links";
 import { ButtonLink } from "@/shared/components/ui/button-link";
+import { SplitText } from "@/shared/motion/split-text";
 
 export function Hero() {
   return (
@@ -11,8 +12,8 @@ export function Hero() {
         <p className="hero-enter hero-enter-eyebrow text-xs font-semibold uppercase tracking-[0.5em] text-muted-foreground">
           Software Engineer
         </p>
-        <h1 className="hero-enter hero-enter-name mt-4 text-4xl font-bold leading-none tracking-[-0.05em] md:text-5xl lg:text-[64px]">
-          Charles
+        <h1 className="mt-4 text-4xl font-bold leading-none tracking-[-0.05em] md:text-5xl lg:text-[64px]">
+          <SplitText splitType="chars">Charles</SplitText>
         </h1>
         <p className="hero-enter hero-enter-role mt-4 text-base text-muted-foreground md:text-lg lg:text-xl">
           I build scalable, maintainable, and reliable full-stack mobile and web applications.

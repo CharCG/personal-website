@@ -34,10 +34,10 @@ export function SpotifyCard() {
         <BrandIcon icon={siSpotify} className="h-8 w-8 shrink-0" />
       </div>
 
-      <div className="mt-6">
+      <div className="mt-auto pt-6">
         {tracks.length > 0 ? (
           <ul
-            className="max-h-36 space-y-2 overflow-y-auto overscroll-y-contain pr-2"
+            className="space-y-2 py-2 md:max-h-36 md:scroll-py-2 md:overflow-y-auto md:overscroll-y-contain md:pr-2"
             aria-label="Recently played songs"
             tabIndex={0}
           >

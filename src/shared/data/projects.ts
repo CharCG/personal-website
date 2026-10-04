@@ -94,7 +94,7 @@ export const projects: Project[] = [
     about:
       "Waste sorting is often overlooked, yet it is important in effective waste management. Many people want to dispose of waste responsibly but lack the knowledge to identify different waste types correctly. Bersih.In was created to make waste classification more accessible through AI-powered image classification, helping users make informed disposal decisions.",
     keyFeatures: [],
-    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Mongoose", "MongoDB", "Flask"],
+    technologies: ["React", "Tailwind CSS", "Vite", "Express.js", "Flask"],
     repositoryLink: "https://github.com/charcg/bersih-in",
     demoLink: "https://bersih-in-ai.vercel.app",
     images: ["/images/projects/bersih-in/bersih-in-1.png"],

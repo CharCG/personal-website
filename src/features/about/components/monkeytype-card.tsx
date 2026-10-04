@@ -7,6 +7,7 @@ import type { MonkeytypeSummary } from "@/features/about/types/monkeytype";
 import { BrandIcon } from "@/shared/components/brand-icon";
 import { ButtonLink } from "@/shared/components/ui/button-link";
 import { monkeytypeContact } from "@/shared/data/contacts";
+import { CountUp } from "@/shared/motion/count-up";
 
 function formatLanguage(language: string) {
   return language
@@ -47,7 +48,7 @@ export function MonkeytypeCard() {
         <div className="mt-6 flex flex-1 flex-col justify-end">
           <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
             <span className="font-mono text-4xl font-semibold leading-none tracking-[-0.04em]">
-              {Math.round(personalBest.wpm)}
+              <CountUp to={Math.round(personalBest.wpm)} />
             </span>
             <span className="text-sm text-muted-foreground">WPM</span>
             <span className="w-full font-mono text-sm text-muted-foreground">
@@ -58,16 +59,20 @@ export function MonkeytypeCard() {
           <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-4">
             <div>
               <dt className="text-xs text-muted-foreground">Accuracy</dt>
-              <dd className="mt-2 font-mono text-sm font-semibold">{Math.round(personalBest.accuracy)}%</dd>
+              <dd className="mt-2 font-mono text-sm font-semibold">
+                <CountUp to={Math.round(personalBest.accuracy)} />%
+              </dd>
             </div>
             <div>
               <dt className="text-xs text-muted-foreground">Consistency</dt>
-              <dd className="mt-2 font-mono text-sm font-semibold">{Math.round(personalBest.consistency)}%</dd>
+              <dd className="mt-2 font-mono text-sm font-semibold">
+                <CountUp to={Math.round(personalBest.consistency)} />%
+              </dd>
             </div>
             <div>
               <dt className="text-xs text-muted-foreground">Tests</dt>
               <dd className="mt-2 font-mono text-sm font-semibold">
-                {summary.completedTests === null ? "—" : summary.completedTests.toLocaleString()}
+                {summary.completedTests === null ? "—" : <CountUp to={summary.completedTests} />}
               </dd>
             </div>
           </dl>
