@@ -5,7 +5,6 @@ export type SpotifyTrack = {
   href: string;
 };
 
-export type SpotifyNowPlaying = {
-  isPlaying: boolean;
-  track: SpotifyTrack | null;
+export type SpotifyRecentlyPlayed = {
+  tracks: SpotifyTrack[];
 };

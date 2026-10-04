@@ -39,12 +39,13 @@ Keep page alignment consistent across all sections and pages.
 
 ## 3. Typography
 
-Use **Inter** as the primary font for the entire website.
+Use four typefaces with distinct, consistent roles. Load them with `next/font/google`.
 
-- Use `Inter` from `next/font/google`.
-- Apply it globally.
-- Use the same font across headings, body text, navigation, buttons, labels, and captions.
-- Do not introduce additional fonts unless explicitly required.
+- **Instrument Sans** is the default for body text, navigation, buttons, eyebrows, labels, and captions.
+- **Bricolage Grotesque** is for display text and semantic headings (`h1`–`h4`).
+- **JetBrains Mono** is reserved for numeric stats, timelines, keyboard shortcuts, and code-like metadata. Do not use it for normal prose or eyebrows.
+- **Architects Daughter** is a sparing accent for short expressive phrases, such as the footer tagline and selected words in section headings. Do not use it for paragraphs, UI controls, or metadata.
+- Keep the typography scale below unchanged across font roles.
 
 | Style   | Desktop | Tablet | Mobile |
 | ------- | ------- | ------ | ------ |
@@ -105,7 +106,7 @@ Do not use arbitrary spacing such as `10px`, `18px`, `30px`, or `37px`.
 - `24px` — content groups and common gaps
 - `32px` — card padding and larger internal groups
 - `48–64px` — groups within a section
-- `80–128px` — major section separation
+- `48–80px` — major section separation
 
 Use the same spacing for the same visual relationship.
 
@@ -117,9 +118,9 @@ Major sections should use consistent vertical spacing.
 
 | Device  | Section Gap |
 | ------- | ----------- |
-| Desktop | 96px        |
-| Tablet  | 80px        |
-| Mobile  | 64px        |
+| Desktop | 80px        |
+| Tablet  | 64px        |
+| Mobile  | 48px        |
 
 Example:
 

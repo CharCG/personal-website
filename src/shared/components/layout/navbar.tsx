@@ -141,7 +141,7 @@ export function Navbar() {
                 onClick={() => setCommandOpen(true)}
               >
                 <span className="truncate">Search</span>
-                <kbd className="hidden text-xs xl:inline">⌘K</kbd>
+                <kbd className="hidden font-mono text-xs xl:inline">⌘K</kbd>
               </button>
             </li>
           </ul>

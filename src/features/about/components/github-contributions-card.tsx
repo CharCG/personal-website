@@ -30,26 +30,16 @@ export function GitHubContributionsCard() {
   }, []);
 
   const hasCalendar = Boolean(contributions?.weeks.length);
-  const dateFormatter = new Intl.DateTimeFormat(undefined, {
-    month: "short",
-    year: "numeric",
-  });
-  const period =
-    contributions?.startedAt && contributions.endedAt
-      ? `${dateFormatter.format(new Date(contributions.startedAt))} – ${dateFormatter.format(
-          new Date(contributions.endedAt),
-        )}`
-      : null;
 
   return (
     <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6">
       <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Open Sourcing</p>
-          <h2 className="mt-2 text-xl font-bold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
+          <h2 className="mt-2 text-xl font-semibold tracking-[-0.03em] md:text-2xl">GitHub Contributions</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {hasCalendar
-              ? `${contributions?.totalContributions} contributions${period ? ` · ${period}` : ""}`
+              ? `${contributions?.totalContributions} contributions this year`
               : `Recent work from @${githubContact.name}`}
           </p>
         </div>
@@ -69,14 +59,14 @@ export function GitHubContributionsCard() {
           <div className="w-max">
             <div className="mb-2 flex gap-1" aria-label="Contribution calendar months">
               {contributions?.months.map((month) => (
-                <span
+                <abbr
                   key={`${month.firstDay}-${month.year}`}
                   title={`${month.name} ${month.year}`}
-                  className="shrink-0 whitespace-nowrap text-xs text-muted-foreground"
+                  className="shrink-0 overflow-hidden whitespace-nowrap text-xs font-medium text-muted-foreground no-underline"
                   style={{ width: `${month.totalWeeks * 16 - 4}px` }}
                 >
-                  {month.name.slice(0, 3)}
-                </span>
+                  {month.name.slice(0, month.totalWeeks === 1 ? 1 : 3)}
+                </abbr>
               ))}
             </div>
             <div className="flex gap-1">

@@ -31,10 +31,14 @@ export default function ProjectsPage() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-4 lg:grid-cols-2">
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
             {projects.map((project, index) => (
-              <Reveal key={project.slug} className="h-full" delay={(index % 4) * motionStagger}>
-                <ProjectCard project={project} />
+              <Reveal
+                key={project.slug}
+                className={`h-full ${index === 0 ? "lg:col-span-2" : ""}`}
+                delay={(index % 4) * motionStagger}
+              >
+                <ProjectCard project={project} variant={index === 0 ? "featured" : "default"} />
               </Reveal>
             ))}
           </div>

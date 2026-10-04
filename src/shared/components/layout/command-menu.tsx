@@ -58,7 +58,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
           placeholder="Search pages, projects, and socials..."
           className="h-16 min-w-0 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
         />
-        <kbd className="hidden rounded-lg border border-border bg-secondary px-2 py-1 text-xs text-muted-foreground sm:inline-flex">
+        <kbd className="hidden rounded-lg border border-border bg-secondary px-2 py-1 font-mono text-xs text-muted-foreground sm:inline-flex">
           Esc
         </kbd>
       </div>

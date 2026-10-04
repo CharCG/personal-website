@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FaArrowLeft, FaArrowRight, FaCode, FaGlobe } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight, FaCode, FaGlobe, FaImage } from "react-icons/fa6";
 import { ProjectGallery } from "@/features/projects/components/project-gallery";
 import { TechnologyList } from "@/features/projects/components/technology-list";
 import { getProjectBySlug, projects, type ProjectStatus } from "@/shared/data/projects";
@@ -73,7 +72,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </Reveal>
 
           <Reveal className="mt-8">
-            <header className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
+            <header className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
               <div className="max-w-3xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">{project.role}</p>
                 <h1 className="mt-4 text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
@@ -111,20 +110,14 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </header>
           </Reveal>
 
-          <div className="mt-12 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="mt-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <Reveal>
               <section aria-label={`${project.title} previews`}>
                 {project.images.length > 0 ? (
                   <ProjectGallery projectTitle={project.title} images={project.images} />
                 ) : (
                   <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-surface p-8 text-center">
-                    <Image
-                      src="/images/mascot/fallbacks/confused.png"
-                      alt=""
-                      width={128}
-                      height={128}
-                      className="h-32 w-32 object-contain"
-                    />
+                    <FaImage aria-hidden="true" className="h-8 w-8 text-primary" />
                     <p className="text-sm font-medium text-muted-foreground">Preview Unavailable</p>
                   </div>
                 )}
@@ -140,7 +133,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-sm text-muted-foreground">Timeline</dt>
-                  <dd className="text-right text-sm font-medium">{project.timeline}</dd>
+                  <dd className="text-right font-mono text-sm font-medium">{project.timeline}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-sm text-muted-foreground">Status</dt>
@@ -168,7 +161,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
 
           {hasProjectContent && (
-            <Reveal className="mt-12">
+            <Reveal className="mt-10">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
                 <div>
                   {hasAbout && (
@@ -203,7 +196,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </Reveal>
           )}
 
-          <Reveal className="mt-16 md:mt-20">
+          <Reveal className="mt-12 md:mt-16 lg:mt-20">
             <nav aria-label="Project navigation" className="grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
               {previousProject && (
                 <Link

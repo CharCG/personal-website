@@ -6,7 +6,7 @@ import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export function Hero() {
   return (
-    <section id="home" className="hero-layout relative h-svh min-h-[720px] overflow-hidden md:min-h-[800px]">
+    <section id="home" className="hero-layout relative h-svh min-h-[800px] overflow-hidden">
       <div className="relative z-10 mx-auto px-6 pt-32 text-center md:pt-40 lg:pt-48">
         <p className="hero-enter hero-enter-eyebrow text-xs font-semibold uppercase tracking-[0.5em] text-muted-foreground">
           Software Engineer
@@ -52,7 +52,7 @@ export function Hero() {
 
       <div className="pointer-events-none absolute inset-x-0 bottom-8 z-30 mx-auto flex max-w-[1200px] justify-center px-6 lg:px-8">
         <Link
-          href="#projects"
+          href="#skills"
           className="hero-enter hero-enter-scroll pointer-events-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
         >
           Scroll

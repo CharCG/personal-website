@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
-import type { SpotifyNowPlaying } from "@/features/about/types/spotify";
+import type { SpotifyRecentlyPlayed } from "@/features/about/types/spotify";
 
 type SpotifyTokenResponse = {
   access_token?: string;
 };
 
-type SpotifyPlaybackResponse = {
-  is_playing?: boolean;
-  item?: {
-    name?: string;
-    artists?: Array<{ name?: string }>;
-    external_urls?: { spotify?: string };
-    album?: { images?: Array<{ url?: string }> };
-  } | null;
+type SpotifyRecentlyPlayedResponse = {
+  items?: Array<{
+    track?: {
+      name?: string;
+      artists?: Array<{ name?: string }>;
+      external_urls?: { spotify?: string };
+      album?: { images?: Array<{ url?: string }> };
+    } | null;
+  }>;
 };
 
-const unavailable: SpotifyNowPlaying = {
-  isPlaying: false,
-  track: null,
-};
+const unavailable: SpotifyRecentlyPlayed = { tracks: [] };
 
 export async function GET() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -51,38 +49,27 @@ export async function GET() {
       return NextResponse.json(unavailable);
     }
 
-    const playbackResponse = await axios.get<SpotifyPlaybackResponse>(
-      "https://api.spotify.com/v1/me/player/currently-playing",
+    const recentResponse = await axios.get<SpotifyRecentlyPlayedResponse>(
+      "https://api.spotify.com/v1/me/player/recently-played",
       {
         timeout: 10_000,
         headers: { Authorization: `Bearer ${tokenData.access_token}` },
+        params: { limit: 3 },
       },
     );
 
-    if (playbackResponse.status === 204) {
-      return NextResponse.json(unavailable);
-    }
+    const tracks = recentResponse.data.items?.flatMap(({ track }) => {
+      if (!track?.name || !track.external_urls?.spotify) return [];
 
-    const playback = playbackResponse.data;
-    const item = playback.item;
+      return [{
+        title: track.name,
+        artists: track.artists?.map((artist) => artist.name).filter(Boolean).join(", ") || "Spotify",
+        albumImage: track.album?.images?.[0]?.url ?? null,
+        href: track.external_urls.spotify,
+      }];
+    }) ?? [];
 
-    if (!item?.name || !item.external_urls?.spotify) {
-      return NextResponse.json(unavailable);
-    }
-
-    return NextResponse.json<SpotifyNowPlaying>({
-      isPlaying: Boolean(playback.is_playing),
-      track: {
-        title: item.name,
-        artists:
-          item.artists
-            ?.map((artist) => artist.name)
-            .filter(Boolean)
-            .join(", ") || "Spotify",
-        albumImage: item.album?.images?.[0]?.url ?? null,
-        href: item.external_urls.spotify,
-      },
-    });
+    return NextResponse.json<SpotifyRecentlyPlayed>({ tracks });
   } catch {
     return NextResponse.json(unavailable);
   }

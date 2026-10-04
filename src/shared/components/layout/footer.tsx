@@ -7,14 +7,14 @@ import { emailContact } from "@/shared/data/contacts";
 
 export function Footer() {
   return (
-    <footer className="mt-16 bg-primary text-primary-foreground md:mt-20 lg:mt-24">
+    <footer className="mt-12 bg-primary text-primary-foreground md:mt-16 lg:mt-20">
       <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-6 md:py-12 lg:px-8">
         <Reveal className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:gap-x-16">
           <div>
             <h2 className="text-xl font-semibold">Charles</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
               Software Engineer <span aria-hidden="true">—</span>{" "}
-              <em className="font-serif italic">An Engineer Who Designs</em>
+              <em className="font-accent font-normal not-italic">An Engineer Who Designs</em>
             </p>
             <SocialLinks
               className="mt-4 flex justify-center gap-6 md:justify-start"

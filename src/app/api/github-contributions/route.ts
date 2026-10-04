@@ -8,8 +8,6 @@ type GitHubGraphQLResponse = {
   data?: {
     user?: {
       contributionsCollection: {
-        startedAt: string;
-        endedAt: string;
         contributionCalendar: {
           totalContributions: number;
           months: GitHubContributions["months"];
@@ -22,8 +20,6 @@ type GitHubGraphQLResponse = {
 
 const unavailable: GitHubContributions = {
   totalContributions: 0,
-  startedAt: null,
-  endedAt: null,
   months: [],
   weeks: [],
 };
@@ -42,8 +38,6 @@ const getGitHubContributions = unstable_cache(
             query Contributions($login: String!) {
               user(login: $login) {
                 contributionsCollection {
-                  startedAt
-                  endedAt
                   contributionCalendar {
                     totalContributions
                     months {
@@ -86,8 +80,6 @@ const getGitHubContributions = unstable_cache(
 
     return {
       totalContributions: collection.contributionCalendar.totalContributions,
-      startedAt: collection.startedAt,
-      endedAt: collection.endedAt,
       months: collection.contributionCalendar.months,
       weeks: collection.contributionCalendar.weeks,
     };
