@@ -57,7 +57,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <Navbar />
 
       <main className="flex-1">
-        <article className="mx-auto w-full max-w-[1200px] px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
+        <article className="mx-auto w-full max-w-content px-6 pt-32 md:px-6 md:pt-40 lg:px-8">
           <Reveal>
             <Link
               href="/projects"
@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <header className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
               <div className="max-w-3xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">{project.role}</p>
-                <h1 className="mt-4 text-[28px] font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
+                <h1 className="mt-4 text-heading-sm font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
                   {project.title}
                 </h1>
                 {project.description && (

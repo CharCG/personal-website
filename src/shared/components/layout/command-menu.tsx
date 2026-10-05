@@ -50,9 +50,9 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
       label="Search pages, projects, and socials"
       loop
       overlayClassName="command-menu-overlay fixed inset-0 z-[60] bg-foreground/30"
-      contentClassName="command-menu-content fixed inset-x-6 top-24 z-[70] mx-auto max-w-2xl overflow-hidden rounded-2xl border border-border bg-surface md:top-32 lg:inset-x-8"
+      contentClassName="command-menu-content fixed inset-x-6 top-24 z-[70] mx-auto flex max-h-[calc(100dvh-8rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-surface md:top-32 md:max-h-[calc(100dvh-10rem)] lg:inset-x-8"
     >
-      <div className="flex items-center gap-4 border-b border-border px-4">
+      <div className="flex shrink-0 items-center gap-4 border-b border-border px-4">
         <FaMagnifyingGlass aria-hidden="true" className="shrink-0 text-muted-foreground" />
         <Command.Input
           placeholder="Search pages, projects, and socials..."
@@ -63,7 +63,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         </kbd>
       </div>
 
-      <Command.List className="max-h-96 overflow-y-auto overscroll-contain p-2">
+      <Command.List className="min-h-0 max-h-96 overflow-y-auto overscroll-contain p-2">
         <Command.Empty className="px-4 py-12 text-center text-sm text-muted-foreground">
           No matching pages or projects.
         </Command.Empty>
@@ -137,7 +137,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         </Command.Group>
       </Command.List>
 
-      <div className="flex items-center justify-between border-t border-border px-4 py-2 text-xs text-muted-foreground">
+      <div className="flex shrink-0 items-center justify-between border-t border-border px-4 py-2 text-xs text-muted-foreground">
         <span>Navigate with ↑ ↓</span>
         <span>Select with Enter</span>
       </div>

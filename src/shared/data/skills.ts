@@ -5,18 +5,12 @@ import {
   siFlask,
   siFlutter,
   siGit,
-  siGithub,
-  siJavascript,
   siKotlin,
   siLaravel,
-  siMongodb,
-  siMongoose,
   siMysql,
   siNestjs,
-  siNodedotjs,
   siOpenjdk,
   siPostgresql,
-  siPostman,
   siPrisma,
   siPython,
   siReact,
@@ -33,7 +27,7 @@ export type Skill = {
 };
 
 export type SkillCategory = {
-  id: "frontend" | "mobile" | "backend" | "uiux" | "other";
+  id: string;
   label: string;
   description: string;
   skills: Skill[];
@@ -69,37 +63,41 @@ export const uiuxSkills: Skill[] = [{ name: "Figma", icon: siFigma }];
 
 export const otherSkills: Skill[] = [{ name: "Git", icon: siGit }];
 
-export const skills: Skill[] = [...frontendSkills, ...mobileSkills, ...backendSkills, ...uiuxSkills, ...otherSkills];
+export const skills: Skill[] = Array.from(
+  new Map(
+    [...frontendSkills, ...mobileSkills, ...backendSkills, ...uiuxSkills, ...otherSkills].map((skill) => [skill.name, skill]),
+  ).values(),
+);
 
 export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
     label: "Frontend Development",
-    description: "",
+    description: "Building responsive and interactive user interfaces.",
     skills: frontendSkills,
   },
   {
     id: "mobile",
     label: "Mobile Development",
-    description: "",
+    description: "Developing cross-platform and native mobile applications.",
     skills: mobileSkills,
   },
   {
     id: "backend",
     label: "Backend Development",
-    description: "",
+    description: "Building robust and scalable server-side applications and APIs.",
     skills: backendSkills,
   },
   {
     id: "uiux",
     label: "UI/UX Design",
-    description: "",
+    description: "Designing intuitive and beautiful experiences and interfaces.",
     skills: uiuxSkills,
   },
   {
     id: "other",
     label: "Other",
-    description: "",
+    description: "Additional tools for collaboration and convenience.",
     skills: otherSkills,
   }
 ];

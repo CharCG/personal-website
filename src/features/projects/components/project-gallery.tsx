@@ -155,7 +155,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
           if (event.key === "ArrowLeft" && images.length > 1) showPreviousImage();
           if (event.key === "ArrowRight" && images.length > 1) showNextImage();
         }}
-        className="project-lightbox m-auto h-[calc(100dvh-48px)] w-[calc(100%-48px)] max-w-[1200px] overflow-hidden rounded-2xl border border-border bg-surface p-0"
+        className="project-lightbox m-auto h-[calc(100dvh-48px)] w-[calc(100%-48px)] max-w-content overflow-hidden rounded-2xl border border-border bg-surface p-0"
       >
         <div className="relative h-full w-full bg-background">
           <AnimatePresence initial={false} mode="wait">

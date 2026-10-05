@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { unstable_cache } from "next/cache";
 import axios from "axios";
 import type { SpotifyRecentlyPlayed } from "@/features/about/types/spotify";
 
@@ -19,16 +20,16 @@ type SpotifyRecentlyPlayedResponse = {
 
 const unavailable: SpotifyRecentlyPlayed = { tracks: [] };
 
-export async function GET() {
-  const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-  const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
+const getRecentlyPlayed = unstable_cache(
+  async (): Promise<SpotifyRecentlyPlayed> => {
+    const clientId = process.env.SPOTIFY_CLIENT_ID;
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+    const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
-  if (!clientId || !clientSecret || !refreshToken) {
-    return NextResponse.json(unavailable);
-  }
+    if (!clientId || !clientSecret || !refreshToken) {
+      throw new Error("Spotify credentials are not configured");
+    }
 
-  try {
     const tokenResponse = await axios.post<SpotifyTokenResponse>(
       "https://accounts.spotify.com/api/token",
       new URLSearchParams({
@@ -46,7 +47,7 @@ export async function GET() {
 
     const tokenData = tokenResponse.data;
     if (!tokenData.access_token) {
-      return NextResponse.json(unavailable);
+      throw new Error("Spotify access token is unavailable");
     }
 
     const recentResponse = await axios.get<SpotifyRecentlyPlayedResponse>(
@@ -58,7 +59,11 @@ export async function GET() {
       },
     );
 
-    const tracks = recentResponse.data.items?.flatMap(({ track }) => {
+    if (!Array.isArray(recentResponse.data.items)) {
+      throw new Error("Spotify recently played data is unavailable");
+    }
+
+    const tracks = recentResponse.data.items.flatMap(({ track }) => {
       if (!track?.name || !track.external_urls?.spotify) return [];
 
       return [{
@@ -67,9 +72,17 @@ export async function GET() {
         albumImage: track.album?.images?.[0]?.url ?? null,
         href: track.external_urls.spotify,
       }];
-    }) ?? [];
+    });
 
-    return NextResponse.json<SpotifyRecentlyPlayed>({ tracks });
+    return { tracks };
+  },
+  ["spotify-recently-played"],
+  { revalidate: 3600 },
+);
+
+export async function GET() {
+  try {
+    return NextResponse.json(await getRecentlyPlayed());
   } catch {
     return NextResponse.json(unavailable);
   }

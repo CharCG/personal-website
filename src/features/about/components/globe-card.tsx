@@ -61,11 +61,29 @@ export function GlobeCard() {
       globe.update({ width: size, height: size });
     });
 
-    let isVisible = true;
     let animationFrame = 0;
-
+    let isVisible = false;
+    const render = () => {
+      animationFrame = 0;
+      if (!isVisible || document.hidden) return;
+      globe.update({ phi, theta });
+      animationFrame = window.requestAnimationFrame(render);
+    };
+    const requestRender = () => {
+      if (!animationFrame && isVisible && !document.hidden) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    };
+    const updateVisibility = () => {
+      if (isVisible && !document.hidden) requestRender();
+      else {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      }
+    };
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
+      updateVisibility();
     });
 
     let activePointer: number | null = null;
@@ -89,6 +107,7 @@ export function GlobeCard() {
       const size = Math.max(container.offsetWidth, 1);
       phi = pointerStartPhi + ((event.clientX - pointerStartX) / size) * Math.PI;
       theta = Math.min(Math.max(pointerStartTheta + ((event.clientY - pointerStartY) / size) * Math.PI, -1.2), 1.2);
+      requestRender();
     };
 
     const handlePointerEnd = (event: PointerEvent) => {
@@ -107,26 +126,23 @@ export function GlobeCard() {
       else return;
 
       event.preventDefault();
-    };
-
-    const render = () => {
-      if (isVisible) globe.update({ phi, theta });
-      animationFrame = window.requestAnimationFrame(render);
+      requestRender();
     };
 
     observer.observe(container);
     visibilityObserver.observe(container);
+    document.addEventListener("visibilitychange", updateVisibility);
     container.addEventListener("pointerdown", handlePointerDown);
     container.addEventListener("pointermove", handlePointerMove);
     container.addEventListener("pointerup", handlePointerEnd);
     container.addEventListener("pointercancel", handlePointerEnd);
     container.addEventListener("keydown", handleKeyDown);
-    animationFrame = window.requestAnimationFrame(render);
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
       observer.disconnect();
       visibilityObserver.disconnect();
+      document.removeEventListener("visibilitychange", updateVisibility);
       container.removeEventListener("pointerdown", handlePointerDown);
       container.removeEventListener("pointermove", handlePointerMove);
       container.removeEventListener("pointerup", handlePointerEnd);

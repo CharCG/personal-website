@@ -25,6 +25,8 @@ const unavailable: MonkeytypeSummary = {
   completedTests: null,
 };
 
+const testDuration = 60;
+
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
 }
@@ -33,10 +35,6 @@ const getMonkeytypeSummary = unstable_cache(
   async (): Promise<MonkeytypeSummary> => {
     const apeKey = process.env.MONKEYTYPE_APE_KEY;
 
-    if (!apeKey) {
-      return unavailable;
-    }
-
     const headers = {
       Authorization: `ApeKey ${apeKey}`,
     };
@@ -44,7 +42,7 @@ const getMonkeytypeSummary = unstable_cache(
     const [personalBestsResult, statsResult] = await Promise.allSettled([
       axios.get<MonkeytypePersonalBestsResponse>("https://api.monkeytype.com/users/personalBests", {
         headers,
-        params: { mode: "time", mode2: 60 },
+        params: { mode: "time", mode2: testDuration },
         timeout: 10_000,
       }),
       axios.get<MonkeytypeStatsResponse>("https://api.monkeytype.com/users/stats", {
@@ -74,6 +72,10 @@ const getMonkeytypeSummary = unstable_cache(
       .sort((first, second) => (second.wpm ?? 0) - (first.wpm ?? 0))[0];
     const stats = statsResult.status === "fulfilled" ? statsResult.value.data.data : null;
 
+    if (!personalBest && !isFiniteNumber(stats?.completedTests)) {
+      throw new Error("Monkeytype summary data is unavailable");
+    }
+
     return {
       personalBest:
         personalBest &&
@@ -85,7 +87,7 @@ const getMonkeytypeSummary = unstable_cache(
               accuracy: personalBest.acc,
               consistency: personalBest.consistency,
               language: personalBest.language || "English",
-              duration: 60,
+              duration: testDuration,
             }
           : null,
       completedTests: isFiniteNumber(stats?.completedTests) ? stats.completedTests : null,
@@ -96,6 +98,8 @@ const getMonkeytypeSummary = unstable_cache(
 );
 
 export async function GET() {
+  if (!process.env.MONKEYTYPE_APE_KEY) return NextResponse.json(unavailable);
+
   try {
     return NextResponse.json(await getMonkeytypeSummary());
   } catch {

@@ -25,11 +25,8 @@ const unavailable: GitHubContributions = {
 };
 
 const getGitHubContributions = unstable_cache(
-  async (): Promise<GitHubContributions> => {
+  async (login: string): Promise<GitHubContributions> => {
     const token = process.env.GITHUB_TOKEN;
-    if (!token) {
-      return unavailable;
-    }
 
     const response = await axios.post<GitHubGraphQLResponse>(
       "https://api.github.com/graphql",
@@ -59,7 +56,7 @@ const getGitHubContributions = unstable_cache(
               }
             }
           `,
-        variables: { login: githubContact.name },
+        variables: { login },
       },
       {
         timeout: 10_000,
@@ -75,7 +72,7 @@ const getGitHubContributions = unstable_cache(
     const collection = result.data?.user?.contributionsCollection;
 
     if (!collection) {
-      return unavailable;
+      throw new Error("GitHub contribution data is unavailable");
     }
 
     return {
@@ -89,8 +86,10 @@ const getGitHubContributions = unstable_cache(
 );
 
 export async function GET() {
+  if (!process.env.GITHUB_TOKEN) return NextResponse.json(unavailable);
+
   try {
-    return NextResponse.json(await getGitHubContributions());
+    return NextResponse.json(await getGitHubContributions(githubContact.name));
   } catch {
     return NextResponse.json(unavailable);
   }

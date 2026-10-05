@@ -1,6 +1,6 @@
 import { type IconType } from "react-icons";
-import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
-import type { SimpleIcon } from "simple-icons";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
+import { siMonkeytype, type SimpleIcon } from "simple-icons";
 
 export type Contact = {
   platform: string;
@@ -23,20 +23,6 @@ export const linkedinContact: Contact = {
   link: "https://www.linkedin.com/in/charcg",
 };
 
-export const instagramContact: Contact = {
-  platform: "Instagram",
-  name: "charlescong_",
-  icon: FaInstagram,
-  link: "https://www.instagram.com/charlescong_/",
-};
-
-export const threadsContact: Contact = {
-  platform: "Threads",
-  name: "charlescong_",
-  icon: FaThreads,
-  link: "https://www.instagram.com/charlescong_/",
-};
-
 export const emailContact: Contact = {
   platform: "Email",
   name: "Charles Cong",
@@ -47,14 +33,12 @@ export const emailContact: Contact = {
 export const monkeytypeContact: Contact = {
   platform: "Monkeytype",
   name: "charcg",
-  icon: FaThreads,
+  icon: siMonkeytype,
   link: "https://monkeytype.com/profile/charcg",
 };
 
 export const contacts: Contact[] = [
   githubContact,
   linkedinContact,
-  instagramContact,
-  threadsContact,
   emailContact,
 ];

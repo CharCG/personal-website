@@ -17,7 +17,9 @@ export function SpotifyCard() {
     axios
       .get<SpotifyRecentlyPlayed>("/api/spotify", { signal: controller.signal })
       .then((response) => setRecentlyPlayed(response.data))
-      .catch(() => undefined);
+      .catch((error: unknown) => {
+        if (!axios.isCancel(error)) setRecentlyPlayed({ tracks: [] });
+      });
 
     return () => controller.abort();
   }, []);
@@ -35,7 +37,11 @@ export function SpotifyCard() {
       </div>
 
       <div className="mt-auto pt-6">
-        {tracks.length > 0 ? (
+        {recentlyPlayed === null ? (
+          <div className="flex min-h-24 items-center" role="status">
+            <p className="text-sm leading-relaxed text-muted-foreground">Loading recent songs…</p>
+          </div>
+        ) : tracks.length > 0 ? (
           <ul
             className="space-y-2 py-2 md:max-h-36 md:scroll-py-2 md:overflow-y-auto md:overscroll-y-contain md:pr-2"
             aria-label="Recently played songs"

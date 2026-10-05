@@ -8,7 +8,7 @@ import { emailContact } from "@/shared/data/contacts";
 export function Footer() {
   return (
     <footer className="mt-12 bg-primary text-primary-foreground md:mt-16 lg:mt-20">
-      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-6 md:py-12 lg:px-8">
+      <div className="mx-auto max-w-content px-6 py-10 md:px-6 md:py-12 lg:px-8">
         <Reveal className="grid justify-items-center gap-8 text-center md:grid-cols-2 md:justify-items-stretch md:text-left lg:gap-x-16">
           <div>
             <h2 className="text-xl font-semibold">Charles</h2>

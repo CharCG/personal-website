@@ -7,14 +7,14 @@ import { ButtonLink } from "@/shared/components/ui/button-link";
 
 export function ProjectsSection() {
   const featuredProject = homeProjects[0];
-  const otherProjects = homeProjects.slice(1, 5);
+  const otherProjects = homeProjects.slice(1);
 
   return (
-    <section id="projects" className="mx-auto max-w-[1200px] px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20">
+    <section id="projects" className="mx-auto max-w-content px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20">
       <Reveal className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Projects</p>
-          <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-[28px] lg:text-4xl">
+          <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-heading-sm lg:text-4xl">
             Things I’ve <span className="font-accent font-normal tracking-normal">Built</span>
           </h2>
           <p className="mt-2 text-base text-muted-foreground md:text-lg">

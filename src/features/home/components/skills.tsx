@@ -43,7 +43,7 @@ export function SkillsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeCategoryId, setActiveCategoryId] = useState<(typeof skillCategories)[number]["id"]>(
-    skillCategories[0].id,
+    skillCategories[0]?.id ?? "",
   );
   const [isInView, setIsInView] = useState(false);
   const [isPointerOver, setIsPointerOver] = useState(false);
@@ -93,11 +93,13 @@ export function SkillsSection() {
     trackRef.current?.getAnimations().forEach((animation) => animation.updatePlaybackRate(rate));
   };
 
+  if (!activeCategory) return null;
+
   return (
-    <section ref={sectionRef} id="skills" className="mx-auto max-w-[1200px] px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20">
+    <section ref={sectionRef} id="skills" className="mx-auto max-w-content px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20">
       <Reveal>
         <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Skills</p>
-        <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-[28px] lg:text-4xl">
+        <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-heading-sm lg:text-4xl">
           Tools I <span className="font-accent font-normal tracking-normal">Work</span> With
         </h2>
         <p className="mt-2 text-base text-muted-foreground md:text-lg">
@@ -136,7 +138,7 @@ export function SkillsSection() {
 
           <div className="mt-8 flex min-h-64 flex-col items-center justify-center rounded-2xl border border-border bg-surface p-6 text-center md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Currently viewing</p>
-            <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] md:text-4xl lg:text-5xl">
+            <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] md:text-heading-sm lg:text-4xl">
               {activeCategory.label}
             </h3>
             {activeCategory.description && (
