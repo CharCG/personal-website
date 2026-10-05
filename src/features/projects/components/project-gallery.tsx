@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { AnimatePresence, m } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { FaChevronLeft, FaChevronRight, FaXmark } from "react-icons/fa6";
 import { motionDuration, motionEaseOut, motionEaseOutCss } from "@/shared/motion/config";
 
@@ -13,19 +13,32 @@ type ProjectGalleryProps = {
 
 export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const openAnimationRef = useRef<Animation | null>(null);
   const closeAnimationRef = useRef<Animation | null>(null);
+  const prefersReducedMotion = useReducedMotion();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedImage = images[selectedIndex];
+
+  useEffect(
+    () => () => {
+      openAnimationRef.current?.cancel();
+      closeAnimationRef.current?.cancel();
+    },
+    [],
+  );
 
   const openImage = (index: number) => {
     setSelectedIndex(index);
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    dialog.showModal();
+    openAnimationRef.current?.cancel();
+    closeAnimationRef.current?.cancel();
+    closeAnimationRef.current = null;
+    if (!dialog.open) dialog.showModal();
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      dialog.animate(
+    if (!prefersReducedMotion) {
+      openAnimationRef.current = dialog.animate(
         [
           { opacity: 0, transform: "scale(0.98)" },
           { opacity: 1, transform: "scale(1)" },
@@ -37,9 +50,10 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
 
   const closeImage = () => {
     const dialog = dialogRef.current;
-    if (!dialog?.open) return;
+    if (!dialog?.open || closeAnimationRef.current?.playState === "running") return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    openAnimationRef.current?.cancel();
+    if (prefersReducedMotion) {
       dialog.close();
       return;
     }
@@ -52,7 +66,15 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
       ],
       { duration: motionDuration.fast * 1000, easing: motionEaseOutCss },
     );
-    closeAnimationRef.current.finished.then(() => dialog.close()).catch(() => undefined);
+    const animation = closeAnimationRef.current;
+    animation.finished
+      .then(() => {
+        if (closeAnimationRef.current === animation) {
+          dialog.close();
+          closeAnimationRef.current = null;
+        }
+      })
+      .catch(() => undefined);
   };
 
   const showPreviousImage = () => {
@@ -75,7 +97,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: motionDuration.fast, ease: motionEaseOut }}
+                transition={{ duration: prefersReducedMotion ? 0 : motionDuration.fast, ease: motionEaseOut }}
               >
                 <Image
                   src={selectedImage}
@@ -152,8 +174,11 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
           closeImage();
         }}
         onKeyDown={(event) => {
-          if (event.key === "ArrowLeft" && images.length > 1) showPreviousImage();
-          if (event.key === "ArrowRight" && images.length > 1) showNextImage();
+          if (images.length > 1 && (event.key === "ArrowLeft" || event.key === "ArrowRight")) {
+            event.preventDefault();
+            if (event.key === "ArrowLeft") showPreviousImage();
+            else showNextImage();
+          }
         }}
         className="project-lightbox m-auto h-[calc(100dvh-48px)] w-[calc(100%-48px)] max-w-content overflow-hidden rounded-2xl border border-border bg-surface p-0"
       >
@@ -166,7 +191,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: motionDuration.fast, ease: motionEaseOut }}
+                transition={{ duration: prefersReducedMotion ? 0 : motionDuration.fast, ease: motionEaseOut }}
               >
                 <Image
                   src={selectedImage}

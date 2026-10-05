@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { siGithub } from "simple-icons";
+import { useWidgetData } from "@/features/about/hooks/use-widget-data";
 import type { ContributionLevel, GitHubContributions } from "@/features/about/types/github";
 import { BrandIcon } from "@/shared/components/brand-icon";
 import { ButtonLink } from "@/shared/components/ui/button-link";
@@ -17,19 +16,17 @@ const levelClassNames: Record<ContributionLevel, string> = {
 };
 
 export function GitHubContributionsCard() {
-  const [contributions, setContributions] = useState<GitHubContributions | null>(null);
-  useEffect(() => {
-    const controller = new AbortController();
-
-    axios
-      .get<GitHubContributions>("/api/github-contributions", { signal: controller.signal })
-      .then((response) => setContributions(response.data))
-      .catch(() => undefined);
-
-    return () => controller.abort();
-  }, []);
+  const { data: contributions, isLoading } = useWidgetData<GitHubContributions>("/api/github-contributions");
 
   const hasCalendar = Boolean(contributions?.weeks.length);
+  // Adjacent months can share a week; summing API totalWeeks creates extra columns.
+  const calendarMonths =
+    contributions?.months
+      .map((month) => ({
+        ...month,
+        start: contributions.weeks.findIndex((week) => week.firstDay >= month.firstDay),
+      }))
+      .filter((month) => month.start >= 0) ?? [];
 
   return (
     <article className="h-full min-w-0 max-w-full rounded-2xl border border-border bg-surface p-6">
@@ -62,35 +59,42 @@ export function GitHubContributionsCard() {
               aria-label="Contribution calendar months"
               style={{ gridTemplateColumns: `repeat(${contributions.weeks.length}, calc(var(--spacing) * 3))` }}
             >
-              {contributions.months.map((month) => (
+              {calendarMonths.map((month, index) => (
                 <span
                   key={`${month.firstDay}-${month.year}`}
                   title={`${month.name} ${month.year}`}
                   className="min-w-0 overflow-hidden whitespace-nowrap text-xs text-muted-foreground"
-                  style={{ gridColumn: `span ${month.totalWeeks}` }}
+                  style={{
+                    gridColumn: `${month.start + 1} / ${(calendarMonths[index + 1]?.start ?? contributions.weeks.length) + 1}`,
+                  }}
                 >
                   {month.name.slice(0, 3)}
                 </span>
               ))}
             </div>
-              <div className="flex w-max gap-1">
-                {contributions.weeks.map((week) => (
-                  <div key={week.firstDay} className="grid grid-rows-7 gap-1">
-                    {week.contributionDays.map((day) => (
-                      <span
-                        key={day.date}
-                        title={`${day.contributionCount} contributions on ${day.date}`}
-                        className={`size-3 rounded-sm ${levelClassNames[day.contributionLevel]}`}
-                        style={{ gridRow: new Date(`${day.date}T00:00:00Z`).getUTCDay() + 1 }}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
+            <div className="flex w-max gap-1">
+              {contributions.weeks.map((week) => (
+                <div key={week.firstDay} className="grid grid-rows-7 gap-1">
+                  {week.contributionDays.map((day) => (
+                    <span
+                      key={day.date}
+                      title={`${day.contributionCount} contributions on ${day.date}`}
+                      className={`size-3 rounded-sm ${levelClassNames[day.contributionLevel]}`}
+                      style={{ gridRow: new Date(`${day.date}T00:00:00Z`).getUTCDay() + 1 }}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
-          <div className="flex min-h-32 items-center justify-center rounded-2xl bg-secondary px-6 text-center">
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">GitHub activity is unavailable right now.</p>
+          <div
+            className="flex min-h-32 items-center justify-center rounded-2xl bg-secondary px-6 text-center"
+            role={isLoading ? "status" : undefined}
+          >
+            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+              {isLoading ? "Loading GitHub activity…" : "GitHub activity is unavailable right now."}
+            </p>
           </div>
         )}
       </div>

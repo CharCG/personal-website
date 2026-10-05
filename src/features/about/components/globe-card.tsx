@@ -35,7 +35,7 @@ export function GlobeCard() {
 
     let phi = 2.85;
     let theta = -0.5;
-    
+
     const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
     const initialSize = Math.max(container.offsetWidth, 1);
 

@@ -87,31 +87,34 @@ export function Navbar() {
       onClick={openSearch}
     >
       <span>Search</span>
-      <kbd aria-hidden="true" className="rounded-md border border-border bg-secondary px-2 font-mono text-xs leading-6">⌘K</kbd>
+      <kbd aria-hidden="true" className="rounded-md border border-border bg-secondary px-2 font-mono text-xs leading-6">
+        ⌘K
+      </kbd>
     </button>
   );
-  const renderLinks = (compact: boolean) => navigationItems.map((item) => (
-    <li key={item.href} className={compact ? "min-w-0" : "min-w-max flex-1"}>
-      <Link
-        href={item.href}
-        aria-current={isActive(item.href) ? "page" : undefined}
-        className={`relative flex min-h-12 items-center rounded-full px-6 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none ${
-          compact ? "break-words" : "justify-center whitespace-nowrap"
-        } ${isActive(item.href) ? "text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"}`}
-        onClick={() => setMenuPath(null)}
-      >
-        {isActive(item.href) && (
-          <m.span
-            aria-hidden="true"
-            layoutId={compact ? "mobile-navigation-active" : "desktop-navigation-active"}
-            className="absolute inset-0 rounded-full bg-primary"
-            transition={{ duration: reducedMotion ? 0 : motionDuration.fast, ease: motionEaseOut }}
-          />
-        )}
-        <span className="relative">{item.label}</span>
-      </Link>
-    </li>
-  ));
+  const renderLinks = (compact: boolean) =>
+    navigationItems.map((item) => (
+      <li key={item.href} className={compact ? "min-w-0" : "min-w-max flex-1"}>
+        <Link
+          href={item.href}
+          aria-current={isActive(item.href) ? "page" : undefined}
+          className={`relative flex min-h-12 items-center rounded-full px-6 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none ${
+            compact ? "break-words" : "justify-center whitespace-nowrap"
+          } ${isActive(item.href) ? "text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"}`}
+          onClick={() => setMenuPath(null)}
+        >
+          {isActive(item.href) && (
+            <m.span
+              aria-hidden="true"
+              layoutId={compact ? "mobile-navigation-active" : "desktop-navigation-active"}
+              className="absolute inset-0 rounded-full bg-primary"
+              transition={{ duration: reducedMotion ? 0 : motionDuration.fast, ease: motionEaseOut }}
+            />
+          )}
+          <span className="relative">{item.label}</span>
+        </Link>
+      </li>
+    ));
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-6 pt-4 lg:px-8 lg:pt-8">
@@ -130,7 +133,9 @@ export function Navbar() {
             <div className="shrink-0 border-l border-border pl-2">{searchControl}</div>
           </div>
         </nav>
-        <div className={`${glassClassName} pointer-events-auto flex items-center justify-between gap-4 ${linksOverflow ? "" : "md:hidden"}`}>
+        <div
+          className={`${glassClassName} pointer-events-auto flex items-center justify-between gap-4 ${linksOverflow ? "" : "md:hidden"}`}
+        >
           <span className="min-w-0 truncate px-4 text-sm font-medium">{currentItem?.label ?? "Navigation"}</span>
           <div className="flex shrink-0 items-center gap-2">
             {searchControl}
@@ -153,7 +158,8 @@ export function Navbar() {
             aria-label="Mobile navigation"
             className={`${glassClassName} pointer-events-auto absolute inset-x-0 top-full mt-2 max-h-[calc(100dvh-8rem)] overflow-y-auto ${linksOverflow ? "" : "md:hidden"}`}
             onBlur={(event) => {
-              if (event.relatedTarget instanceof Node && !containerRef.current?.contains(event.relatedTarget)) setMenuPath(null);
+              if (event.relatedTarget instanceof Node && !containerRef.current?.contains(event.relatedTarget))
+                setMenuPath(null);
             }}
           >
             <ul className="space-y-2">{renderLinks(true)}</ul>

@@ -32,7 +32,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body className={`${instrumentSans.variable} ${bricolageGrotesque.variable} ${jetBrainsMono.variable} ${architectsDaughter.variable}`}>
+      <body
+        className={`${instrumentSans.variable} ${bricolageGrotesque.variable} ${jetBrainsMono.variable} ${architectsDaughter.variable}`}
+      >
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

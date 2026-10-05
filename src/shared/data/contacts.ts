@@ -37,8 +37,4 @@ export const monkeytypeContact: Contact = {
   link: "https://monkeytype.com/profile/charcg",
 };
 
-export const contacts: Contact[] = [
-  githubContact,
-  linkedinContact,
-  emailContact,
-];
+export const contacts: Contact[] = [githubContact, linkedinContact, emailContact];

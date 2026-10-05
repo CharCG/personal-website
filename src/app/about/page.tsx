@@ -27,8 +27,9 @@ export default function About() {
             <Reveal className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-heading-sm font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                I care about the space between <em className="font-accent font-normal not-italic tracking-normal">useful</em>{" "}
-                and <em className="font-accent font-normal not-italic tracking-normal">delightful</em>.
+                I care about the space between{" "}
+                <em className="font-accent font-normal not-italic tracking-normal">useful</em> and{" "}
+                <em className="font-accent font-normal not-italic tracking-normal">delightful</em>.
               </h1>
             </Reveal>
 

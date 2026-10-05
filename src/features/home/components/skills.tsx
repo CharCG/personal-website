@@ -16,7 +16,10 @@ const AUTO_ROTATE_MS = 10000;
 
 function CategoryList({ activeCategoryId, repeated = false, onSelect }: CategoryListProps) {
   return (
-    <div className={`skills-category-list ${repeated ? "skills-category-list-repeat" : ""}`}>
+    <div
+      className={`skills-category-list ${repeated ? "skills-category-list-repeat" : ""}`}
+      aria-hidden={repeated || undefined}
+    >
       {skillCategories.map((category) => {
         const active = category.id === activeCategoryId;
 
@@ -27,7 +30,9 @@ function CategoryList({ activeCategoryId, repeated = false, onSelect }: Category
             aria-pressed={active}
             tabIndex={repeated ? -1 : undefined}
             className={`skills-category-item cursor-pointer text-lg transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground md:text-xl ${
-              active ? "bg-primary font-semibold text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              active
+                ? "bg-primary font-semibold text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
             }`}
             onClick={() => onSelect(category.id)}
           >
@@ -50,8 +55,7 @@ export function SkillsSection() {
   const [isFocusWithin, setIsFocusWithin] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isPageVisible, setIsPageVisible] = useState(true);
-  const activeCategory =
-    skillCategories.find((category) => category.id === activeCategoryId) ?? skillCategories[0];
+  const activeCategory = skillCategories.find((category) => category.id === activeCategoryId) ?? skillCategories[0];
   const isPaused = isPointerOver || isFocusWithin;
   const isAutoRotating = isInView && isPageVisible && !isPaused && !prefersReducedMotion && skillCategories.length > 1;
 
@@ -96,7 +100,11 @@ export function SkillsSection() {
   if (!activeCategory) return null;
 
   return (
-    <section ref={sectionRef} id="skills" className="mx-auto max-w-content px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20">
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="mx-auto max-w-content px-6 pt-12 md:px-6 md:pt-16 lg:px-8 lg:pt-20"
+    >
       <Reveal>
         <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">Skills</p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] md:text-heading-sm lg:text-4xl">
@@ -146,7 +154,10 @@ export function SkillsSection() {
                 {activeCategory.description}
               </p>
             )}
-            <ul className="mt-8 flex flex-wrap justify-center gap-6 md:gap-8" aria-label={`${activeCategory.label} technologies`}>
+            <ul
+              className="mt-8 flex flex-wrap justify-center gap-6 md:gap-8"
+              aria-label={`${activeCategory.label} technologies`}
+            >
               {activeCategory.skills.map((skill) => (
                 <li key={skill.name} className="flex w-20 flex-col items-center gap-2 text-center">
                   <BrandIcon icon={skill.icon} className="h-8 w-8 text-primary" />
@@ -155,12 +166,21 @@ export function SkillsSection() {
               ))}
             </ul>
             <div className="mt-8 flex self-end flex-col items-end gap-2 text-xs text-muted-foreground">
-              <span>{prefersReducedMotion ? "Manual viewing" : isPaused ? "Paused" : "Auto-rotating"}</span>
+              <span>
+                {prefersReducedMotion || skillCategories.length <= 1
+                  ? "Manual viewing"
+                  : isAutoRotating
+                    ? "Auto-rotating"
+                    : "Paused"}
+              </span>
               <span className="h-1 w-24 overflow-hidden rounded-full bg-secondary" aria-hidden="true">
                 <span
                   key={`${activeCategoryId}-${isAutoRotating}`}
                   className="skills-auto-rotate-progress block h-full w-full rounded-full bg-primary"
-                  style={{ animationDuration: `${AUTO_ROTATE_MS}ms`, animationPlayState: isAutoRotating ? "running" : "paused" }}
+                  style={{
+                    animationDuration: `${AUTO_ROTATE_MS}ms`,
+                    animationPlayState: isAutoRotating ? "running" : "paused",
+                  }}
                 />
               </span>
             </div>

@@ -65,7 +65,10 @@ export const otherSkills: Skill[] = [{ name: "Git", icon: siGit }];
 
 export const skills: Skill[] = Array.from(
   new Map(
-    [...frontendSkills, ...mobileSkills, ...backendSkills, ...uiuxSkills, ...otherSkills].map((skill) => [skill.name, skill]),
+    [...frontendSkills, ...mobileSkills, ...backendSkills, ...uiuxSkills, ...otherSkills].map((skill) => [
+      skill.name,
+      skill,
+    ]),
   ).values(),
 );
 
@@ -99,7 +102,7 @@ export const skillCategories: SkillCategory[] = [
     label: "Other",
     description: "Additional tools for collaboration and convenience.",
     skills: otherSkills,
-  }
+  },
 ];
 
 export function getSkillByName(name: string) {

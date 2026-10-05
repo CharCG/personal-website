@@ -20,7 +20,7 @@ export function TechnologyList({ technologies, className = "" }: TechnologyListP
                 skill ? (
                   <BrandIcon icon={skill.icon} className="h-4 w-4 shrink-0 text-primary" />
                 ) : (
-                  <div className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-primary" />
                 )
               }
             >

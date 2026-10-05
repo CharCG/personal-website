@@ -23,7 +23,6 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-info: var(--info);
-
 }
 
 :root {
@@ -298,6 +297,10 @@ a {
   }
 }
 
+body:has(.project-lightbox[open]) {
+  overflow: hidden;
+}
+
 .project-lightbox::backdrop {
   background: color-mix(in srgb, var(--foreground) 80%, transparent);
   animation: project-lightbox-backdrop-in var(--motion-fast) ease-out;
@@ -409,7 +412,6 @@ a {
     min-width: min(100vw, 1200px);
     justify-content: space-around;
   }
-
 }
 
 @media (min-width: 1024px) {

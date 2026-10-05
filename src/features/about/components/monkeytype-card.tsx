@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { siMonkeytype } from "simple-icons";
+import { useWidgetData } from "@/features/about/hooks/use-widget-data";
 import type { MonkeytypeSummary } from "@/features/about/types/monkeytype";
 import { BrandIcon } from "@/shared/components/brand-icon";
 import { ButtonLink } from "@/shared/components/ui/button-link";
@@ -10,24 +9,11 @@ import { monkeytypeContact } from "@/shared/data/contacts";
 import { CountUp } from "@/shared/motion/count-up";
 
 function formatLanguage(language: string) {
-  return language
-    .replaceAll("_", " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  return language.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
 export function MonkeytypeCard() {
-  const [summary, setSummary] = useState<MonkeytypeSummary | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    axios
-      .get<MonkeytypeSummary>("/api/monkeytype", { signal: controller.signal })
-      .then((response) => setSummary(response.data))
-      .catch(() => undefined);
-
-    return () => controller.abort();
-  }, []);
+  const { data: summary, isLoading } = useWidgetData<MonkeytypeSummary>("/api/monkeytype");
 
   const personalBest = summary?.personalBest;
 
@@ -72,14 +58,19 @@ export function MonkeytypeCard() {
             <div>
               <dt className="text-xs text-muted-foreground">Tests</dt>
               <dd className="mt-2 font-mono text-sm font-semibold">
-                {summary.completedTests === null ? "—" : <CountUp to={summary.completedTests} />}
+                {summary?.completedTests == null ? "—" : <CountUp to={summary.completedTests} />}
               </dd>
             </div>
           </dl>
         </div>
       ) : (
-        <div className="mt-6 flex flex-1 items-center border-t border-border pt-6">
-          <p className="text-sm leading-relaxed text-muted-foreground">Monkeytype typing stats are unavailable right now.</p>
+        <div
+          className="mt-6 flex flex-1 items-center border-t border-border pt-6"
+          role={isLoading ? "status" : undefined}
+        >
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {isLoading ? "Loading typing stats…" : "Monkeytype typing stats are unavailable right now."}
+          </p>
         </div>
       )}
     </article>

@@ -55,8 +55,7 @@ const getMonkeytypeSummary = unstable_cache(
       throw new Error("Monkeytype API requests failed");
     }
 
-    const personalBestData =
-      personalBestsResult.status === "fulfilled" ? personalBestsResult.value.data.data : null;
+    const personalBestData = personalBestsResult.status === "fulfilled" ? personalBestsResult.value.data.data : null;
     const personalBests = Array.isArray(personalBestData)
       ? personalBestData
       : personalBestData
@@ -64,10 +63,7 @@ const getMonkeytypeSummary = unstable_cache(
         : [];
     const personalBest = personalBests
       .filter(
-        (result) =>
-          isFiniteNumber(result.wpm) &&
-          isFiniteNumber(result.acc) &&
-          isFiniteNumber(result.consistency),
+        (result) => isFiniteNumber(result.wpm) && isFiniteNumber(result.acc) && isFiniteNumber(result.consistency),
       )
       .sort((first, second) => (second.wpm ?? 0) - (first.wpm ?? 0))[0];
     const stats = statsResult.status === "fulfilled" ? statsResult.value.data.data : null;

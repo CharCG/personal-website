@@ -66,12 +66,18 @@ const getRecentlyPlayed = unstable_cache(
     const tracks = recentResponse.data.items.flatMap(({ track }) => {
       if (!track?.name || !track.external_urls?.spotify) return [];
 
-      return [{
-        title: track.name,
-        artists: track.artists?.map((artist) => artist.name).filter(Boolean).join(", ") || "Spotify",
-        albumImage: track.album?.images?.[0]?.url ?? null,
-        href: track.external_urls.spotify,
-      }];
+      return [
+        {
+          title: track.name,
+          artists:
+            track.artists
+              ?.map((artist) => artist.name)
+              .filter(Boolean)
+              .join(", ") || "Spotify",
+          albumImage: track.album?.images?.[0]?.url ?? null,
+          href: track.external_urls.spotify,
+        },
+      ];
     });
 
     return { tracks };

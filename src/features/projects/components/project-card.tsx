@@ -32,7 +32,11 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
             src={previewImage}
             alt={`${project.title} product preview`}
             fill
-            sizes={featured ? "(max-width: 767px) calc(100vw - 80px), 60vw" : "(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"}
+            sizes={
+              featured
+                ? "(max-width: 767px) calc(100vw - 80px), 60vw"
+                : "(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"
+            }
             className="object-cover object-top transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
           />
         ) : (
@@ -46,7 +50,9 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
       <div className={`flex min-w-0 flex-1 flex-col pt-4 ${featured ? "md:pt-0" : ""}`}>
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <Heading className={`font-semibold leading-tight ${featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}>
+            <Heading
+              className={`font-semibold leading-tight ${featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}
+            >
               {project.title}
             </Heading>
             <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">{project.role}</p>

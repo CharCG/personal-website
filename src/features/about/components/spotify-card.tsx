@@ -2,27 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { siSpotify } from "simple-icons";
+import { useWidgetData } from "@/features/about/hooks/use-widget-data";
 import type { SpotifyRecentlyPlayed } from "@/features/about/types/spotify";
 import { BrandIcon } from "@/shared/components/brand-icon";
 
 export function SpotifyCard() {
-  const [recentlyPlayed, setRecentlyPlayed] = useState<SpotifyRecentlyPlayed | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    axios
-      .get<SpotifyRecentlyPlayed>("/api/spotify", { signal: controller.signal })
-      .then((response) => setRecentlyPlayed(response.data))
-      .catch((error: unknown) => {
-        if (!axios.isCancel(error)) setRecentlyPlayed({ tracks: [] });
-      });
-
-    return () => controller.abort();
-  }, []);
+  const { data: recentlyPlayed, isLoading } = useWidgetData<SpotifyRecentlyPlayed>("/api/spotify");
 
   const tracks = recentlyPlayed?.tracks ?? [];
 
@@ -37,7 +23,7 @@ export function SpotifyCard() {
       </div>
 
       <div className="mt-auto pt-6">
-        {recentlyPlayed === null ? (
+        {isLoading ? (
           <div className="flex min-h-24 items-center" role="status">
             <p className="text-sm leading-relaxed text-muted-foreground">Loading recent songs…</p>
           </div>
@@ -78,7 +64,9 @@ export function SpotifyCard() {
           </ul>
         ) : (
           <div className="flex min-h-24 items-center">
-            <p className="text-sm leading-relaxed text-muted-foreground">Spotify recent listening is unavailable right now.</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Spotify recent listening is unavailable right now.
+            </p>
           </div>
         )}
       </div>
