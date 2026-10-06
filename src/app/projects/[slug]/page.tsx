@@ -1,27 +1,23 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { FaArrowLeft, FaArrowRight, FaCode, FaGlobe, FaImage } from "react-icons/fa6";
-import { ProjectGallery } from "@/features/projects/components/project-gallery";
-import { TechnologyList } from "@/features/projects/components/technology-list";
-import { getProjectBySlug, projects, type ProjectStatus } from "@/shared/data/projects";
-import { Footer } from "@/shared/components/layout/footer";
-import { Navbar } from "@/shared/components/layout/navbar";
-import { Reveal } from "@/shared/motion/reveal";
-import { ButtonLink } from "@/shared/components/ui/button-link";
-import { Chip } from "@/shared/components/ui/chip";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { FaArrowLeft, FaCode, FaGlobe, FaImage } from 'react-icons/fa6';
+
+import { ProjectContent } from '@/features/projects/components/project-content';
+import { ProjectGallery } from '@/features/projects/components/project-gallery';
+import { ProjectNavigation } from '@/features/projects/components/project-navigation';
+import { ProjectOverview } from '@/features/projects/components/project-overview';
+import { Footer } from '@/shared/components/layout/footer';
+import { Navbar } from '@/shared/components/layout/navbar';
+import { ButtonLink } from '@/shared/components/ui/button-link';
+import { getProjectBySlug, projects } from '@/shared/data/projects';
+import { Reveal } from '@/shared/motion/reveal';
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export const dynamicParams = false;
-
-const statusIndicatorClasses: Record<ProjectStatus, string> = {
-  Completed: "bg-success",
-  "In Progress": "bg-warning",
-  Archived: "bg-info",
-};
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -48,9 +44,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const projectIndex = projects.indexOf(project);
   const previousProject = projects[projectIndex - 1] ?? null;
   const nextProject = projects[projectIndex + 1] ?? null;
-  const hasAbout = project.about.trim().length > 0;
-  const keyFeatures = project.keyFeatures.filter((feature) => feature.trim().length > 0);
-  const hasProjectContent = hasAbout || keyFeatures.length > 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -124,119 +117,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </section>
             </Reveal>
 
-            <aside className="h-fit rounded-2xl border border-border bg-surface p-6">
-              <h2 className="text-lg font-semibold">Overview</h2>
-              <dl className="mt-6 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <dt className="text-sm text-muted-foreground">Type</dt>
-                  <dd className="text-right text-sm font-medium">{project.type}</dd>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <dt className="text-sm text-muted-foreground">Timeline</dt>
-                  <dd className="text-right font-mono text-sm font-medium">{project.timeline}</dd>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <dt className="text-sm text-muted-foreground">Status</dt>
-                  <dd>
-                    <Chip
-                      className="font-medium"
-                      icon={
-                        <span
-                          aria-hidden="true"
-                          className={`h-2 w-2 shrink-0 rounded-full ${statusIndicatorClasses[project.status]}`}
-                        />
-                      }
-                    >
-                      {project.status}
-                    </Chip>
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="mt-6 border-t border-border pt-6">
-                <h2 className="text-lg font-semibold">Technology Stack</h2>
-                <TechnologyList technologies={project.technologies} className="mt-4" />
-              </div>
-            </aside>
+            <ProjectOverview project={project} />
           </div>
 
-          {hasProjectContent && (
-            <Reveal className="mt-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-                <div>
-                  {hasAbout && (
-                    <section aria-labelledby="about-project">
-                      <h2 id="about-project" className="text-2xl font-semibold tracking-[-0.03em]">
-                        About
-                      </h2>
-                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.about}</p>
-                    </section>
-                  )}
+          <ProjectContent about={project.about} keyFeatures={project.keyFeatures} />
 
-                  {keyFeatures.length > 0 && (
-                    <section className={hasAbout ? "mt-8" : ""} aria-labelledby="key-features">
-                      <h2 id="key-features" className="text-2xl font-semibold tracking-[-0.03em]">
-                        Key Features
-                      </h2>
-                      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-                        {keyFeatures.map((feature) => (
-                          <li
-                            key={feature}
-                            className="flex items-start gap-4 rounded-xl bg-secondary p-4 text-base leading-relaxed"
-                          >
-                            <span aria-hidden="true" className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  )}
-                </div>
-              </div>
-            </Reveal>
-          )}
-
-          <Reveal className="mt-12 md:mt-16 lg:mt-20">
-            <nav aria-label="Project navigation" className="grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
-              {previousProject && (
-                <Link
-                  href={`/projects/${previousProject.slug}`}
-                  className="group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-                >
-                  <FaArrowLeft
-                    aria-hidden="true"
-                    className="shrink-0 text-lg transition-transform duration-200 ease-out motion-safe:group-hover:-translate-x-1"
-                  />
-                  <span className="flex min-w-0 flex-1 flex-col items-start">
-                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                      Previous Project
-                    </span>
-                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">{previousProject.title}</span>
-                  </span>
-                </Link>
-              )}
-
-              {nextProject && (
-                <Link
-                  href={`/projects/${nextProject.slug}`}
-                  className={`group flex min-h-28 items-center gap-4 rounded-2xl border border-border bg-surface p-6 text-right transition-colors duration-200 ease-out hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
-                    previousProject ? "" : "sm:col-start-2"
-                  }`}
-                >
-                  <span className="flex min-w-0 flex-1 flex-col items-end">
-                    <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                      Next Project
-                    </span>
-                    <span className="mt-2 text-xl font-semibold tracking-[-0.03em]">{nextProject.title}</span>
-                  </span>
-                  <FaArrowRight
-                    aria-hidden="true"
-                    className="shrink-0 text-lg transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
-                  />
-                </Link>
-              )}
-            </nav>
-          </Reveal>
+          <ProjectNavigation previousProject={previousProject} nextProject={nextProject} />
         </article>
       </main>
 

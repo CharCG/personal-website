@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, m, useReducedMotion } from "motion/react";
-import { FaChevronLeft, FaChevronRight, FaXmark } from "react-icons/fa6";
-import { motionDuration, motionEaseOut, motionEaseOutCss } from "@/shared/motion/config";
+import { AnimatePresence, m } from 'motion/react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6';
+
+import { motionDuration, motionEaseOut, motionEaseOutCss } from '@/shared/motion/config';
+import { useReducedMotion } from '@/shared/motion/use-reduced-motion';
 
 type ProjectGalleryProps = {
   projectTitle: string;
@@ -40,8 +42,8 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
     if (!prefersReducedMotion) {
       openAnimationRef.current = dialog.animate(
         [
-          { opacity: 0, transform: "scale(0.98)" },
-          { opacity: 1, transform: "scale(1)" },
+          { opacity: 0, transform: 'scale(0.98)' },
+          { opacity: 1, transform: 'scale(1)' },
         ],
         { duration: motionDuration.fast * 1000, easing: motionEaseOutCss },
       );
@@ -50,7 +52,7 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
 
   const closeImage = () => {
     const dialog = dialogRef.current;
-    if (!dialog?.open || closeAnimationRef.current?.playState === "running") return;
+    if (!dialog?.open || closeAnimationRef.current?.playState === 'running') return;
 
     openAnimationRef.current?.cancel();
     if (prefersReducedMotion) {
@@ -61,8 +63,8 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
     closeAnimationRef.current?.cancel();
     closeAnimationRef.current = dialog.animate(
       [
-        { opacity: 1, transform: "scale(1)" },
-        { opacity: 0, transform: "scale(0.98)" },
+        { opacity: 1, transform: 'scale(1)' },
+        { opacity: 0, transform: 'scale(0.98)' },
       ],
       { duration: motionDuration.fast * 1000, easing: motionEaseOutCss },
     );
@@ -148,13 +150,13 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
                 type="button"
                 onClick={() => setSelectedIndex(index)}
                 aria-label={`View project image ${index + 1}`}
-                aria-current={selectedIndex === index ? "true" : undefined}
+                aria-current={selectedIndex === index ? 'true' : undefined}
                 className="flex h-6 w-6 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
                 <span
                   aria-hidden="true"
                   className={`h-2 w-2 rounded-full transition-colors duration-200 ease-out ${
-                    selectedIndex === index ? "bg-primary" : "bg-border"
+                    selectedIndex === index ? 'bg-primary' : 'bg-border'
                   }`}
                 />
               </button>
@@ -174,9 +176,9 @@ export function ProjectGallery({ projectTitle, images }: ProjectGalleryProps) {
           closeImage();
         }}
         onKeyDown={(event) => {
-          if (images.length > 1 && (event.key === "ArrowLeft" || event.key === "ArrowRight")) {
+          if (images.length > 1 && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
             event.preventDefault();
-            if (event.key === "ArrowLeft") showPreviousImage();
+            if (event.key === 'ArrowLeft') showPreviousImage();
             else showNextImage();
           }
         }}

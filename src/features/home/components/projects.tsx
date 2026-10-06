@@ -1,9 +1,10 @@
-import { FaArrowRight } from "react-icons/fa6";
-import { ProjectCard } from "@/features/projects/components/project-card";
-import { homeProjects } from "@/shared/data/projects";
-import { motionStagger } from "@/shared/motion/config";
-import { Reveal } from "@/shared/motion/reveal";
-import { ButtonLink } from "@/shared/components/ui/button-link";
+import { FaArrowRight } from 'react-icons/fa6';
+
+import { ProjectCard } from '@/features/projects/components/project-card';
+import { ButtonLink } from '@/shared/components/ui/button-link';
+import { homeProjects } from '@/shared/data/projects';
+import { motionStagger } from '@/shared/motion/config';
+import { Reveal } from '@/shared/motion/reveal';
 
 export function ProjectsSection() {
   const featuredProject = homeProjects[0];
@@ -36,7 +37,7 @@ export function ProjectsSection() {
         </Reveal>
       )}
 
-      <div className={`${featuredProject ? "mt-4" : "mt-10"} grid gap-4 md:grid-cols-2`}>
+      <div className={`${featuredProject ? 'mt-4' : 'mt-10'} grid gap-4 md:grid-cols-2`}>
         {otherProjects.map((project, index) => (
           <Reveal key={project.slug} className="h-full" delay={index * motionStagger}>
             <ProjectCard project={project} headingLevel="h3" />

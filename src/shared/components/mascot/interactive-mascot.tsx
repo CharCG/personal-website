@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useEffect, useRef } from "react";
+import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 type InteractiveMascotProps = {
   className?: string;
@@ -9,15 +9,15 @@ type InteractiveMascotProps = {
   sizes?: string;
 };
 
-export function InteractiveMascot({ className = "", priority = false, sizes = "256px" }: InteractiveMascotProps) {
+export function InteractiveMascot({ className = '', priority = false, sizes = '256px' }: InteractiveMascotProps) {
   const mascotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mascot = mascotRef.current;
     if (!mascot) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const eyeGraphics = mascot.querySelectorAll<HTMLElement>(".interactive-mascot-eye-graphic");
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const eyeGraphics = mascot.querySelectorAll<HTMLElement>('.interactive-mascot-eye-graphic');
     let animationFrame = 0;
     let previousFrameTime = 0;
     let nextBlinkTimer = 0;
@@ -47,11 +47,11 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
     };
 
     const setMascotMotion = () => {
-      mascot.style.setProperty("--mascot-eye-x", `${motion.eyeX.toFixed(2)}px`);
-      mascot.style.setProperty("--mascot-eye-y", `${motion.eyeY.toFixed(2)}px`);
-      mascot.style.setProperty("--mascot-body-x", `${motion.bodyX.toFixed(2)}px`);
-      mascot.style.setProperty("--mascot-body-y", `${motion.bodyY.toFixed(2)}px`);
-      mascot.style.setProperty("--mascot-body-rotation", `${motion.bodyRotation.toFixed(2)}deg`);
+      mascot.style.setProperty('--mascot-eye-x', `${motion.eyeX.toFixed(2)}px`);
+      mascot.style.setProperty('--mascot-eye-y', `${motion.eyeY.toFixed(2)}px`);
+      mascot.style.setProperty('--mascot-body-x', `${motion.bodyX.toFixed(2)}px`);
+      mascot.style.setProperty('--mascot-body-y', `${motion.bodyY.toFixed(2)}px`);
+      mascot.style.setProperty('--mascot-body-rotation', `${motion.bodyRotation.toFixed(2)}deg`);
     };
 
     const stepSpring = (
@@ -137,7 +137,7 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
 
     const followPointer = (event: PointerEvent) => {
       recordActivity();
-      if (event.pointerType !== "mouse" || reducedMotion.matches) return;
+      if (event.pointerType !== 'mouse' || reducedMotion.matches) return;
 
       const bounds = mascot.getBoundingClientRect();
       const deltaX = event.clientX - (bounds.left + bounds.width / 2);
@@ -162,8 +162,8 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
     const blink = () => {
       blinkAnimations = Array.from(eyeGraphics, (eye) =>
         eye.animate(
-          [{ transform: "scaleY(1)" }, { transform: "scaleY(0.08)", offset: 0.45 }, { transform: "scaleY(1)" }],
-          { duration: 200, easing: "ease-in-out" },
+          [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.08)', offset: 0.45 }, { transform: 'scaleY(1)' }],
+          { duration: 200, easing: 'ease-in-out' },
         ),
       );
     };
@@ -198,7 +198,7 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
       if (reducedMotion.matches || isSleeping) return;
 
       isSleeping = true;
-      mascot.dataset.sleeping = "true";
+      mascot.dataset.sleeping = 'true';
       stopBlinking();
       resetMascot();
     };
@@ -225,7 +225,7 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
 
       if (isSleeping) {
         isSleeping = false;
-        mascot?.removeAttribute("data-sleeping");
+        mascot?.removeAttribute('data-sleeping');
         scheduleNextBlink();
       }
 
@@ -270,25 +270,25 @@ export function InteractiveMascot({ className = "", priority = false, sizes = "2
 
     scheduleNextBlink();
     scheduleIdleCheck();
-    window.addEventListener("pointermove", followPointer, { passive: true });
-    window.addEventListener("pointerdown", recordActivity, { passive: true });
-    window.addEventListener("keydown", recordActivity);
-    window.addEventListener("scroll", recordActivity, { passive: true });
-    window.addEventListener("pointerout", handlePointerOut, { passive: true });
-    window.addEventListener("blur", resetMascot);
-    reducedMotion.addEventListener("change", handleMotionPreference);
+    window.addEventListener('pointermove', followPointer, { passive: true });
+    window.addEventListener('pointerdown', recordActivity, { passive: true });
+    window.addEventListener('keydown', recordActivity);
+    window.addEventListener('scroll', recordActivity, { passive: true });
+    window.addEventListener('pointerout', handlePointerOut, { passive: true });
+    window.addEventListener('blur', resetMascot);
+    reducedMotion.addEventListener('change', handleMotionPreference);
 
     return () => {
       cancelAnimationFrame(animationFrame);
       stopBlinking();
       window.clearTimeout(idleTimer);
-      window.removeEventListener("pointermove", followPointer);
-      window.removeEventListener("pointerdown", recordActivity);
-      window.removeEventListener("keydown", recordActivity);
-      window.removeEventListener("scroll", recordActivity);
-      window.removeEventListener("pointerout", handlePointerOut);
-      window.removeEventListener("blur", resetMascot);
-      reducedMotion.removeEventListener("change", handleMotionPreference);
+      window.removeEventListener('pointermove', followPointer);
+      window.removeEventListener('pointerdown', recordActivity);
+      window.removeEventListener('keydown', recordActivity);
+      window.removeEventListener('scroll', recordActivity);
+      window.removeEventListener('pointerout', handlePointerOut);
+      window.removeEventListener('blur', resetMascot);
+      reducedMotion.removeEventListener('change', handleMotionPreference);
     };
   }, []);
 

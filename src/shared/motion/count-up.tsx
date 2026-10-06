@@ -1,16 +1,17 @@
-"use client";
+'use client';
 
-// Adapted from React Bits CountUp to use the portfolio's motion and typography.
-import { useEffect, useRef } from "react";
-import { useInView, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { motionDuration } from "@/shared/motion/config";
+import { useInView, useMotionValue, useSpring } from 'motion/react';
+import { useEffect, useRef } from 'react';
+
+import { motionDuration } from '@/shared/motion/config';
+import { useReducedMotion } from '@/shared/motion/use-reduced-motion';
 
 type CountUpProps = {
   to: number;
   className?: string;
 };
 
-const numberFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const numberFormatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 
 export function CountUp({ to, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -32,7 +33,7 @@ export function CountUp({ to, className }: CountUpProps) {
     }
 
     element.textContent = numberFormatter.format(springValue.get());
-    const unsubscribe = springValue.on("change", (value) => {
+    const unsubscribe = springValue.on('change', (value) => {
       element.textContent = numberFormatter.format(value);
     });
     motionValue.set(to);

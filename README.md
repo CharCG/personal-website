@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Charles's portfolio
 
-## Getting Started
+Next.js App Router portfolio with TypeScript, Tailwind CSS, React Icons, Simple Icons, and Motion. See `DESIGN.md` for visual rules.
 
-First, run the development server:
+## Development
 
-```bash
+```powershell
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Store server-only credentials in `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `GITHUB_TOKEN`
+- `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
+- `MONKEYTYPE_APE_KEY`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Missing credentials show unavailable states in the About widgets. Successful responses are cached for one hour. Cache names and response contracts are defined in the integration modules.
 
-## Learn More
+## Organization
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app`: routes, metadata, API handlers, and page composition.
+- `src/features/home`: home-specific sections.
+- `src/features/projects`: project cards, gallery, and detail sections.
+- `src/features/about`: widgets, hooks, response types, and server-only integration modules.
+- `src/shared`: reusable UI, navigation, motion, and data used across features.
+- `public`: images and the resume.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Keep feature-specific code with its feature. Move code to `shared` only when multiple features need it. Use direct imports rather than barrel files, and extract components around meaningful responsibilities rather than individual tags.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Project order, home visibility, skills, and contacts are maintained in `src/shared/data`. One-off copy stays near its page or component.
 
-## Deploy on Vercel
+## Code conventions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Use the checked-in Prettier configuration for formatting. ESLint enforces import sorting and type-only imports. Components use PascalCase, files use kebab-case, and props types sit near the component that owns them. Prefer Server Components; add a client boundary only for browser state or interaction. Do not put credentials in client code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```powershell
+npm run lint:fix
+npm run format
+npm run lint
+npm run typecheck
+npm run format:check
+npm run build
+```
+
+After a successful build, `npm start` runs the production server. On Vercel, configure environment variables before deploying, or redeploy after changing them.

@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Command } from "cmdk";
-import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from "react-icons/fa6";
-import { projects } from "@/shared/data/projects";
-import { BrandIcon } from "@/shared/components/brand-icon";
-import { navigationItems } from "@/shared/data/navigation";
-import { contacts } from "@/shared/data/contacts";
+import { Command } from 'cmdk';
+import { useRouter } from 'next/navigation';
+import { FaArrowRight, FaFile, FaFolderOpen, FaMagnifyingGlass } from 'react-icons/fa6';
+
+import { BrandIcon } from '@/shared/components/brand-icon';
+import { contacts } from '@/shared/data/contacts';
+import { navigationItems } from '@/shared/data/navigation';
+import { projects } from '@/shared/data/projects';
 
 type CommandMenuProps = {
   open: boolean;
@@ -14,10 +15,10 @@ type CommandMenuProps = {
 };
 
 const commandItemClassName =
-  "flex min-h-12 cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm text-foreground outline-none transition-colors duration-200 ease-out data-[selected=true]:bg-secondary data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50";
+  'flex min-h-12 cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm text-foreground outline-none transition-colors duration-200 ease-out data-[selected=true]:bg-secondary data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50';
 
 const commandGroupClassName =
-  "py-2 [&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.3em] [&_[cmdk-group-heading]]:text-muted-foreground";
+  'py-2 [&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.3em] [&_[cmdk-group-heading]]:text-muted-foreground';
 
 export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
   const router = useRouter();
@@ -29,18 +30,18 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
 
   const openResume = () => {
     onOpenChange(false);
-    window.open("/resume.pdf", "_blank", "noopener,noreferrer");
+    window.open('/resume.pdf', '_blank', 'noopener,noreferrer');
   };
 
   const openSocial = (href: string) => {
     onOpenChange(false);
 
-    if (href.startsWith("mailto:")) {
+    if (href.startsWith('mailto:')) {
       window.location.assign(href);
       return;
     }
 
-    window.open(href, "_blank", "noopener,noreferrer");
+    window.open(href, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -110,7 +111,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
             <Command.Item
               key={contact.platform}
               value={`contact:${contact.platform}`}
-              keywords={[contact.platform, contact.name, contact.link, "social", "contact"]}
+              keywords={[contact.platform, contact.name, contact.link, 'social', 'contact']}
               onSelect={() => openSocial(contact.link)}
               className={commandItemClassName}
             >
@@ -127,7 +128,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         <Command.Group heading="Actions" className={commandGroupClassName}>
           <Command.Item
             value="action:resume"
-            keywords={["resume", "cv", "download"]}
+            keywords={['resume', 'cv', 'download']}
             onSelect={openResume}
             className={commandItemClassName}
           >

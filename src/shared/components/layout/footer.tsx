@@ -1,9 +1,10 @@
-import { FaArrowRight } from "react-icons/fa6";
-import { motionStagger } from "@/shared/motion/config";
-import { Reveal } from "@/shared/motion/reveal";
-import { SocialLinks } from "@/shared/components/social-links";
-import { ButtonLink } from "@/shared/components/ui/button-link";
-import { emailContact } from "@/shared/data/contacts";
+import { FaArrowRight } from 'react-icons/fa6';
+
+import { SocialLinks } from '@/shared/components/social-links';
+import { ButtonLink } from '@/shared/components/ui/button-link';
+import { emailContact } from '@/shared/data/contacts';
+import { motionStagger } from '@/shared/motion/config';
+import { Reveal } from '@/shared/motion/reveal';
 
 export function Footer() {
   return (
@@ -13,7 +14,7 @@ export function Footer() {
           <div>
             <h2 className="text-xl font-semibold">Charles</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
-              Software Engineer <span aria-hidden="true">—</span>{" "}
+              Software Engineer <span aria-hidden="true">—</span>{' '}
               <em className="font-accent font-normal not-italic">An Engineer Who Designs</em>
             </p>
             <SocialLinks

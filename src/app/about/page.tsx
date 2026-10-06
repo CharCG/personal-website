@@ -1,19 +1,20 @@
-import type { Metadata } from "next";
-import { FaFile } from "react-icons/fa6";
-import { GitHubContributionsCard } from "@/features/about/components/github-contributions-card";
-import { GlobeCard } from "@/features/about/components/globe-card";
-import { MonkeytypeCard } from "@/features/about/components/monkeytype-card";
-import { SpotifyCard } from "@/features/about/components/spotify-card";
-import { Footer } from "@/shared/components/layout/footer";
-import { Navbar } from "@/shared/components/layout/navbar";
-import { motionStagger } from "@/shared/motion/config";
-import { Reveal } from "@/shared/motion/reveal";
-import { SocialLinks } from "@/shared/components/social-links";
-import { ButtonLink } from "@/shared/components/ui/button-link";
+import type { Metadata } from 'next';
+import { FaFile } from 'react-icons/fa6';
+
+import { GitHubContributionsCard } from '@/features/about/components/github-contributions-card';
+import { GlobeCard } from '@/features/about/components/globe-card';
+import { MonkeytypeCard } from '@/features/about/components/monkeytype-card';
+import { SpotifyCard } from '@/features/about/components/spotify-card';
+import { Footer } from '@/shared/components/layout/footer';
+import { Navbar } from '@/shared/components/layout/navbar';
+import { SocialLinks } from '@/shared/components/social-links';
+import { ButtonLink } from '@/shared/components/ui/button-link';
+import { motionStagger } from '@/shared/motion/config';
+import { Reveal } from '@/shared/motion/reveal';
 
 export const metadata: Metadata = {
-  title: "About — Charles",
-  description: "Learn more about Charles.",
+  title: 'About — Charles',
+  description: 'Learn more about Charles.',
 };
 
 export default function About() {
@@ -27,8 +28,8 @@ export default function About() {
             <Reveal className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">About me</p>
               <h1 className="mt-4 max-w-xl text-heading-sm font-bold leading-tight tracking-[-0.04em] md:text-4xl lg:text-5xl">
-                I care about the space between{" "}
-                <em className="font-accent font-normal not-italic tracking-normal">useful</em> and{" "}
+                I care about the space between{' '}
+                <em className="font-accent font-normal not-italic tracking-normal">useful</em> and{' '}
                 <em className="font-accent font-normal not-italic tracking-normal">delightful</em>.
               </h1>
             </Reveal>

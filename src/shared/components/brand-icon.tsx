@@ -1,5 +1,5 @@
-import type { IconType } from "react-icons";
-import type { SimpleIcon } from "simple-icons";
+import type { IconType } from 'react-icons';
+import type { SimpleIcon } from 'simple-icons';
 
 type BrandIconProps = {
   icon: IconType | SimpleIcon;
@@ -7,7 +7,7 @@ type BrandIconProps = {
 };
 
 export function BrandIcon({ icon, className }: BrandIconProps) {
-  if (typeof icon === "function") {
+  if (typeof icon === 'function') {
     const ReactIcon = icon;
     return <ReactIcon aria-hidden="true" className={className} />;
   }

@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import type { ReactNode } from "react";
-import { m } from "motion/react";
-import { motionDuration, motionEaseOut } from "@/shared/motion/config";
+import { m } from 'motion/react';
+import type { ReactNode } from 'react';
+
+import { motionDuration, motionEaseOut } from '@/shared/motion/config';
 
 type RevealProps = {
   children: ReactNode;

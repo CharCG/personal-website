@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { siSpotify } from "simple-icons";
-import { useWidgetData } from "@/features/about/hooks/use-widget-data";
-import type { SpotifyRecentlyPlayed } from "@/features/about/types/spotify";
-import { BrandIcon } from "@/shared/components/brand-icon";
+import Image from 'next/image';
+import Link from 'next/link';
+import { siSpotify } from 'simple-icons';
+
+import { useWidgetData } from '@/features/about/hooks/use-widget-data';
+import type { SpotifyRecentlyPlayed } from '@/features/about/types/spotify';
+import { BrandIcon } from '@/shared/components/brand-icon';
 
 export function SpotifyCard() {
-  const { data: recentlyPlayed, isLoading } = useWidgetData<SpotifyRecentlyPlayed>("/api/spotify");
+  const { data: recentlyPlayed, isLoading } = useWidgetData<SpotifyRecentlyPlayed>('/api/spotify');
 
   const tracks = recentlyPlayed?.tracks ?? [];
 

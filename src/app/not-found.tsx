@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import { FaArrowLeft } from "react-icons/fa6";
-import { Footer } from "@/shared/components/layout/footer";
-import { ButtonLink } from "@/shared/components/ui/button-link";
+import type { Metadata } from 'next';
+import { FaArrowLeft } from 'react-icons/fa6';
+
+import { Footer } from '@/shared/components/layout/footer';
+import { ButtonLink } from '@/shared/components/ui/button-link';
 
 export const metadata: Metadata = {
-  title: "Page Not Found — Charles",
+  title: 'Page Not Found — Charles',
   description: "The page you're looking for doesn't exist.",
 };
 

@@ -1,8 +1,8 @@
-import { Hero } from "@/features/home/components/hero";
-import { ProjectsSection } from "@/features/home/components/projects";
-import { SkillsSection } from "@/features/home/components/skills";
-import { Footer } from "@/shared/components/layout/footer";
-import { Navbar } from "@/shared/components/layout/navbar";
+import { Hero } from '@/features/home/components/hero';
+import { ProjectsSection } from '@/features/home/components/projects';
+import { SkillsSection } from '@/features/home/components/skills';
+import { Footer } from '@/shared/components/layout/footer';
+import { Navbar } from '@/shared/components/layout/navbar';
 
 export default function Home() {
   return (

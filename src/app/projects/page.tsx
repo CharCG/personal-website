@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import { ProjectCard } from "@/features/projects/components/project-card";
-import { projects } from "@/shared/data/projects";
-import { Footer } from "@/shared/components/layout/footer";
-import { Navbar } from "@/shared/components/layout/navbar";
-import { motionStagger } from "@/shared/motion/config";
-import { Reveal } from "@/shared/motion/reveal";
+import type { Metadata } from 'next';
+
+import { ProjectCard } from '@/features/projects/components/project-card';
+import { Footer } from '@/shared/components/layout/footer';
+import { Navbar } from '@/shared/components/layout/navbar';
+import { projects } from '@/shared/data/projects';
+import { motionStagger } from '@/shared/motion/config';
+import { Reveal } from '@/shared/motion/reveal';
 
 export const metadata: Metadata = {
-  title: "Projects — Charles",
-  description: "Explore the products Charles has solved, designed, and built.",
+  title: 'Projects — Charles',
+  description: 'Explore the products Charles has solved, designed, and built.',
 };
 
 export default function ProjectsPage() {
@@ -35,10 +36,10 @@ export default function ProjectsPage() {
             {projects.map((project, index) => (
               <Reveal
                 key={project.slug}
-                className={`h-full ${index === 0 ? "lg:col-span-2" : ""}`}
+                className={`h-full ${index === 0 ? 'lg:col-span-2' : ''}`}
                 delay={(index % 4) * motionStagger}
               >
-                <ProjectCard project={project} variant={index === 0 ? "featured" : "default"} />
+                <ProjectCard project={project} variant={index === 0 ? 'featured' : 'default'} />
               </Reveal>
             ))}
           </div>

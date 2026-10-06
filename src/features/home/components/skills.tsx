@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { BrandIcon } from "@/shared/components/brand-icon";
-import { skillCategories } from "@/shared/data/skills";
-import { motionStagger } from "@/shared/motion/config";
-import { Reveal } from "@/shared/motion/reveal";
+import { useInView } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+
+import { BrandIcon } from '@/shared/components/brand-icon';
+import { skillCategories, type SkillCategory } from '@/shared/data/skills';
+import { motionStagger } from '@/shared/motion/config';
+import { Reveal } from '@/shared/motion/reveal';
+import { useReducedMotion } from '@/shared/motion/use-reduced-motion';
 
 type CategoryListProps = {
-  activeCategoryId: (typeof skillCategories)[number]["id"];
+  activeCategoryId: SkillCategory['id'];
   repeated?: boolean;
-  onSelect: (id: (typeof skillCategories)[number]["id"]) => void;
+  onSelect: (id: SkillCategory['id']) => void;
 };
 
 const AUTO_ROTATE_MS = 10000;
@@ -17,7 +20,7 @@ const AUTO_ROTATE_MS = 10000;
 function CategoryList({ activeCategoryId, repeated = false, onSelect }: CategoryListProps) {
   return (
     <div
-      className={`skills-category-list ${repeated ? "skills-category-list-repeat" : ""}`}
+      className={`skills-category-list ${repeated ? 'skills-category-list-repeat' : ''}`}
       aria-hidden={repeated || undefined}
     >
       {skillCategories.map((category) => {
@@ -31,8 +34,8 @@ function CategoryList({ activeCategoryId, repeated = false, onSelect }: Category
             tabIndex={repeated ? -1 : undefined}
             className={`skills-category-item cursor-pointer text-lg transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground md:text-xl ${
               active
-                ? "bg-primary font-semibold text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? 'bg-primary font-semibold text-primary-foreground'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
             onClick={() => onSelect(category.id)}
           >
@@ -47,38 +50,24 @@ function CategoryList({ activeCategoryId, repeated = false, onSelect }: Category
 export function SkillsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [activeCategoryId, setActiveCategoryId] = useState<(typeof skillCategories)[number]["id"]>(
-    skillCategories[0]?.id ?? "",
-  );
-  const [isInView, setIsInView] = useState(false);
+  const [activeCategoryId, setActiveCategoryId] = useState<SkillCategory['id']>(skillCategories[0]?.id ?? '');
+  const isInView = useInView(sectionRef);
   const [isPointerOver, setIsPointerOver] = useState(false);
   const [isFocusWithin, setIsFocusWithin] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   const [isPageVisible, setIsPageVisible] = useState(true);
   const activeCategory = skillCategories.find((category) => category.id === activeCategoryId) ?? skillCategories[0];
   const isPaused = isPointerOver || isFocusWithin;
   const isAutoRotating = isInView && isPageVisible && !isPaused && !prefersReducedMotion && skillCategories.length > 1;
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting));
-    observer.observe(section);
-
-    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => setPrefersReducedMotion(motionPreference.matches);
     const updatePageVisibility = () => setIsPageVisible(!document.hidden);
 
-    updateMotionPreference();
     updatePageVisibility();
-    motionPreference.addEventListener("change", updateMotionPreference);
-    document.addEventListener("visibilitychange", updatePageVisibility);
+    document.addEventListener('visibilitychange', updatePageVisibility);
 
     return () => {
-      observer.disconnect();
-      motionPreference.removeEventListener("change", updateMotionPreference);
-      document.removeEventListener("visibilitychange", updatePageVisibility);
+      document.removeEventListener('visibilitychange', updatePageVisibility);
     };
   }, []);
 
@@ -118,10 +107,10 @@ export function SkillsSection() {
       <Reveal className="mt-8" delay={motionStagger}>
         <div
           onPointerEnter={(event) => {
-            if (event.pointerType !== "touch") setIsPointerOver(true);
+            if (event.pointerType !== 'touch') setIsPointerOver(true);
           }}
           onPointerLeave={(event) => {
-            if (event.pointerType !== "touch") setIsPointerOver(false);
+            if (event.pointerType !== 'touch') setIsPointerOver(false);
           }}
           onFocusCapture={() => setIsFocusWithin(true)}
           onBlurCapture={(event) => {
@@ -132,10 +121,10 @@ export function SkillsSection() {
             className="skills-category-marquee select-none border-y border-border"
             aria-label="Skill categories"
             onPointerEnter={(event) => {
-              if (event.pointerType !== "touch") setMarqueeSpeed(0.2);
+              if (event.pointerType !== 'touch') setMarqueeSpeed(0.2);
             }}
             onPointerLeave={(event) => {
-              if (event.pointerType !== "touch") setMarqueeSpeed(1);
+              if (event.pointerType !== 'touch') setMarqueeSpeed(1);
             }}
           >
             <div ref={trackRef} className="skills-category-track">
@@ -168,10 +157,10 @@ export function SkillsSection() {
             <div className="mt-8 flex self-end flex-col items-end gap-2 text-xs text-muted-foreground">
               <span>
                 {prefersReducedMotion || skillCategories.length <= 1
-                  ? "Manual viewing"
+                  ? 'Manual viewing'
                   : isAutoRotating
-                    ? "Auto-rotating"
-                    : "Paused"}
+                    ? 'Auto-rotating'
+                    : 'Paused'}
               </span>
               <span className="h-1 w-24 overflow-hidden rounded-full bg-secondary" aria-hidden="true">
                 <span
@@ -179,7 +168,7 @@ export function SkillsSection() {
                   className="skills-auto-rotate-progress block h-full w-full rounded-full bg-primary"
                   style={{
                     animationDuration: `${AUTO_ROTATE_MS}ms`,
-                    animationPlayState: isAutoRotating ? "running" : "paused",
+                    animationPlayState: isAutoRotating ? 'running' : 'paused',
                   }}
                 />
               </span>

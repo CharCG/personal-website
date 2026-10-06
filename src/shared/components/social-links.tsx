@@ -1,6 +1,7 @@
-import Link from "next/link";
-import { BrandIcon } from "@/shared/components/brand-icon";
-import { contacts } from "@/shared/data/contacts";
+import Link from 'next/link';
+
+import { BrandIcon } from '@/shared/components/brand-icon';
+import { contacts } from '@/shared/data/contacts';
 
 type SocialLinksProps = {
   className: string;

@@ -1,23 +1,24 @@
-import Image from "next/image";
-import Link from "next/link";
-import { FaArrowRight, FaImage } from "react-icons/fa6";
-import { TechnologyList } from "@/features/projects/components/technology-list";
-import type { Project } from "@/shared/data/projects";
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaArrowRight, FaImage } from 'react-icons/fa6';
+
+import { TechnologyList } from '@/features/projects/components/technology-list';
+import type { Project } from '@/shared/data/projects';
 
 type ProjectCardProps = {
   project: Project;
-  headingLevel?: "h2" | "h3";
-  variant?: "default" | "featured";
+  headingLevel?: 'h2' | 'h3';
+  variant?: 'default' | 'featured';
 };
 
-export function ProjectCard({ project, headingLevel = "h2", variant = "default" }: ProjectCardProps) {
+export function ProjectCard({ project, headingLevel = 'h2', variant = 'default' }: ProjectCardProps) {
   const Heading = headingLevel;
   const previewImage = project.images[0];
-  const featured = variant === "featured";
+  const featured = variant === 'featured';
 
   return (
     <article
-      className={`group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-200 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99] ${featured ? "md:flex-row-reverse md:gap-8 md:p-6" : ""}`}
+      className={`group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-[border-color,transform] duration-200 ease-out hover:border-foreground/20 motion-safe:active:scale-[0.99] ${featured ? 'md:flex-row-reverse md:gap-8 md:p-6' : ''}`}
     >
       <Link
         href={`/projects/${project.slug}`}
@@ -25,7 +26,7 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
         className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       />
       <div
-        className={`relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-secondary ${featured ? "md:aspect-auto md:min-h-80 md:w-3/5 md:self-stretch" : ""}`}
+        className={`relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-secondary ${featured ? 'md:aspect-auto md:min-h-80 md:w-3/5 md:self-stretch' : ''}`}
       >
         {previewImage ? (
           <Image
@@ -34,8 +35,8 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
             fill
             sizes={
               featured
-                ? "(max-width: 767px) calc(100vw - 80px), 60vw"
-                : "(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px"
+                ? '(max-width: 767px) calc(100vw - 80px), 60vw'
+                : '(max-width: 1023px) calc(100vw - 80px), (max-width: 1279px) calc(50vw - 48px), 552px'
             }
             className="object-cover object-top transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.02]"
           />
@@ -47,11 +48,11 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
         )}
       </div>
 
-      <div className={`flex min-w-0 flex-1 flex-col pt-4 ${featured ? "md:pt-0" : ""}`}>
+      <div className={`flex min-w-0 flex-1 flex-col pt-4 ${featured ? 'md:pt-0' : ''}`}>
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <Heading
-              className={`font-semibold leading-tight ${featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}
+              className={`font-semibold leading-tight ${featured ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}
             >
               {project.title}
             </Heading>
@@ -67,7 +68,7 @@ export function ProjectCard({ project, headingLevel = "h2", variant = "default" 
         {project.description && (
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
         )}
-        <TechnologyList technologies={project.technologies} className={featured ? "pt-4" : "mt-auto pt-4"} />
+        <TechnologyList technologies={project.technologies} className={featured ? 'pt-4' : 'mt-auto pt-4'} />
       </div>
     </article>
   );

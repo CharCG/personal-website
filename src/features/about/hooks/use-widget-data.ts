@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export function useWidgetData<T>(url: string) {
   const [result, setResult] = useState<{ url: string | null; data: T | null }>({ url: null, data: null });

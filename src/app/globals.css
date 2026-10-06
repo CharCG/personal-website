@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme inline {
   --font-sans: var(--font-instrument-sans), Arial, sans-serif;
@@ -209,11 +209,11 @@ a {
   animation-delay: 440ms;
 }
 
-.interactive-mascot[data-sleeping="true"] .interactive-mascot-sleep-indicator {
+.interactive-mascot[data-sleeping='true'] .interactive-mascot-sleep-indicator {
   opacity: 1;
 }
 
-.interactive-mascot[data-sleeping="true"] .interactive-mascot-sleep-indicator span {
+.interactive-mascot[data-sleeping='true'] .interactive-mascot-sleep-indicator span {
   animation-play-state: running;
 }
 
@@ -250,7 +250,7 @@ a {
   transition: transform var(--motion-fast) var(--motion-ease-out);
 }
 
-.interactive-mascot[data-sleeping="true"] .interactive-mascot-eye-graphic {
+.interactive-mascot[data-sleeping='true'] .interactive-mascot-eye-graphic {
   transform: scaleY(0.08);
 }
 

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import createGlobe from "cobe";
-import { FaLocationDot } from "react-icons/fa6";
+import createGlobe from 'cobe';
+import { useEffect, useRef } from 'react';
+import { FaLocationDot } from 'react-icons/fa6';
 
 type GlobeColor = [number, number, number];
 
@@ -28,9 +28,9 @@ export function GlobeCard() {
     const container = globeContainerRef.current;
     if (!container) return;
 
-    const canvas = document.createElement("canvas");
-    canvas.className = "block h-full w-full";
-    canvas.setAttribute("aria-hidden", "true");
+    const canvas = document.createElement('canvas');
+    canvas.className = 'block h-full w-full';
+    canvas.setAttribute('aria-hidden', 'true');
     container.append(canvas);
 
     let phi = 2.85;
@@ -50,10 +50,10 @@ export function GlobeCard() {
       scale: 1,
       mapSamples: 16000,
       mapBrightness: 4,
-      baseColor: readThemeColor("--muted-foreground", [0.42, 0.45, 0.5]),
-      markerColor: readThemeColor("--surface", [1, 1, 1]),
-      glowColor: readThemeColor("--secondary", [0.95, 0.96, 0.97]),
-      markers: [{ location: jakartaLocation, size: 0.08, id: "indonesia" }],
+      baseColor: readThemeColor('--muted-foreground', [0.42, 0.45, 0.5]),
+      markerColor: readThemeColor('--surface', [1, 1, 1]),
+      glowColor: readThemeColor('--secondary', [0.95, 0.96, 0.97]),
+      markers: [{ location: jakartaLocation, size: 0.08, id: 'indonesia' }],
     });
 
     const observer = new ResizeObserver(([entry]) => {
@@ -119,10 +119,10 @@ export function GlobeCard() {
     const handleKeyDown = (event: KeyboardEvent) => {
       const rotationStep = 0.1;
 
-      if (event.key === "ArrowLeft") phi -= rotationStep;
-      else if (event.key === "ArrowRight") phi += rotationStep;
-      else if (event.key === "ArrowUp") theta = Math.max(theta - rotationStep, -1.2);
-      else if (event.key === "ArrowDown") theta = Math.min(theta + rotationStep, 1.2);
+      if (event.key === 'ArrowLeft') phi -= rotationStep;
+      else if (event.key === 'ArrowRight') phi += rotationStep;
+      else if (event.key === 'ArrowUp') theta = Math.max(theta - rotationStep, -1.2);
+      else if (event.key === 'ArrowDown') theta = Math.min(theta + rotationStep, 1.2);
       else return;
 
       event.preventDefault();
@@ -131,23 +131,23 @@ export function GlobeCard() {
 
     observer.observe(container);
     visibilityObserver.observe(container);
-    document.addEventListener("visibilitychange", updateVisibility);
-    container.addEventListener("pointerdown", handlePointerDown);
-    container.addEventListener("pointermove", handlePointerMove);
-    container.addEventListener("pointerup", handlePointerEnd);
-    container.addEventListener("pointercancel", handlePointerEnd);
-    container.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('visibilitychange', updateVisibility);
+    container.addEventListener('pointerdown', handlePointerDown);
+    container.addEventListener('pointermove', handlePointerMove);
+    container.addEventListener('pointerup', handlePointerEnd);
+    container.addEventListener('pointercancel', handlePointerEnd);
+    container.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
       observer.disconnect();
       visibilityObserver.disconnect();
-      document.removeEventListener("visibilitychange", updateVisibility);
-      container.removeEventListener("pointerdown", handlePointerDown);
-      container.removeEventListener("pointermove", handlePointerMove);
-      container.removeEventListener("pointerup", handlePointerEnd);
-      container.removeEventListener("pointercancel", handlePointerEnd);
-      container.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('visibilitychange', updateVisibility);
+      container.removeEventListener('pointerdown', handlePointerDown);
+      container.removeEventListener('pointermove', handlePointerMove);
+      container.removeEventListener('pointerup', handlePointerEnd);
+      container.removeEventListener('pointercancel', handlePointerEnd);
+      container.removeEventListener('keydown', handleKeyDown);
       globe.destroy();
       container.replaceChildren();
     };
